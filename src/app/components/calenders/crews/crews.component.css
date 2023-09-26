@@ -1,0 +1,129 @@
+a.btn.btn-raised.btn-primary {
+  background-color: black;
+  border-color: black;
+  color: #fff;
+}
+
+a.btn.btn-raised.btn-danger {
+  color: #fff;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active {
+  background-color: #ffad09 !important;
+  border-color: #ffad09 !important;
+  color: #fff;
+}
+
+/* input field colors */
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #ee3724 !important;
+}
+
+::ng-deep .mat-form-field-label {
+  /*change color of label*/
+  color: #ee3724 !important;
+}
+
+/* #ffac0b */
+
+/* ::ng-deep.mat-form-field-underline {
+    background-color: #ee3724 !important;
+  } */
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #ee3724 !important;
+}
+
+::ng-deep input.mat-input-element {
+  color: black;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* end */
+
+@media (min-width: 576px) {
+  .card-deck .card {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 1 0 0%;
+    flex: 1 0 0%;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-bottom: 0;
+    margin-left: 0px;
+  }
+}
+
+h4 {
+  font-family: "Raleway", "sans-serif";
+  font-weight: bold;
+  background: #e4e4e4;
+  border-color: #858d94;
+  text-align: center;
+  color: #000000;
+  border-bottom: 2px solid #1f15135e;
+  padding: 9px 0px;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+p {
+  padding: 5px 12px;
+  text-align: center;
+}
+
+.card {
+  border-radius: 20px;
+}
+
+.crew_card {
+  width: 150px;
+  border: 1.2px solid #ee3724;
+  color: black;
+  height: 45px;
+  border-radius: 10px;
+}
+
+.crew_card:hover {
+  background: #ee3724;
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+}
+
+.crew_card_checked {
+  background: #ee3724;
+  border: 1px solid white;
+  color: white;
+}
+
+.card_table {display:table;border-collapse:separate;border-spacing:5px;}
+.card_row {display:table-row;}
+.card_cell {display:table-cell; vertical-align: middle;width: auto;}
+
+#calendar {
+  padding: 15px;
+}
+
+.day-view-column-headers {
+  display: flex;
+  margin-left: 70px;
+}
+.day-view-column-header {
+  width: 150px;
+  border: solid 1px #ee3724;
+  text-align: center;
+}
+.cal-time-events {
+  border-top: solid 1px #e1e1e1;
+}
+.cal-week-view {
+  border-top: 0;
+}

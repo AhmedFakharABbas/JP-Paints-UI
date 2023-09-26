@@ -1,0 +1,227 @@
+<div class="container my-4rem">
+
+  <!-- <div class="container image-container px-0">
+        <div class="row">
+            <div class="col">
+                <img src="assets/img/joses-letterhead.gif" style="width: 100%;height: 60%;margin-top: 4rem;">
+            </div>
+        </div>
+    </div> -->
+
+  <div class="row">
+    <div class="col">
+      <!-- start -->
+      <section class="mb-3">
+        <div class="container px-0">
+          <div class="card-header top-heading-card">
+            <h3 class="inside-heading mb-0">Paint Order</h3>
+          </div>
+          <div class="card">
+            <div class="card-body mt-4">
+              <div class="row">
+                <div class="col">
+                  <div class="container-fluid my-5 px-0">
+                    <div class="row my-3">
+                      <div class="col-sm-12 col-md-4 col-lg-2">
+                        <h4>PO #</h4>
+                        <p>{{expenseDetails.id}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-2">
+                        <h4>Expense Date</h4>
+                        <p>{{expenseDetails.expense_date | date:'MM/dd/yyyy'}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3">
+                        <h4>Ordered By</h4>
+                        <p>{{expenseDetails.ordered_by_name}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-3">
+                        <h4>Payable To</h4>
+                        <p *ngIf="expenseDetails.collected_by_user != null">{{expenseDetails.collected_by_user}}</p>
+                        <p *ngIf="expenseDetails.collected_by_vendor != null">{{expenseDetails.collected_by_vendor}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-4 col-lg-2">
+                        <h4>Date Paid</h4>
+                        <p>{{expenseDetails.paid_date | date:'MM/dd/yyyy'}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- end -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <section class="mb-3">
+        <div class="container px-0">
+          <div class="card-header top-heading-card">
+            <h3 class="inside-heading mb-0">Project Information</h3>
+          </div>
+          <div class="card">
+            <div class="card-body mt-4">
+              <!-- <h4 class="text-center">Project Information</h4> -->
+              <div class="row">
+                <div class="col">
+                  <div class="container-fluid my-5 px-0">
+                    <div class="row my-3">
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Name</h4>
+                        <p>{{expenseDetails.customer_name}}</p>
+                        <!-- <p>{{customerDetails | json}}</p> -->
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Home Phone</h4>
+                        <p>{{expenseDetails.home_phone}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Work Phone</h4>
+                        <p>{{expenseDetails.work_phone}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Mobile Phone</h4>
+                        <p>{{expenseDetails.mobile_phone}}</p>
+                      </div>
+                    </div>
+                    <div class="row my-3">
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Fax</h4>
+                        <p>{{expenseDetails.fax}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Email</h4>
+                        <p>{{expenseDetails.email}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Address</h4>
+                        <p>{{expenseDetails.address_1}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Subdivision</h4>
+                        <p>{{expenseDetails.sub_division_name}}</p>
+                      </div>
+                    </div>
+                    <div class="row my-3">
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Intersection</h4>
+                        <p>{{expenseDetails.major_intersection}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Referred By</h4>
+                        <p>{{expenseDetails.referral_source_name}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Project No</h4>
+                        <p>{{expenseDetails.project_number}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Project Type</h4>
+                        <p>{{expenseDetails.project_type_name}}</p>
+                      </div>
+                    </div>
+                    <div class="row my-3">
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Estimator</h4>
+                        <p>{{expenseDetails.estimator_name}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Estimator Phone Number</h4>
+                        <p>{{expenseDetails.estimate_phone_no}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Estimate Date</h4>
+                        <p>{{expenseDetails.estimate_date | date : 'MM/dd/yyyy'}}</p>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <h4>Estimate Time</h4>
+                        <p>{{expenseDetails.estimate_time}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <th colspan="2">Product Name</th>
+                <th colspan="2">Description</th>
+                <th>Color</th>
+                <th>Formula</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let expenseItemDetail of expenseItemsDetail">
+                  <td class="w-17" colspan="2">
+                    <p>
+                      {{expenseItemDetail.product_name}}
+                    </p>
+                  </td>
+                  <td class="w-17" colspan="2">
+                    <p>
+                      {{expenseItemDetail.description}}
+                    </p>
+                  </td>
+                  <td>
+                    <p>{{expenseItemDetail.color}}</p>
+                  </td>
+                  <td>
+                    <p>{{expenseItemDetail.formula}}</p>
+                  </td>
+                  <td>
+                    <p>{{expenseItemDetail.size}}</p>
+                  </td>
+                  <td>
+                    <p>{{expenseItemDetail.price}}</p>
+                  </td>
+                  <td>
+                    <p>{{expenseItemDetail.quantity}}</p>
+                  </td>
+                  <td>
+                    <p>{{expenseItemDetail.total_price}}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="row justify-content-end">
+          <div class="col-auto pr-0">
+            <button class="btn btn-primary color d-block ml-auto mt-3"  
+              [routerLink]="['/project/view',expenseDetails.project_number]"
+              [queryParams]="{queryParam: pexpenseID}" type="button">
+              Edit Expense Details
+            </button>
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-primary color d-block ml-auto mt-3 mr-3" type="button"
+              [routerLink]="['/project/view',expenseDetails.project_number]">
+              View Project
+            </button>
+          </div>
+        </div>
+
+        <!-- <a _ngcontent-tcd-c16="" aria-controls="nav-add-extimate" aria-selected="false" class="nav-item nav-link" 
+        data-toggle="tab" href="#nav-add-extimate" id="nav-add-extimate-tab" role="tab">Estimates </a> -->
+
+      </div>
+    </div>
+  </div>
+</div>

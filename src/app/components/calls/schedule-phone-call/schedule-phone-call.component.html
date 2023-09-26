@@ -1,0 +1,344 @@
+<section class="mb-3">
+  <div class="card-header top-heading-card">
+    <h3 class="inside-heading mb-0">Schedule Phone Call</h3>
+  </div>
+  <div class="container">
+    <div class="card">
+      <div class="card-body mt-4">
+        <form
+          #phoneCallForm="ngForm"
+          (ngSubmit)="
+            phoneCallForm.valid &&
+            phoneCallObj.customer_detail_obj.id != undefined
+              ? onSchedulePhoneCall(phoneCallForm)
+              : undefined
+          "
+        >
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <mat-label>Customer</mat-label>
+                  <!-- <input id="typeahead-format" type="text" matInput [ngbTypeahead]="search" name="customerDetailObj"
+                    [(ngModel)]="phoneCallObj.customer_detail_obj" [resultFormatter]="formatter"
+                    [inputFormatter]="formatter" placeholder="Type to search"
+                    [required]="(customer_detail.touched || phoneCallForm.submitted) && (phoneCallObj.customer_detail_obj.id == undefined)"
+                    [disabled]="customer_id != undefined" #customer_detail="ngModel" /> (onSelectionChange)="optionClicked($event, 'estimator', estimator.id)" -->
+                  <input
+                    type="text"
+                    placeholder="Type to search"
+                    aria-label="customer_detail"
+                    matInput
+                    [matAutocomplete]="auto1"
+                    [formControl]="customerSearch$"
+                    [required]="
+                      phoneCallObj.customer_detail_obj.id == undefined &&
+                      phoneCallForm.submitted
+                    "
+                  />
+
+                  <mat-autocomplete #auto1="matAutocomplete">
+                    <ng-container
+                      *ngIf="
+                        searchCustomers$ != undefined &&
+                        searchCustomersLength > 0
+                      "
+                    >
+                      <mat-option
+                        *ngFor="let customer of searchCustomers$"
+                        [value]="customer.name"
+                        (onSelectionChange)="
+                          optionClicked(
+                            $event,
+                            'estimator',
+                            customer.id,
+                            customer
+                          )
+                        "
+                      >
+                        <div>
+                          {{ customer.name }}
+                        </div>
+                      </mat-option>
+                    </ng-container>
+                    <mat-option
+                      *ngIf="
+                        searchCustomers$ != undefined &&
+                        searchCustomersLength == 0 &&
+                        !isCustomerLoading
+                      "
+                    >
+                      <div>No customer found</div>
+                    </mat-option>
+                    <mat-option *ngIf="isCustomerLoading">
+                      <mat-spinner diameter="35"></mat-spinner>
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <div class="error-block">
+                  <!-- <small class="help-block-custom"
+                    *ngIf="(customer_detail.touched || phoneCallForm.submitted) && (phoneCallObj.customer_detail_obj.id == undefined)">
+                    Valid customer name required
+                  </small> -->
+                  <small
+                    class="help-block-custom"
+                    *ngIf="
+                      phoneCallObj.customer_detail_obj.id == undefined &&
+                      phoneCallForm.submitted
+                    "
+                  >
+                    Valid customer name required
+                  </small>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <!-- <mat-form-field>
+            
+                  <mat-select
+                    name="Project"
+                    id="projectID"
+                    name="projectID"
+                    #projectID="ngModel"
+                    [(ngModel)]="phoneCallObj.project_id"
+                    placeholder="Project"
+                    ngModel
+                    #project_ID="ngModel"
+                    [disabled]="
+                      phoneCallObj.customer_detail_obj.id == undefined
+                    "
+                    [required]="
+                      phoneCallObj.customer_detail_obj.id == undefined
+                    "
+                  >
+                    <mat-option
+                      *ngFor="
+                        let projectsDetail of projectsDetails
+                          | filter
+                            : (phoneCallObj.customer_detail_obj != undefined
+                                ? phoneCallObj.customer_detail_obj.id
+                                : '-1')
+                            : 'customer_id'
+                      "
+                      [value]="projectsDetail.project_number"
+                    >
+                      {{ projectsDetail.project_number }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div class="error-block">
+                  <small
+                    class="help-block-custom"
+                    *ngIf="
+                      (project_ID.touched || phoneCallForm.submitted) &&
+                      !project_ID.valid
+                    "
+                  >
+                    Required
+                  </small>
+                </div> -->
+
+                <mat-form-field>
+                  <mat-label>Project</mat-label>
+                  <input
+                    type="text"
+                    placeholder="Type to search"
+                    aria-label="project_detail"
+                    matInput
+                    [matAutocomplete]="projectautocomp"
+                    [formControl]="projectSearch$"
+                    [required]="
+                      phoneCallObj.project_id == undefined &&
+                      phoneCallForm.submitted
+                    "
+                  />
+
+                  <mat-autocomplete #projectautocomp="matAutocomplete">
+                    <mat-option
+                      *ngFor="let project of searchProjects$"
+                      [value]="project.project_number"
+                      (onSelectionChange)="
+                        projectAutoCompClick(project.project_number)
+                      "
+                    >
+                      <div>
+                        {{ project.project_number }}
+                      </div>
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <div class="error-block">
+                  <small
+                    class="help-block-custom"
+                    *ngIf="
+                      phoneCallObj.project_id == undefined &&
+                      phoneCallForm.submitted
+                    "
+                  >
+                    Valid Project required
+                  </small>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <input
+                    type="datetime-local"
+                    placeholder="Date Time"
+                    matInput
+                    id="callDateTime"
+                    name="callDate"
+                    #callDate="ngModel"
+                    [(ngModel)]="phoneCallObj.call_date"
+                    ngModel
+                    #call_date_time="ngModel"
+                  />
+                </mat-form-field>
+                <!-- <div class="error-block">
+                  <small class="help-block-custom"
+                    *ngIf="(call_date_time.touched || phoneCallForm.submitted) && !call_date_time.valid">
+                    Required
+                  </small>
+                </div> -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-8">
+                <mat-form-field>
+                  <input
+                    type="text"
+                    placeholder="Call title"
+                    matInput
+                    id="title"
+                    name="title"
+                    #title="ngModel"
+                    [(ngModel)]="phoneCallObj.title"
+                    required
+                    ngModel
+                    #call_title="ngModel"
+                  />
+                </mat-form-field>
+                <div class="error-block">
+                  <small
+                    class="help-block-custom"
+                    *ngIf="
+                      (call_title.touched || phoneCallForm.submitted) &&
+                      !call_title.valid
+                    "
+                  >
+                    Required
+                  </small>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-4">
+                <!-- <mat-form-field>
+                  <mat-select
+                    matInput
+                    id="callAssignedTo"
+                    name="assignedTo"
+                    #assignedTo="ngModel"
+                    [(ngModel)]="phoneCallObj.assigned_to"
+                    placeholder="Assign to"
+                    required
+                    ngModel
+                    #call_assigned_to="ngModel"
+                  >
+                    <mat-option
+                      *ngFor="let userDetail of userDetails"
+                      [value]="userDetail.id"
+                    >
+                      {{ userDetail.first_name }}
+                      {{ userDetail.last_name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field> -->
+                <mat-form-field>
+                  <mat-label>Assign to </mat-label>
+                  <input
+                    type="text"
+                    placeholder="Type to search"
+                    aria-label="assigned_to"
+                    matInput
+                    [matAutocomplete]="autoAssignedTo"
+                    [formControl]="assignedToSearch$"
+                    [required]="
+                      phoneCallObj.assigned_to == undefined &&
+                      phoneCallForm.submitted
+                    "
+                  />
+
+                  <mat-autocomplete #autoAssignedTo="matAutocomplete">
+                    <mat-option
+                      *ngFor="let user of assignedToProjects$"
+                      [value]="user.name"
+                      (onSelectionChange)="assignedToClick(user.id)"
+                    >
+                      <div>{{ user.name }}</div>
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <!-- <div class="error-block">
+                  <small class="help-block-custom"
+                    *ngIf="(call_assigned_to.touched || phoneCallForm.submitted) && !call_assigned_to.valid">
+                    Required
+                  </small>
+                </div> -->
+                <div class="error-block">
+                  <small
+                    class="help-block-custom"
+                    *ngIf="
+                      phoneCallObj.assigned_to == undefined &&
+                      phoneCallForm.submitted
+                    "
+                  >
+                    Required
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <mat-form-field>
+                  <textarea
+                    name="reason_for_call"
+                    id="reason_for_call"
+                    rows="1"
+                    matInput
+                    placeholder="Description/Reason for call"
+                    id="callDateTime"
+                    name="callDate"
+                    #callDate="ngModel"
+                    [(ngModel)]="phoneCallObj.reason"
+                    required
+                  ></textarea>
+                </mat-form-field>
+                <div class="error-block">
+                  <small
+                    class="help-block-custom"
+                    *ngIf="
+                      (callDate.touched || phoneCallForm.submitted) &&
+                      !callDate.valid
+                    "
+                  >
+                    Required
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer p-0 no-border">
+            <button
+              type="submit"
+              class="btn btn-outline color"
+              [disabled]="
+                (!phoneCallForm.valid &&
+                  phoneCallObj.customer_detail_obj.id == undefined) ||
+                phoneCallObj.project_id == null
+              "
+            >
+              <i class="fas fa-calendar-check"></i> Schedule Call
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

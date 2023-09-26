@@ -1,0 +1,186 @@
+/* #ee3724
+#ffac0b */
+
+.full {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+
+.login-text {
+    position: relative;
+    font-size: 36px;
+    color: white;
+    font-weight: 500;
+    line-height: 1.2em;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.form {
+    position: fixed;
+    -webkit-transform: translate(-25%, -50%);
+    transform: translate(-44%, -50%);
+    z-index: 1;
+    background: #0000000a;
+    max-width: 459px;
+    /* outline: 4px solid #ee3724; */
+    outline-offset: 5px;
+    height: 511px;
+    padding: 31px;
+    text-align: center;
+    border-bottom: 2px solid black;
+    border-bottom: 2px solid #ee3724;
+    left: 25%;
+    top: 50%;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width:992px) {
+    .form {
+        position: fixed;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        background: #0000000a;
+        max-width: 459px;
+        /* outline: 4px solid #ee3724; */
+        outline-offset: 5px;
+        height: 400px;
+        padding: 31px;
+        text-align: center;
+        border-bottom: 2px solid black;
+        border-bottom: 2px solid #ee3724;
+        left: 50%;
+        top: 50%;
+    }
+}
+
+/* Queries End */
+
+/* .form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    width: 50%;
+    margin-bottom: 0;
+  }
+*/
+
+/* input field colors */
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: #ee3724 !important;
+}
+
+::ng-deep .mat-form-field-label {
+    /*change color of label*/
+    color: #ee3724 !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #ffac0b !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: #ee3724 !important;
+    ;
+}
+
+::ng-deep input.mat-input-element {
+    color: black;
+}
+
+
+
+/* end */
+
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #ee3724;
+    position: relative;
+    width: 30%;
+    border: 0;
+    padding: 11px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+}
+
+.form button:hover, .form button:active, .form button:focus {
+    color: #FFFFFF;
+    background-color: #ffac0b;
+    border-color: #ee3724;
+    cursor: pointer;
+}
+
+.form button:disabled {
+    background: #252531;
+    cursor: not-allowed;
+}
+
+.form .message_register {
+    margin: 15px 0 0;
+    color: black;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: left;
+}
+
+.form .message_forgot_password {
+    margin: 15px 0 0;
+    color: black;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: right;
+}
+
+a {
+    cursor: pointer;
+}
+
+/* .form .message:hover {
+    margin: 15px 0 0;
+    color: white;
+    font-weight: normal;
+    font-size: 18px;
+    transform: scale(1.1);
+  } */
+
+/* .form .message a {
+    color: white;
+    text-decoration: none;
+  } */
+
+/* p a {
+    transform: scale(1.1);
+  } */
+
+/* img:hover {
+    transform: scale(1.1);
+} */

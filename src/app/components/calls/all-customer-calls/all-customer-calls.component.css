@@ -1,0 +1,31 @@
+table {
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    border: 1px solid black;
+  }
+  
+  th, td {
+    font-size: 12px;
+    border-bottom: 1px solid black;
+  }
+  
+  thead {
+    background-color: #ee3724;
+    color: #fff;
+    font-family: 'Raleway', 'sans-serif';
+  }
+  
+  td {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+  }
+  
+  a {
+    color: #000;
+  }
+  
+  a:hover {
+    color: #ee3724;
+    cursor: pointer;
+  }

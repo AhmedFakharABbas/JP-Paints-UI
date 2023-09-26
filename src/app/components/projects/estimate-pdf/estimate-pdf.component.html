@@ -1,0 +1,1294 @@
+<div id="content" #content>
+  <div class="row flex-row-reverse m-0">
+    <button type="button" class="btn btn-primary color mr-4" value="Download PDF" (click)="captureScreen()"
+      placement="left" ngbTooltip="Export PDF">
+      <i class="fas fa-file-excel mr-1"></i> Export PDF
+    </button>
+  </div>
+</div>
+
+
+<div class="container bg-grad pt-4" id="contentToConvert" >
+  <div class="row">
+    <img src="../../../../assets/img/jp-pdf-cover.png" alt="cover-photo" width="100%" height="auto">
+  </div>
+  <div class="row m-0" *ngIf="project_information != undefined">
+    <div class="col-4  ">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Name:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.customer_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Address:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.address_1}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Estimate#</span>
+        <span class="form-value b-b-1 col bold">{{project_information.project_number}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Home Phone:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.home_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-value b-b-1 bold col">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+   
+      <div class="row m-0">
+        <span class="form-field col- bolder">Project Type:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.project_type_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Work Phone:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.work_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Subdivision:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.sub_division_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Sales Rep.:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.estimator_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Mobile Phone:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.mobile_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Intersection:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.major_intersection}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Sales Phone:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.work_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">FAX:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.work_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Referred By:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.referral_source_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Est Date:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.estimate_date}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Email:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.email}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+
+
+
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Time:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.estimate_time}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+  </div>
+  <h4 class="section-heading">Exterior Estimate</h4>
+
+  <div class="col-12 border-black minus-margin"
+    *ngIf="project_descriptions!=undefined && project_descriptions.estimate !=undefined">
+    <div class="row">
+      <h4 class="bg-heading ">PRESSURE WASH: To remove dirt, flaking, mold, mildew & loose paint</h4>
+    </div>
+    <div class="row">
+      <div class="col-7 b-r-1">
+        <div class="align-items-center row justify-content-around">
+          <label class="check ">House
+            <input type="checkbox" name="is_name" [checked]="project_descriptions.is_house == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check ">Gutters
+            <input type="checkbox" name="is_name" [checked]="project_descriptions.is_gutters == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check ">Decks
+            <input type="checkbox" name="is_name" [checked]="project_descriptions.is_decks == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check ">Driveaway
+            <input type="checkbox" name="is_name" [checked]="project_descriptions.is_driveway == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check ">Patio
+            <input type="checkbox" name="is_name" [checked]="project_descriptions.is_patio == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check ">Fence
+            <input type="checkbox" name="is_name" [checked]="project_descriptions.is_fence == 1">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="col-3 b-r-1">
+        <span class="form-field">Other: {{project_descriptions.others}}</span>
+        <span class="form-value"></span>
+      </div>
+      <div class="col-2">
+        {{project_descriptions.pressure_wash_price}}
+      </div>
+    </div>
+    <div class="row">
+      <h4 class="bg-heading ">Preparation the key for an excellent paint job. Keep water away from wood.</h4>
+    </div>
+    <div class="row b-b-1">
+      <div class="col-10 b-r-1">
+        <div class="align-items-center row justify-content-around">
+          <label class="check ">Scrape and Prime where needed
+            <input type="checkbox" name="is_name" [checked]="project_descriptions.is_scrape_prime == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check ">Prime windows sills
+            <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_windows == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check ">Putty all nail holes in sliding
+            <input type="checkbox" name="is_name" [checked]="project_descriptions.is_putty == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check ">Fill Knot Holes
+            <input type="checkbox" name="is_name" [checked]="project_descriptions.is_house == 1">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <div class="col-2 "></div>
+    </div>
+    <div class="row ">
+      <div class="col-10 b-b-1 b-r-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Recaulk:</span>
+          </div>
+          <div class="col-11">
+            <div class="row">
+              <label class="check col"> Siding
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_siding == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Windows
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_windows == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Doors
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_doors == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Cornice
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_cornice == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> G. Doors
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_ground_doors == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 "></div>
+    </div>
+    <div class="row ">
+      <div class="col-10 b-b-1 b-r-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field"></span>
+          </div>
+          <div class="col-11">
+            <div class="row">
+              <label class="check col"> Brick Metals
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_metal == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Reglaze Window
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_reglaze_windows == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Cover plants and bushes
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_cover_plant == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Use Silicone Caulk
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_silicone_caulk_notes == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> &nbsp;
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-b-1 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-10 b-b-1 b-r-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Caulk:</span>
+          </div>
+          <div class="col-11">
+            <div class="row">
+              <label class="check col"> Stucco
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_stucco == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Brick
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_stucco_brick == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Metal
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_stucco_metal == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Concrete
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_concrete == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Bay Tops
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_house == 1">
+                <span class="checkmark"></span>
+              </label>
+              <div class="col"> &nbsp;
+              </div>
+              <div class="col"> &nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-b-1"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-10 b-b-1 b-r-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Prime:</span>
+          </div>
+          <div class="col-9 pr-1">
+            <div class="row ">
+              <label class="check col"> Siding
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_siding == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Trim
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_trim == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Windows
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_windows == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> New Wood
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_new_wood == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Brick
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_brick == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Metals
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_metal == 1">
+                <span class="checkmark"></span>
+              </label>
+
+            </div>
+          </div>
+          <div class="col b-l-1">
+            <div class="row">
+              <span class="form-field col-6 px-2">Coats:</span>
+              <span class="c"></span>
+              <span class="form-field col-6 px-2">{{project_descriptions.prime_coats}}</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-b-1"></div>
+    </div>
+
+    <div class="row ">
+      <div class="col-10 b-r-1 ">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 b-r-1">
+            <span class="form-field bolder bolder ">Brand:</span>
+          </div>
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 b-r-1">
+            <span class="form-field">Paint: {{project_descriptions.paint}}</span>
+          </div>
+          <div class="col-4">
+            &nbsp;
+          </div>
+          <div class="col-2 b-l-1">
+            <div class="row">
+              <span class="form-field col-6 px-2">Gallons:</span>
+              <span class="c"></span>
+              <span class="form-field col-6 px-2">{{project_descriptions.prime_gallons}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2"></div>
+    </div>
+  </div>
+
+  <div class="col-12 border-black minus-margin mt-2">
+    <div class="row">
+      <h4 class="bg-heading ">PRESSURE WASH: To remove dirt, flaking ,mold, mildew & loose paint.</h4>
+    </div>
+    <div class="row">
+      <div class="col-10 b-b-1 pl-2">
+        <div class="align-items-center row justify-content-start mx-1">
+          <div class="col-7">
+            <div class="row">
+
+              <label class="check col-2"> House
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_house == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-2"> Gutters
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_gutters == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-2"> Decks
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_decks == 1">
+                <span class="checkmark"></span>
+              </label>
+
+
+              <label class="check col-2"> Driveway
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_driveway == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-2"> Patio
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_patio == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-2"> Fence
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_fence == 1">
+                <span class="checkmark"></span>
+              </label>
+
+            </div>
+          </div>
+
+          <div class="col-4 b-l-1">
+            <span class="form-field col-6 ">Others</span>
+            <span class="form-field col-6">{{project_descriptions.others}}</span>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-2  b-l-1 b-b-1">
+        {{project_descriptions.pressure_wash_price | currency}}
+      </div>
+
+    </div>
+
+    <div class="row">
+      <h4 class="bg-heading ">Preparation the key for an excellent paint job. Keep water away from wood.</h4>
+    </div>
+    <div class="row">
+      <div class="col-10 b-b-1 pl-2">
+        <div class="align-items-center row justify-content-start mx-1">
+          <div class="col-11">
+            <div class="row">
+
+              <label class="check col-3"> Scrap and Prime where needed
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_scrape_prime == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-3"> Prime windows sills
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_window == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-3"> Putty all nail holes in siding
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_putty == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-3"> Fill Knot Holes
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_spray_black_roll == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1">
+        {{project_descriptions.is_scrape_price | currency}}
+      </div>
+    </div>
+
+
+    <div class="row ">
+      <div class="col-10 b-b-1 pl-2">
+        <div class="align-items-center row justify-content-start">
+          <div class="col-1">
+            <span class="form-field bolder">Recaulk:</span>
+          </div>
+          <div class="col-10">
+            <div class="row">
+              <label class="check col"> Siding
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_sliding == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Windows
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_windows == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Doors
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_doors == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Cornice
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_cornice == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> G. Doors
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_ground_doors == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2  b-l-1 b-b-1">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-10 b-b-1 pl-2">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-10">
+            <div class="row">
+              <label class="check col"> Brick Metals
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_brick == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Reglaze Window
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_reglaze_windows == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Cover plants and bushes
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_cover_plant == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Use Silicone Caulk
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_silicone_caulk_notes == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2  b-l-1 b-b-1">
+        {{project_descriptions.is_windows_price | currency}}
+      </div>
+    </div>
+
+
+    <div class="row ">
+      <div class="col-10 b-b-1 pl-2">
+        <div class="align-items-center row justify-content-start">
+          <div class="col-1">
+            <span class="form-field bolder">Caulk:</span>
+          </div>
+          <div class="col-10">
+            <div class="row">
+              <label class="check col"> Stucco
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_stucco == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Brick
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_stucco_brick == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Metal
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_stucco_metal == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Concrete
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_concrete == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Bay Tops
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_bay_tops_notes == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2  b-l-1 b-b-1">
+        {{project_descriptions.stucco_price | currency}}
+      </div>
+    </div>
+
+
+    <div class="row ">
+      <div class="col-10 b-b-1 pl-2">
+        <div class="align-items-center row justify-content-start">
+          <div class="col-1">
+            <span class="form-field bolder">Prime:</span>
+          </div>
+          <div class="col-11 pr-4">
+            <div class="row">
+              <label class="check col"> Siding
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_siding == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Trim
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_trim == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Windows
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_windows == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> New Wood
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_new_wood == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Brick
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_brick == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Metals
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_prime_metal == 1">
+                <span class="checkmark"></span>
+              </label>
+              <div class="col-2 pl-0">
+                <span class="form-field col-6 b-r-1 b-l-1 px-1 float-left mr-2">Coats:</span>
+                <span class="form-field px-1 float-left">{{project_descriptions.prime_coats}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2  b-l-1 b-b-1">
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 b-r-1">
+            <span class="form-field bolder ">Brand: {{project_descriptions.prime_assignment_name}}</span>
+          </div>
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 ">
+            <span class="form-field ">Paint: {{project_descriptions.paint}}</span>
+          </div>
+          <div class="col-4 b-l-1 b-r-1">
+            <span class="form-field  ">Notes: {{project_descriptions.prime_notes}}</span>
+          </div>
+          <div class="col-2  p-0">
+            <span class="form-field col-6 px-1 b-l-1 b-r-1 float-left">Gallons:</span>
+            <span class="form-field col-6 px-1 float-left">{{project_descriptions.prime_gallons}}&nbsp;</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1">
+        {{project_descriptions.prime_price | currency}}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-12 border-black minus-margin mt-2">
+    <div class="row">
+      <h4 class="bg-heading ">Thick coat using top of the lin paint. Never water down.</h4>
+    </div>
+
+    <div class="row ">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Siding:</span>
+          </div>
+          <div class="col-5">
+            <div class="row">
+              <label class="check col"> Spray
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.siding_type == 22">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Brush
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.siding_type == 23">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-6"> Spray & Back Roll
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.siding_type == 25">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-4 b-r-1 b-l-1">
+            <span class="form-field col-6 ">Color</span>
+            <span class="form-field col-6">{{project_descriptions.siding_color}}</span>
+          </div>
+          <div class="col-2  p-0">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Coats:</span>
+            <span class="form-field col-6 px-1 float-left">{{project_descriptions.siding_coats}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2  b-l-1 b-b-1">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 b-r-1">
+            <span class="form-field bolder ">Brand: {{project_descriptions.siding_assigned_to_name}}</span>
+          </div>
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 ">
+            <span class="form-field ">Paint: {{project_descriptions.siding_paint}}</span>
+          </div>
+          <div class="col-4 b-l-1 b-r-1">
+            <span class="form-field  ">Finish: {{project_descriptions.siding_finish_name}}</span>
+          </div>
+          <div class="col-2 p-0">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Gallons:</span>
+            <span class="form-field col-6 px-1 float-left"> {{project_descriptions.siding_gallons}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1">
+        {{project_descriptions.siding_price | currency}}
+      </div>
+    </div>
+
+
+    <div class="row ">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Trim:</span>
+          </div>
+          <div class="col-5">
+            <div class="row">
+              <label class="check col"> Spray & Brush
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.trim_type == 42">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-6"> Brush
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.trim_type == 43">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-4 b-x-1">
+            <span class="form-field col-6 ">Color</span>
+            <span class="form-field col-6">{{project_descriptions.trim_color}}</span>
+          </div>
+          <div class="col-2 p-0">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Coats:</span>
+            <span class="form-field col-6 px-1 float-left">{{project_descriptions.trim_coat}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2  b-l-1 b-b-1">
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 b-r-1">
+            <span class="form-field bolder ">Brand: {{project_descriptions.trim_assigned_to_name}}</span>
+          </div>
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 ">
+            <span class="form-field ">Paint: {{project_descriptions.trim_paint}}</span>
+          </div>
+          <div class="col-4 b-l-1 b-r-1">
+            <span class="form-field  ">Finish: {{project_descriptions.trim_finish_name  }}</span>
+          </div>
+          <div class="col-2  p-0">
+            <span class="form-field col-6 px-1 b-r-1 float-left">Gallons:</span>
+            <span class="form-field col-6 px-1 float-left">{{project_descriptions.trim_gallon}}&nbsp;</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1">
+        {{project_descriptions.trim_price | currency}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Shutters:</span>
+          </div>
+          <div class="col-5">
+            <div class="row">
+              <label class="check col"> Paint
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.shutter_type == 44">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-8"> Remove & Put Back
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.shutter_type == 45">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-4 b-r-1 b-l-1">
+            <span class="form-field col-6 ">Color</span>
+            <span class="form-field col-6">{{project_descriptions.shutter_color}}</span>
+          </div>
+          <div class="col-2 p-0">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Coats:</span>
+            <span class="form-field col-6 px-1 float-left">{{project_descriptions.shutter_coats}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2  b-l-1 b-b-1"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 b-r-1">
+            <span class="form-field bolder ">Brand: {{project_descriptions.shutter_assigned_to_name}}</span>
+          </div>
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0">
+            <span class="form-field ">Paint: {{project_descriptions.shutter_paint}}</span>
+          </div>
+          <div class="col-4 b-r-1 b-l-1">
+            <span class="form-field  ">Finish: {{project_descriptions.shutter_finish_name}}</span>
+          </div>
+          <div class="col-2 p-0">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Gallons:</span>
+            <span class="form-field col-6 px-1 float-left"> {{project_descriptions.shutter_gallons}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1">
+        {{project_descriptions.shutter_price | currency}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-10 b-b-1">
+        <div class="row">
+          <div class="col-2 p-0 pl-2">
+            <span class="form-field bolder">Front Door:</span>
+          </div>
+          <div class="col-8 b-r-1">
+            <div class="row mr-4 mt-1">
+              <label class="check col"> <span>Prime</span>
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_front_door_prime == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Paint
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_front_door_paint == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Strip
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_strip_wallpaper == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Stain
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_porch_stain == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Varnish
+                <input type="checkbox" name="is_name">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Sand
+                <input type="checkbox" name="is_name">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-2 p-0">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Coats:</span>
+            <span class="form-field col-6 px-1 float-left">{{project_descriptions.front_door_coats}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1">
+        {{project_descriptions.front_door_price | currency}}
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-10 b-b-1">
+        <div class="row ">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Porch:</span>
+          </div>
+          <div class="col-11">
+            <div class="row" style="margin-right: 62px;">
+              <label class="check col"> <span>Outside</span>
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_porch_outside == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> <span>Inside</span>
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_porch_inside == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Ceiling
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_porch_ceiling == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Cover
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_porch_cover == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Floor
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_porch_floor == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Seal
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_porch_seal == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Stain
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_porch_stain == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Paint
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_porch_paint == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1">
+        {{project_descriptions.porch_price | currency}}
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-10 b-b-1">
+        <div class="row">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Bay Top:</span>
+          </div>
+          <div class="col-4 ">
+            <div class="row mr-1">
+              <label class="check col"> <span>Prime</span>
+                <input type="checkbox" name="is_name">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> <span>Paint</span>
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_bay_tops_paint == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Copper
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_bay_tops_copper == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-6 b-l-1">
+            <div class="row">
+              <span class="form-field mr-2">Iron Railing:</span>
+              <label class="check col"> Strip
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.iron_railing_strip == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Prime
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.iron_railing_prime == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Paint
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.iron_railing_paint == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1">
+        {{project_descriptions.bay_tops_price | currency}}
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Decks:</span>
+          </div>
+          <div class="col-5">
+            <div class="row">
+              <label class="check col"> Clean
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_decks_clean == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Seal
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_decks_seal == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Prime
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_decks_prime == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Paint
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_decks_paint == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-4 b-r-1">
+            <span class="form-field col-6 ">Color</span>
+            <span class="form-field col-6">{{project_descriptions.decks_color}}</span>
+          </div>
+          <div class="col-2  p-0">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Coats:</span>
+            <span class="form-field col-6 px-1 float-left">{{project_descriptions.decks_coats}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-b-1 b-l-1 "></div>
+    </div>
+
+    <div class="row">
+      <div class="col-10">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 b-r-1">
+            <span class="form-field bolder ">Brand: {{project_descriptions.decks_assigned_to_name}}</span>
+          </div>
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 b-r-1">
+            <span class="form-field ">Paint: {{project_descriptions.decks_paint_name}}</span>
+          </div>
+          <div class="col-4 b-r-1">
+            <span class="form-field  ">Finish: {{project_descriptions.decks_finish_name}}</span>
+          </div>
+          <div class="col-2 p-0">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Gallons:</span>
+            <span class="form-field col-6 px-1 float-left"> {{project_descriptions.decks_gallons}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1">
+        {{project_descriptions.decks_price | currency}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 border-black minus-margin mt-2">
+    <div class="row">
+      <h4 class="bg-heading ">Stucco: We specialize in stucco application coating. Flexible & water proof paint.
+      </h4>
+    </div>
+    <div class="row ">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Seal:</span>
+          </div>
+          <div class="col-5">
+            <div class="row">
+              <label class="check col"> Cracks
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_seal_cracks == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Around Trim
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_seal_around_trim == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col-6"> Use: 790 Dow Corning
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_seal_dow_corning == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-4 b-l-1">
+            <span class="form-field col-6 ">Color</span>
+            <span class="form-field col-6">{{project_descriptions.seal_color}}</span>
+          </div>
+          <div class="col-2 p-0">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Qty:</span>
+            <span class="form-field col-6 px-1 float-left b-l-1 b-r-1">{{project_descriptions.seal_coats}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1">
+        {{project_descriptions.seal_price | currency}}
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-1 p-0 pl-2">
+            <span class="form-field bolder">Paint:</span>
+          </div>
+          <div class="col-9">
+            <div class="row">
+              <label class="check col"> Elastrometric Paint
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_elastromeric_paint == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Spray & Back Roll
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_spray_black_roll == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Paint Stucco Trim
+                <input type="checkbox" name="is_name" [checked]="project_descriptions.is_paint_stucco_trim == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-2 p-0 b-l-1">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Coats:</span>
+            <span class="form-field col-6 px-1 float-left b-l-1 b-r-1">{{project_descriptions.decks_coats}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-10 ">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 b-r-1">
+            <span class="form-field bolder ">Brand:{{project_descriptions.paint_assigned_to_name}}</span>
+          </div>
+          <div class="col-3 pl-2 pr-0 pt-0 pb-0 b-r-1">
+            <span class="form-field">Paint:{{project_descriptions.paint_color}}</span>
+          </div>
+          <div class="col-4 b-r-1">
+            <span class="form-field">Finish:{{project_descriptions.paint_finish_name}}</span>
+          </div>
+          <div class="col-2  p-0">
+            <span class="form-field col-6 b-r-1 px-1 float-left">Gallons:</span>
+            <span class="form-field col-6 px-1 float-left">{{project_descriptions.decks_gallons}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1">
+        {{project_descriptions.paint_price | currency}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 border-black minus-margin mt-2">
+    <div class="row">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-10 b-r-1">
+            <span class="form-field bolder">Carpentry : {{project_descriptions.carpentry}}</span>
+          </div>
+          <div class="col-2 ">
+            <span class="form-field col-6 px-1 b-r-1 float-left "></span>
+            <span class="form-field col-6 px-1 float-left ">&nbsp;&nbsp;</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1">
+        {{project_descriptions.carpentry_price | currency}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-10">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-10 b-r-1">
+            <span class="form-field bolder">Others:
+              <p class="break-all-word">{{project_descriptions.others_notes}}</p>
+            </span>
+          </div>
+          <div class="col-2 p-0">
+            <span class="form-field col-6 px-1 float-left b-r-1"></span>
+            <span class="form-field col-6 px-1 float-left">&nbsp;&nbsp;</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1">
+        {{project_descriptions.other_price | currency}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 border-black minus-margin mt-2" *ngIf="project_information!=undefined">
+    <div class="row ">
+      <div class="col-8">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-3 bolder">
+            <h6 class="bolder m-0">Special Instructions:</h6>
+          </div>
+          <div class="col-9 pl-0 b-b-1 mt-2">
+            <p class="break-all-word">{{project_information.exterior_special_notes}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-4  b-b-1 b-l-1">
+        <div class="row">
+          <span class="form-field col-6 px-1 bolder text-right">Price include materials:</span>
+          <label class="check col"> Yes
+            <input type="checkbox" name="is_name"
+              [checked]="project_information.is_exterior_paint_material_included == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col"> No
+            <input type="checkbox" name="is_name"
+              [checked]="project_information.is_exterior_paint_material_included != 1">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8 ">
+        <div class="align-items-center row justify-content-around mb-1 align-items-center">
+          <div class="col-12 pl-0 b-b-1 mb-1"></div>
+        </div>
+      </div>
+      <div class="col-4  b-b-1 b-l-1">
+        <div class="row">
+          <span class="form-field col-6 px-2 text-right bolder">Payment by check:</span>
+          <label class="check col"> Yes
+            <input type="checkbox" name="is_name" [checked]="project_information.exterior_payment_method == 2">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col"> No
+            <input type="checkbox" name="is_name" [checked]="project_information.exterior_payment_method != 2">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-8 ">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0 b-b-1 mb-1">&nbsp;</div>
+        </div>
+      </div>
+      <div class="col-4 b-b-1 b-l-1 ">
+        <div class="row">
+          <span class="form-field col-6 text-right px-2 bolder">TOTAL:</span>
+          <span class="form-value"> {{project_descriptions.exterior_price | currency}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-8 ">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0 b-b-1 mb-1"></div>
+        </div>
+      </div>
+      <div class="col-4 b-b-1 b-l-1 ">
+        <div class="row mt-1">
+          <span class="form-field col-6 text-right px-2 bolder">DEPOSIT:</span>
+          <span class="form-value">
+            {{project_descriptions.exterior_deposit_amount | currency}}
+            <!-- <mat-form-field>
+              <input type="text" matInput name="spent_Amount" id="spent_Amount" [(ngModel)]="spentAmount"
+                #spent_Amount="ngModel" class="" placeholder="DEPOSIT" />
+            </mat-form-field> -->
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-8 ">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0 ">
+            <div class="row m-0">
+              <div class="col-1">
+                <img src="../../../../assets/img/cards.png" alt="cards" class="w-100">
+              </div>
+              Note: A convinience charge will be added when using a credit card:
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 b-l-1 ">
+        <div class="row">
+          <span class="form-field col-6 text-right px-2 bolder">BALANCE DUE:</span>
+          <span
+            class="form-value">{{project_descriptions.exterior_price - project_descriptions.exterior_deposit_amount | currency}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 border-black mt-2 bg-white">
+    <div class="row">
+      <h4 class="bg-heading ">Dependability, Quality, Value, Experience Make the Difference. Thank You for Letting Us
+        Serve You</h4>
+    </div>
+    <div class="row">
+      <div class="col-3 min-height-sig b-red-r-1">
+        <span class="form-field px-2 col-prim">Job Approved By:</span><span class="form-value"></span>
+      </div>
+      <div class="col-6 min-height-sig b-red-r-1">
+        <span class="form-field col-6 px-2 col-prim">Signature:</span><span class="form-value"></span>
+      </div>
+      <div class="col-3 min-height-sig">
+        <span class="form-field col-3 px-2 col-prim">Due to Start:</span><span class="form-value"></span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row justify-content-around mt-3 mb-2">
+    <h6 class="red-heading ">We Appriciate Your Buisness. Please Make Check Payable To JP</h6>
+  </div>
+
+
+</div>

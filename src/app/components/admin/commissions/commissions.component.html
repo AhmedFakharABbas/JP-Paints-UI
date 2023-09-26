@@ -1,0 +1,94 @@
+<section class="mb-3 commission">
+  <div class="container">
+    <div class="card-header top-heading-card ">
+      <h3 class="inside-heading mb-0">Commissions</h3>
+    </div>
+    <div class="card ">
+      <div class="card-body mt-4">
+        <div class="table-responsive table-striped">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">User</th>
+                <th scope="col">Commission</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="users!=undefined && users.length>0">
+              <tr *ngFor="let user of users | paginate: { itemsPerPage: 5, currentPage: p } ;let idx = index">
+                <td>{{user.name_of_user}}</td>
+                <!--  *ngIf="isShowCommissionValue == true" -->
+                <td>
+                  <mat-form-field>
+                    <input type="number" placeholder="commission" matInput name="commission{{idx}}"
+                      [disabled]="isShowCommissionValue == false" id="{{idx}}commission" #commission="ngModel"
+                      [(ngModel)]="user.commission" min="0" maxlength="5"
+                      oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength)"
+                      onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && event.charCode != 47
+                       && event.charCode <= 57">
+                  </mat-form-field>
+                </td>
+                <!-- *ngIf="isShowCommissionValue == false" -->
+                <!-- <td >
+                  {{user.commission}}
+                </td> -->
+                <td>
+                  <a><i style="cursor: pointer" placement="top" ngbTooltip="Update Commission"
+                      (click)="isShowCommissionValue==false ? isShowCommissionValue = true : updateUserComission(user.id,user.commission)"
+                      class="fa fa-edit mr-3">
+                      <!-- isShowCommissionValue==false ? isShowCommissionValue = true :  -->
+                    </i>
+                  </a>
+                  <!-- *ngIf="isShowCommissionValue" -->
+                  <a><i *ngIf="isShowCommissionValue == true" style="cursor: pointer" placement="top"
+                      ngbTooltip="Cancel" (click)="toggle()" class="fa fa-times">
+                    </i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="users==undefined || users.length==0">
+              <tr>
+                <td colspan="4">No user found!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col">
+            <!-- | paginate: { itemsPerPage: 10, currentPage: p } -->
+            <!-- <pagination-controls (pageChange)="p = $event" class="text-right"></pagination-controls> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #commission let-c="close" let-d="dismiss">
+  <div class="modal-header ">
+    <h6 class="modal-title">
+      Update Commission</h6>
+    <button type="button" class="close" (click)="c('Close click')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <label for="" class="mb-2">Commission </label>
+        <input type="number" class="form-control" placeholder="Commission" id="commission" name="commission"
+          [(ngModel)]="userObj.commission" required ngModel #user_comission="ngModel"
+          onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57" />
+        <div class="error-block">
+          <small class="help-block-custom" *ngIf="user_comission.touched && !user_comission.valid">
+            Required
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer mt-2">
+      <button type="button" class="btn btn-outline color" (click)="c('Close click')">Close</button>
+      <button type="submit" class="btn btn-primary color" [disabled]="userObj.commission == undefined"
+        (click)="updateUserComission()">Submit</button>
+    </div>
+  </div>
+</ng-template>

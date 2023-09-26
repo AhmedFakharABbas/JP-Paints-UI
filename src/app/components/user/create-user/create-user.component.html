@@ -1,0 +1,150 @@
+<section>
+  <div class="container">
+    <div class="card-header top-heading-card">
+      <h3 class="inside-heading mb-0">{{userAdministrationObj.id == undefined ? 'Create' : 'Update'}} User</h3>
+    </div>
+  </div>
+</section>
+<section class="mb-3">
+  <div class="container">
+    <div class="card ">
+      <div class="card-body">
+        <form #createUserForm="ngForm"
+          (ngSubmit)="(createUserForm.valid && (userAdministrationObj.password == '' || userAdministrationObj.password_confirmation == userAdministrationObj.password)) ? ((userAdministrationObj.id != undefined) ? onEditUser() : onCreateUser()) : 0">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" maxlength="25" class="" matInput placeholder="First Name" id="first_name"
+                  name="first_name" #firstname="ngModel" [(ngModel)]="userAdministrationObj.first_name" required />
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(firstname.touched || createUserForm.submitted)  && !firstname.valid">*
+                  Required
+                </small>
+                <!-- <small class="mx-2" style="color:red" *ngIf="email.valid && email.touched">Enter correct email address
+                </small> -->
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" maxlength="25" class="" matInput placeholder="Last Name" name="lastName"
+                  id="lastName" #lastname="ngModel" [(ngModel)]="userAdministrationObj.last_name" required />
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(lastname.touched || createUserForm.submitted)  && !lastname.valid">*
+                  Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" maxlength="15" matInput class="" id="Phone" placeholder="Phone" name="phone"
+                  #phone_no="ngModel"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57) || event.charCode == 43"
+                  [(ngModel)]="userAdministrationObj.phone_number" #phonenumber="ngModel" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" class="" maxlength="25" matInput placeholder="Username" name="userName"
+                  #username="ngModel" [(ngModel)]="userAdministrationObj.username" #username1="ngModel" required />
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(createUserForm.submitted || username1.touched) && !username1.valid">*
+                  Required
+                </small>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" class="" maxlength="100" matInput placeholder="Email" name="email"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="userAdministrationObj.email"
+                  #email="ngModel"  />
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom" *ngIf="(createUserForm.submitted || email.touched) && !email.valid">*
+                  Required
+                </small>
+              </div>
+            </div>
+
+
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="Password" minlength="4" class="" matInput placeholder="Password" 
+                   name="password"
+                  #password0="ngModel" [(ngModel)]="userAdministrationObj.password"
+                  [required]="userAdministrationObj.id == undefined" />
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(password0.touched || createUserForm.submitted) && !password0.valid && !userAdministrationObj.password">*
+                  Required
+                </small>
+                <small class="help-block-custom"
+                  *ngIf="(password0.touched || createUserForm.submitted) && !password0.valid && password0.errors.minlength && userAdministrationObj.password">*
+                  Atleast 4 characters
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="Password" class="" matInput placeholder="Confirm Password" name="confirm_password"
+                  #confirm_password="ngModel" [(ngModel)]="userAdministrationObj.password_confirmation" />
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(confirm_password.touched || createUserForm.submitted) && (userAdministrationObj.password != '' && userAdministrationObj.password_confirmation != userAdministrationObj.password)">*
+                  Password confirmation does not match
+                </small>
+              </div>
+            </div>
+
+
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-select id="user_type" name="user_type" placeholder="User Type" [compareWith]="comparer" multiple
+                  [(ngModel)]="userAdministrationObj.roles" required ngModel #usertypeID="ngModel">
+                  <mat-option *ngFor="let type of userTypesMeta; let i = index" [value]="type">
+                    {{ type.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(usertypeID.touched || createUserForm.submitted)  && !usertypeID.valid">*
+                  Required
+                </small>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <button type="submit" class="btn btn-primary color ml-auto mt-4" id="submit_button">
+                {{userAdministrationObj.id != undefined ? 'Update' : 'Create'}}
+              </button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
+<ng-template #samePasswords>
+  <div class="error-block">
+    <small class="help-block-custom" *ngIf="userAdministrationObj.password == userAdministrationObj.confirm_password">*
+      password and confirm password shouldn't same
+    </small>
+  </div>
+</ng-template> -->

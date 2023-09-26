@@ -1,0 +1,124 @@
+.form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+/* End */
+
+.headertitle {
+    font-family: 'Raleway';
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 29px;
+    line-height: 40px;
+}
+
+.headertitle::after {
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    background-color: #ee3724;
+    display: block;
+    content: "";
+    height: 1.5px;
+}
+
+label {
+    font-weight: 700;
+    font-size: 13px;
+    color: #000;
+    /* padding-bottom: 8px; */
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+::placeholder {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+[disabled] {
+    cursor: not-allowed;
+}
+
+button.btn.btn-primary.color.mt-4[disabled]:hover {
+    background-color: #ee3724;
+    color: white;
+}
+
+/* 
+button[disabled]:hover{
+    background-color: #ee3724;
+    color: white;
+} */
+
+/* input field colors */
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: #ee3724 !important;
+}
+
+::ng-deep .mat-form-field-label {
+    /*change color of label*/
+    color: #ee3724 !important;
+}
+
+/* #ffac0b */
+
+/* ::ng-deep.mat-form-field-underline {
+    background-color: #ee3724 !important;
+  } */
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: #ee3724 !important;
+    ;
+}
+
+::ng-deep input.mat-input-element {
+    color: black;
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #ee3724;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    color: rgb(66, 134, 244);
+    background-color: #ee3724;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color: rgb(255, 37, 37, .26)
+}
+
+
+mat-form-field {
+    width: 100%;
+}
+
+/* end */
+
+.tag{
+    color:#77080c; top: -38px; text-align: right;-webkit-text-stroke: 0.5px white; background: white
+}
+
+.tag p{
+    font-size: larger; font-weight: bolder;
+}
+
+.tag small{
+    font-weight: bolder; font-size:10px; float: left; margin-top: 8px;
+}

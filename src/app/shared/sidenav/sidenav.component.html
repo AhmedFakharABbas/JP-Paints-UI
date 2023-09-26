@@ -1,0 +1,224 @@
+<!-- Sidebar  -->
+<nav id="sidebar"
+  style="background:linear-gradient(87deg, rgba(238, 55, 36, 0.05) 0, rgba(238, 55, 36, 0.11) 100%),url(assets/img/brick.jpg) ; overflow: auto">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-lg-10 col-10">
+        <div class="sidebar-header">
+          <button type="button" id="sidebarCollapse" class="bg-transparent" style="border:none">
+            <h3><img src="assets/img/JP_logo.png" class="w-75 pt-3" /></h3>
+            <strong style="color:#ee3724">JP</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="list-unstyled components">
+    <li style="color: white;background-color: #605e5d;">
+      Welcome {{_sharedService.userObj.username}}
+    </li>
+    <li>
+      <a routerLink="/todo/task" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}"
+        data-toggle="collapse" aria-expanded="false">
+        <i class="fas fa-tasks"></i>Todo
+      </a>
+    </li>
+
+
+
+    <li>
+      <a routerLink="/customer/all" routerLinkActive="link-active">
+        <i class="fas fa-users"></i>Customers</a>
+    </li>
+    <li>
+      <a routerLink="/project/all" routerLinkActive="link-active">
+        <i class="fas fa-briefcase"></i> Projects
+      </a>
+    </li>
+    <li>
+      <a routerLink="/calendar/crews" routerLinkActive="link-active">
+        <i class="fas fa-calendar-alt"></i> Calendars
+      </a>
+    </li>
+
+
+    <li>
+      <!-- <a href="#callsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">
+        <i class="fas fa-phone-volume"></i> Calls
+      </a> -->
+      <a routerLink="/calls" routerLinkActive="link-active">
+        <i class="fas fa-phone-volume"></i> Calls
+      </a>
+      <!-- <ul class="collapse list-unstyled" id="callsSubmenu">
+        <li>
+          <a routerLink="/calls/search" routerLinkActive="link-active">
+            <i class="fas fa-search"></i>
+            Search Calls</a>
+        </li>
+        <li>
+          <a  routerLink="call/scheduled" routerLinkActive="link-active">
+            <i class="fas fa-calendar-plus"></i>
+            Call Scheduled</a>
+        </li>
+      </ul> -->
+    </li>
+
+    <ng-container *ngIf="_sharedService.role_flags.is_administrator == true">
+      <li>
+        <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle active">
+          <i class="fas fa-cogs"></i> Administration
+        </a>
+        <ul class="collapse list-unstyled" id="userSubmenu">
+          <li>
+            <a routerLink="/vendor/all" routerLinkActive="link-active"><i class="fas fa-users"></i> All Vendors</a>
+          </li>
+          <li>
+            <a routerLink="/user/all" routerLinkActive="link-active"><i class="fas fa-users"></i> All Users</a>
+          </li>
+          <li>
+            <a routerLink="/user/manage-access" routerLinkActive="link-active"><i class="fas fa-user-shield"></i> Manage
+              User Access</a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          <i class="fas fa-tachometer-alt"></i> Admin Options
+        </a>
+        <ul class="collapse list-unstyled" id="adminSubmenu">
+          <li>
+            <a [routerLink]="['/admin/marketing']" routerLinkActive="link-active"><i class="fas fa-bullhorn"></i>
+              Marketing
+              Expenditure</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/restore-customer']" routerLinkActive="link-active"><i
+                class="fas fa-user-plus"></i>Restore
+              Customer</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/referrel-source']" routerLinkActive="link-active"><i class="fas fa-users"></i>
+              Referrel
+              Source</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/paint-brands']" routerLinkActive="link-active"><i class="fas fa-paint-roller"></i>
+              Paint
+              Brands</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/commissions']" routerLinkActive="link-active"><i class="fas fa-money-bill"></i>
+              Commissions</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/all-user-login']" routerLinkActive="link-active"><i
+                class="fas fa-sign-in-alt"></i>
+              All User Logins</a>
+          </li>
+          <li>
+            <a [routerLink]="['/admin/manage-calenders']" routerLinkActive="link-active"><i
+                class="fas fa-calendar-alt"></i>
+              Manage Calenders</a>
+          </li>
+          <!-- <li>
+          <a [routerLink]="['/page-tracking']" routerLinkActive="link-active"><i class="fas fa-poll"></i> Page
+            Tracking</a>
+        </li> -->
+        </ul>
+      </li>
+
+      <li>
+        <a routerLink="/statistic/main" routerLinkActive="link-active">
+          <i class="fas fa-briefcase"></i> Statistics
+        </a>
+      </li>
+
+
+      <!-- <li>
+        <a href="#statisticsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+          <i class="fas fa-tachometer-alt"></i> Statistics
+        </a>
+        <ul class="collapse list-unstyled" id="statisticsSubmenu">
+          <li>
+            <a [routerLink]="['/statistic/main']" routerLinkActive="link-active"><i class="fas fa-bullhorn"></i>Main
+              Statistics</a>
+          </li>
+          <li>
+            <a [routerLink]="['/statistic/customer-referrel-source/marketing-costs']" routerLinkActive="link-active"><i
+                class="fas fa-user-plus"></i>Customer Referral Sources/Marketing Costs</a>
+          </li>
+          <li>
+            <a [routerLink]="['/statistic/overall-estimate-statistics']" routerLinkActive="link-active"><i
+                class="fas fa-users"></i>
+              Overall Estimate Statistics </a>
+          </li>
+          <li>
+            <a [routerLink]="['/statistic/overall-work-statistics']" routerLinkActive="link-active"><i
+                class="fas fa-paint-roller"></i> Overall Work Statistics
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/statistic/estimate-by-customer-zipcode']" routerLinkActive="link-active"><i
+                class="fas fa-money-bill"></i>Estimates by Customer Zip Code
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/statistic/work-by-customer-zipcode']" routerLinkActive="link-active"><i
+                class="fas fa-sign-in-alt"></i> Work by Customer Zip Code
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/statistic/csr-customer-to-work-stats']" routerLinkActive="link-active"><i
+                class="fas fa-calendar-alt"></i>CSR Customer to Work %
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/statistic/estimator-breakdowns']" routerLinkActive="link-active"><i
+                class="fas fa-calendar-alt"></i>Estimator Breakdowns
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/statistic/estimate-to-work-stats']" routerLinkActive="link-active"><i
+                class="fas fa-calendar-alt"></i>Estimate to work %
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/statistic/missing-estimates']" routerLinkActive="link-active"><i
+                class="fas fa-calendar-alt"></i>Missing Estimates
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/statistic/crew-breakdowns']" routerLinkActive="link-active"><i
+                class="fas fa-calendar-alt"></i>Crew Breakdowns
+            </a>
+          </li>
+        </ul>
+      </li> -->
+
+
+
+    </ng-container>
+    <li>
+      <a routerLink="/login" routerLinkActive="link-active" (click)="onSignOut()" data-toggle="collapse"
+        aria-expanded="false">
+        <i class="fas fa-sign-out-alt"></i>Logout
+      </a>
+    </li>
+  </ul>
+  <!-- <ul class="list-unstyled components">
+      <li *ngFor = "let menu of MenuItems">
+        <a [href] = "menu.SubMenuitems.length > 0 ? menu.href" data-toggle ="collapse" aria-expanded="false" [class]="menu.class"  [routerLinkActive]="menu.SubMenuitems.length > 0 ? '' : 'link-active'" [routerLinkActiveOptions]="{exact: true}"
+           (click) = "menu.SubMenuitems.length > 0 ? onNavigateToScheduledCall() : 0" aria-expanded="false">
+          <i [class]="menu.icon"></i>{{menu.title}}
+        </a>
+          <ul class="collapse list-unstyled" [id]="menu.id" *ngIf = "menu.SubMenuitems.length > 0">
+            <li *ngFor = "let item of menu.SubMenuitems">
+              <a [routerLink]="[item.path]" routerLinkActive="link-active">
+                <i [class]="item.icon"></i>{{item.title}}
+              </a>
+            </li>
+          </ul>
+      </li>
+  </ul> -->
+</nav>

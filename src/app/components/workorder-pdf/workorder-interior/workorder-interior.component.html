@@ -1,0 +1,422 @@
+<div id="content" #content>
+  <!-- <div>
+    <input type="button" class="btn btn-primary" value="Download PDF" (click)="captureScreen()" />
+  </div> -->
+  <div class="row flex-row-reverse m-0">
+    <button type="button" class="btn btn-primary color mr-4" value="Download PDF" (click)="captureScreen()"
+      placement="left" ngbTooltip="Export PDF">
+      <i class="fas fa-file-excel mr-1"></i> Export PDF
+    </button>
+  </div>
+</div>
+<div class="container bg-grad pt-4" id="contentToConvert">
+  <div class="row">
+    <img src="../../../../assets/img/jp-pdf-cover.png" alt="cover-photo" width="100%" height="auto">
+  </div>
+  <div class="row m-0" *ngIf="projectDetailsObj != undefined && projectDetailsObj.project_information!=undefined">
+    <div class="col-4  ">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Name:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.customer_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Address:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.address_1}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Estimate#</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.project_number}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Home Phone:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.home_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-value b-b-1 bold col">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Project Type:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.project_type_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Work Phone:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.work_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Subdivision:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.sub_division_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Sales Rep.:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.estimator_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Mobile Phone:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.mobile_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Intersection:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.major_intersection}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Sales Phone:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.work_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">FAX:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.work_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Referred By:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.referral_source_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Est Date:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.estimate_date}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Email:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.email}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+
+
+
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Time:</span>
+        <span class="form-value b-b-1 col bold">{{projectDetailsObj.project_information.estimate_time}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+
+
+
+  </div>
+  <h4 class="section-heading">WORK ORDER - INTERIOR JOB</h4>
+
+  <div class="col-12 border-black">
+    <div class="row">
+      <h4 class="bg-heading-transparent">Job Specifications:
+       <p class="break-all-word"><u>{{projectDetailsObj.project_information.project_description}}</u></p>
+      </h4>
+    </div>
+  </div>
+
+
+  <div class="col-lg-12 border-black mt-2 ">
+    <div class="row justify-content-around">
+      <div class="col padding_0 bg-heading">Area</div>
+      <div class="col padding_0 bg-heading">1 Coats</div>
+      <div class="col padding_0 bg-heading">Gal</div>
+      <div class="col padding_0 bg-heading">2 coats</div>
+      <div class="col padding_0 bg-heading">Gal</div>
+      <div class="col padding_0 bg-heading">Trim</div>
+      <div class="col padding_0 bg-heading">Coats</div>
+      <div class="col padding_0 bg-heading">Gal</div>
+      <div class="col padding_0 bg-heading">Ceiling</div>
+      <div class="col padding_0 bg-heading">Coats</div>
+      <div class="col padding_0 bg-heading">Gal</div>
+      <div class="col padding_0 bg-heading">Closet</div>
+      <div class="col padding_0 bg-heading">Price</div>
+    </div>
+    <ng-container
+      *ngIf="projectDetailsObj != undefined && projectDetailsObj.interiorpaints!=undefined && projectDetailsObj.interiorpaints.length>0">
+
+      <div class="row b-b-1 text-center" style="margin-left: -17px;
+      margin-right: -14px" *ngFor="let task of projectDetailsObj.interiorpaints">
+        <div class="col padding_0 border-rigth-black">{{task.paint_area}}</div>
+        <div class="col padding_0 border-rigth-black">$$$</div>
+        <div class="col padding_0 border-rigth-black">{{task.coat1_gallons}}</div>
+        <div class="col padding_0 border-rigth-black">$$$</div>
+        <div class="col padding_0 border-rigth-black">{{task.coat2_gallons}}</div>
+        <div class="col padding_0 border-rigth-black">$$$</div>
+        <div class="col padding_0 border-rigth-black">{{task.trim_coats}}</div>
+        <div class="col padding_0 border-rigth-black">{{task.trim_gallons}}</div>
+        <div class="col padding_0 border-rigth-black">$$$</div>
+        <div class="col padding_0 border-rigth-black">{{task.ceiling_coats}}</div>
+        <div class="col padding_0 border-rigth-black">{{task.ceiling_gallons}}</div>
+        <div class="col padding_0 border-rigth-black">$$$</div>
+        <div class="col padding_0 border-rigth-black">$$$</div>
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="projectDetailsObj != undefined && projectDetailsObj.interior_description!=undefined && projectDetailsObj.interior_description.length>0">
+
+      <div class="row text-center" style="margin-left: -17px;
+      margin-right: -14px" *ngFor="let test of projectDetailsObj.interior_description">
+        <div class="col-1 padding_0 border-rigth-black"><p class="break-all-word">{{test.interior_description_area}}</p></div>
+        <div class="col-10 padding_0 border-rigth-black"><p class="break-all-word">{{test.interior_special_notes}}</p></div>
+        <div class="col-1 padding_0 border-rigth-black"><p class="break-all-word">$$$</p></div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="col-12 border-black mt-2">
+    <div class="row">
+      <div class="col-12" *ngIf="projectDetailsObj!=undefined && projectDetailsObj.estimate !=undefined">
+        <div class="row justify-content-around">
+          <strong>We Always use TOP OF THE LINE PAINTS! Because they are durable, washablle and hold their color
+            better.</strong> Cheap
+          paint id made with clay pigments, the paints we use are made with titanium or Teflon.
+        </div>
+
+        <div class="row justify-content-around border-bot-1 mt-1">
+          <label class="check "> Fix Sheetrock
+            <input type="checkbox" [checked]="projectDetailsObj.estimate.is_fix_sheetrock == 1" name="is_name">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check "> Skim Sheetrock
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_skim_sheetrock == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check "> Strip Wall Paper
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_strip_wallpaper == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check "> Carpentry
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.carpentery == 1">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+
+        <div class="row justify-content-around border-bot-1 mt-1">
+          <label class="check "> Porter
+            <input type="checkbox" [checked]="projectDetailsObj.estimate.is_porter == 1" name="is_name">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check "> Sherwin Williams
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_sherwin_williams == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check "> Benjamin Moore
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_benjamin_moore == 1">
+            <span class="checkmark"></span>
+          </label>
+
+          <!-- <label class="check "> Duron
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_duron == 1">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="check "> Glidden
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_glidden == 1">
+            <span class="checkmark"></span>
+          </label> -->
+
+          <label class="check "> Others
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_other_paint == 1">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+
+        <div class="row  border-bot-1 mt-1" style="padding: 0 32px;">
+          <label class="check col-4"> Ceiling : {{projectDetailsObj.estimate.ceilings}}
+            <input type="checkbox" name="is_name"
+              [checked]="projectDetailsObj.estimate.ceilings != '' && projectDetailsObj.estimate.ceilings != undefined">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col-4"> Walls : {{projectDetailsObj.estimate.walls}}
+            <input type="checkbox" name="is_name"
+              [checked]="projectDetailsObj.estimate.walls != '' && projectDetailsObj.estimate.walls != undefined">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col-4"> Trim : {{projectDetailsObj.estimate.trims}}
+            <input type="checkbox" name="is_name"
+              [checked]="projectDetailsObj.estimate.trims != '' && projectDetailsObj.estimate.trims != undefined">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <div class="row justify-content-around mt-1">
+          <label class="check "> Primer :
+            <input type="checkbox" name="is_name">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check "> Others : {{projectDetailsObj.estimate.others}}
+            <input type="checkbox" name="is_name"
+              [checked]="projectDetailsObj.estimate.others != '' && projectDetailsObj.estimate.others != undefined">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-12 border-black minus-margin mt-2"
+    *ngIf="projectDetailsObj!=undefined && projectDetailsObj.estimate !=undefined">
+
+    <div class="row ">
+      <div class="col-8">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-3 bolder">
+            <h6 class="bolder m-0">Special Instructions:</h6>
+          </div>
+          <div class="col-9 pl-0"><p class="break-all-word">{{projectDetailsObj.estimate.interior_special_notes}}</p></div>
+        </div>
+      </div>
+      <div class="col-4  b-b-1 b-l-1">
+        <div class="row">
+          <span class="form-field col-6 px-1 bolder text-right">Price include materials:</span>
+          <label class="check col"> Yes
+            <input type="checkbox" name="is_name"
+              [checked]="projectDetailsObj.estimate.is_interior_paint_material_included == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col"> No
+            <input type="checkbox" name="is_name"
+              [checked]="projectDetailsObj.estimate.is_interior_paint_material_included != 1">
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="check col"> Partial
+            <input type="checkbox" name="is_name">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8 ">
+        <div class="align-items-center row justify-content-around mb-1 align-items-center">
+          <div class="col-12 pl-0 b-b-1 mb-1"></div>
+        </div>
+      </div>
+      <div class="col-4  b-b-1 b-l-1">
+        <div class="row">
+          <span class="form-field col-6 px-2 text-right bolder">Payment by check:</span>
+          <label class="check col"> Yes
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.interior_payment_method == 2">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col"> No
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.interior_payment_method != 2">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-8 ">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0 b-b-1 mb-1">&nbsp;</div>
+        </div>
+      </div>
+      <div class="col-4 b-b-1 b-l-1 ">
+        <div class="row">
+          <span class="form-field col-6 text-right px-2 bolder">TOTAL:</span>
+          <span class="form-value"> $$$</span>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-8 b-b-1">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0 "></div>
+        </div>
+      </div>
+      <div class="col-4 b-b-1 b-l-1 ">
+        <div class="row mt-1">
+          <span class="form-field col-6 text-right px-2 bolder">DEPOSIT:</span>
+          <span class="form-value">$$$
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-8 ">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-12 pl-0 ">
+            <div class="row m-0">
+              <div class="col-1">
+                <img src="../../../../assets/img/cards.png" alt="cards" class="w-100">
+              </div>
+              Note: A convinience charge will be added when using a credit card:
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 b-l-1 ">
+        <div class="row">
+          <span class="form-field col-6 text-right px-2 bolder">BALANCE DUE:</span>
+          <span class="form-value"> $$$</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-12 border-black mt-2 bg-white">
+    <div class="row">
+      <h4 class="bg-heading ">Dependability, Quality, Value, Experience Make the Difference. Thank You for Letting Us
+        Serve You</h4>
+    </div>
+    <div class="row">
+      <div class="col-3 min-height-sig b-red-r-1">
+        <span class="form-field px-2 col-prim">Job Approved By:</span><span class="form-value"></span>
+      </div>
+      <div class="col-6 min-height-sig b-red-r-1">
+        <span class="form-field col-6 px-2 col-prim">Signature:</span><span class="form-value"></span>
+      </div>
+      <div class="col-3 min-height-sig">
+        <span class="form-field col-3 px-2 col-prim">Due to Start:</span><span class="form-value"></span>
+      </div>
+
+    </div>
+  </div>
+  <div class="row justify-content-around mt-3 mb-2">
+    <h6 class="red-heading ">We Appriciate Your Buisness. Please Make Check Payable To JP</h6>
+  </div>
+
+</div>

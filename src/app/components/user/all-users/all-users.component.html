@@ -1,0 +1,631 @@
+<!-- <section class="mb-3">
+  <div class="container">
+    <div class="card-header top-heading-card ">
+      <h3 class="inside-heading mb-0">Active Users</h3>
+    </div>
+    <div class="card ">
+      <div class="card-body mt-4">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 float-right">
+            <button type="button" class="btn btn-primary color float-right" id="search_button"
+              [routerLink]="['/user/create']">
+              <i class="fas fa-user-plus mr-2"></i>Create
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive table-striped">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">User Type(s)</th>
+                <th scope="col">Username</th>
+                <th scope="col">Inactive</th>
+                <th scope="col">Date Created</th>
+                <th scope="col">Date Modified </th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="userDetails?.length > 0">
+              <tr
+                *ngFor="let userDetail of userDetails | paginate: { itemsPerPage: 5, currentPage: p } ; let idx=index">
+
+                <td *ngIf="userDetail.is_active">{{userDetail.first_name}}</td>
+                <td *ngIf="!userDetail.is_active"> <del><i>{{userDetail.first_name}}</i></del> </td>
+
+                <td *ngIf="userDetail.is_active">{{userDetail.last_name}}</td>
+                <td *ngIf="!userDetail.is_active"><del><i>{{userDetail.last_name}}</i></del> </td>
+
+                <td *ngIf="userDetail.is_active">{{userDetail.user_roles}}</td>
+                <td *ngIf="!userDetail.is_active"> <del><i>{{userDetail.user_roles}}</i></del></td>
+
+                <td *ngIf="userDetail.is_active">{{userDetail.username}}</td>
+                <td *ngIf="!userDetail.is_active"> <del><i>{{userDetail.email}}</i></del></td>
+
+                <td *ngIf="userDetail.is_active">{{userDetail.is_active ? 'false' : 'true'}}</td>
+                <td *ngIf="!userDetail.is_active"> <del><i>{{userDetail.is_active ? 'false' : 'true'}}</i></del></td>
+
+                <td *ngIf="userDetail.is_active">{{userDetail.created_at | date:'MM/dd/yyyy' }}</td>
+                <td *ngIf="!userDetail.is_active"> <del><i>{{userDetail.created_at | date:'MM/dd/yyyy' }}</i></del></td>
+
+                <td *ngIf="userDetail.updated_at != null && userDetail.is_active">
+                  {{userDetail.updated_at | date:'MM/dd/yyyy'}}</td>
+                <td *ngIf="userDetail.updated_at != null && !userDetail.is_active">
+                  <del><i>{{userDetail.updated_at | date:'MM/dd/yyyy'}}</i></del></td>
+
+                <td *ngIf="userDetail.updated_at == null && userDetail.is_active"></td>
+                <td *ngIf="userDetail.updated_at == null && !userDetail.is_active"><del><i></i></del>
+
+                </td>
+                <td>
+                  <a [routerLink]="['/user/view', userDetail.id]"><i style="cursor: pointer" placement="top"
+                      ngbTooltip="View Login" class="fas fa-eye" aria-hidden="true"></i></a>
+                  <a name="is_active{{idx}}" id="{{idx}}is_active" (click)="toggleIsActiveUser(userDetail.id)">
+                    <i style="cursor: pointer" placement="top"
+                      ngbTooltip="{{userDetail.is_active ? 'Deactivate' : 'Activate'}}" class="ml-3 fas fa-power-off"
+                      aria-hidden="true">
+                    </i>
+                  </a>
+                  <a [routerLink]="['/user/update', userDetail.id]" placement="top" ngbTooltip="Edit User"><i
+                      class="fas fa-edit ml-3"></i></a>
+                  <a (click)="openDeleteUserModal(deleteUserModal,userDetail.id)"><i style="cursor: pointer"
+                      placement="top" ngbTooltip="Delete User" class="ml-3 fas fa-trash"></i></a>
+                </td>
+              </tr>
+            </tbody>
+            <tr *ngIf="userDetails?.length == 0">
+              <td colspan="8">
+                <p>No user found</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col">
+            <pagination-controls (pageChange)="p = $event" class="text-right"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section id="tabs" class="project-tab mb-3">
+  <div class="container">
+    <div class="card-header top-heading-card">
+      <h3 class="inside-heading mb-0">All Users</h3>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row justify-content-end">
+          <div class="col-xs-12 col-sm-12 float-right mb-3">
+            <button
+              type="button"
+              class="btn btn-primary color float-right"
+              id="search_button"
+              [routerLink]="['/user/create']"
+            >
+              <i class="fas fa-user-plus mr-2"></i>Create
+            </button>
+          </div>
+
+          <!-- <div class="row">
+            <div class="col-xs-12 col-sm-12 mb-3">
+              <button type="button" class="btn btn-primary color mr-3" id="submit_button" (click)="onUpdateAllUsers()">
+                Update All
+              </button>
+            </div>
+          </div>
+        [(ngModel)]="projectObj.address_1" -->
+          <!-- {{ activeUserDetails.length }} -->
+          <div class="col-md-12">
+            <div class="row justify-content-end">
+              <nav class="col-4 mr-auto mt-3">
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                  <a
+                    class="nav-item nav-link active"
+                    id="nav-home-tab"
+                    data-toggle="tab"
+                    href="#nav-home"
+                    role="tab"
+                    aria-controls="nav-home"
+                    aria-selected="true"
+                    >Active Users</a
+                  >
+                  <a
+                    class="nav-item nav-link"
+                    id="nav-profile-tab"
+                    data-toggle="tab"
+                    href="#nav-profile"
+                    role="tab"
+                    aria-controls="nav-profile"
+                    aria-selected="false"
+                    >In Active Users</a
+                  >
+                </div>
+              </nav>
+              <div class="col-4">
+                <mat-form-field>
+                  <mat-label>Search</mat-label>
+                  <input
+                    type="text"
+                    name="supervisor-name"
+                    id="supervisor_name"
+                    placeholder="Type to search user"
+                    aria-label="supervisor_detail"
+                    matInput
+                    [(ngModel)]="userSearchQuery"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-1 mt-3">
+                <i
+                  style="cursor: pointer"
+                  placement="top"
+                  ngbTooltip="Search User"
+                  (click)="userSearch()"
+                  class="fas fa-search searchbtn"
+                  aria-hidden="true"
+                ></i>
+
+                <i
+                  style="cursor: pointer"
+                  placement="top"
+                  ngbTooltip="Reset Search"
+                  (click)="userSearchQuery = undefined; onGetAllUsers()"
+                  class="fas fa-undo-alt resethbtn ml-1"
+                ></i>
+              </div>
+            </div>
+
+            <div class="tab-content" id="nav-tabContent">
+              <div
+                class="tab-pane fade show active"
+                id="nav-home"
+                role="tabpanel"
+                aria-labelledby="nav-home-tab"
+              >
+                <div class="card-body">
+                  <div class="table-responsive table-striped">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">First Name</th>
+                          <th scope="col">Last Name</th>
+                          <th scope="col">User Type(s)</th>
+                          <th scope="col">Username</th>
+                          <th scope="col">Inactive</th>
+                          <th scope="col">Date Created</th>
+                          <th scope="col">Date Modified</th>
+                          <th scope="col">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody *ngIf="activeUserDetails.length > 0">
+                        <tr
+                          *ngFor="
+                            let userDetail of activeUserDetails
+                              | userpipes: '1'
+                              | paginate
+                                : {
+                                    id: 'ActiveUserserver',
+                                    itemsPerPage: 10,
+                                    currentPage: ActiveCurrentPageNo,
+                                    totalItems: totalActiveUserCount
+                                  };
+                            let idx = index;
+                            first as isFirst;
+                            last as isLast
+                          "
+                        >
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.first_name }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{ userDetail.first_name }}</i></del
+                            >
+                          </td>
+
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.last_name }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{ userDetail.last_name }}</i></del
+                            >
+                          </td>
+
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.user_roles }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{ userDetail.user_roles }}</i></del
+                            >
+                          </td>
+
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.username }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{ userDetail.username }}</i></del
+                            >
+                          </td>
+
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.is_active ? "false" : "true" }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{
+                                userDetail.is_active ? "false" : "true"
+                              }}</i></del
+                            >
+                          </td>
+
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.created_at | date: "MM/dd/yyyy" }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{
+                                userDetail.created_at | date: "MM/dd/yyyy"
+                              }}</i></del
+                            >
+                          </td>
+
+                          <td
+                            *ngIf="
+                              userDetail.updated_at != null &&
+                              userDetail.is_active
+                            "
+                          >
+                            {{ userDetail.updated_at | date: "MM/dd/yyyy" }}
+                          </td>
+                          <td
+                            *ngIf="
+                              userDetail.updated_at != null &&
+                              !userDetail.is_active
+                            "
+                          >
+                            <del
+                              ><i>{{
+                                userDetail.updated_at | date: "MM/dd/yyyy"
+                              }}</i></del
+                            >
+                          </td>
+
+                          <td
+                            *ngIf="
+                              userDetail.updated_at == null &&
+                              userDetail.is_active
+                            "
+                          ></td>
+                          <td
+                            *ngIf="
+                              userDetail.updated_at == null &&
+                              !userDetail.is_active
+                            "
+                          >
+                            <del><i></i></del>
+                          </td>
+                          <td>
+                            <!-- routerLink="/login-user" -->
+                            <a [routerLink]="['/user/view', userDetail.id]"
+                              ><i
+                                style="cursor: pointer"
+                                placement="top"
+                                ngbTooltip="View Login"
+                                class="fas fa-eye"
+                                aria-hidden="true"
+                              ></i
+                            ></a>
+                            <a
+                              name="is_active{{ idx }}"
+                              id="{{ idx }}is_active"
+                              (click)="toggleIsActiveUser(userDetail.id)"
+                            >
+                              <i
+                                style="cursor: pointer"
+                                placement="top"
+                                ngbTooltip="{{
+                                  userDetail.is_active
+                                    ? 'Deactivate'
+                                    : 'Activate'
+                                }}"
+                                class="ml-3 fas fa-power-off"
+                                aria-hidden="true"
+                              >
+                              </i>
+                              <!-- {{userDetail.is_active }} -->
+                            </a>
+                            <!-- [routerLink]="['/project/view',project.id]"
+                              [routerLink]="['/project/update', project.id]" -->
+                            <a
+                              [routerLink]="['/user/update', userDetail.id]"
+                              placement="top"
+                              ngbTooltip="Edit User"
+                              ><i class="fas fa-edit ml-3"></i
+                            ></a>
+                            <a
+                              (click)="
+                                openDeleteUserModal(
+                                  deleteUserModal,
+                                  userDetail.id
+                                )
+                              "
+                              ><i
+                                style="cursor: pointer"
+                                placement="top"
+                                ngbTooltip="Delete User"
+                                class="ml-3 fas fa-trash"
+                              ></i
+                            ></a>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tr *ngIf="activeUserDetails?.length == 0">
+                        <td colspan="8">
+                          <p>No active user found</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="row">
+                    <div class="col" *ngIf="totalActiveUserCount > 10">
+                      <!-- <pagination-controls id="pagination1" (pageChange)="p = $event" class="text-right">
+                      </pagination-controls> -->
+                      <pagination-controls
+                        (pageChange)="
+                          ActiveCurrentPageNo = $event; onGetAllUsers()
+                        "
+                        directionLinks="true"
+                        responsive="true"
+                        id="ActiveUserserver"
+                        class="text-right"
+                      >
+                      </pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="tab-pane fade"
+                id="nav-profile"
+                role="tabpanel"
+                aria-labelledby="nav-profile-tab"
+              >
+                <div class="card-body">
+                  <div class="table-responsive table-striped">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">First Name</th>
+                          <th scope="col">Last Name</th>
+                          <th scope="col">User Type(s)</th>
+                          <th scope="col">Username</th>
+                          <th scope="col">Inactive</th>
+                          <th scope="col">Date Created</th>
+                          <th scope="col">Date Modified</th>
+                          <th scope="col">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody *ngIf="inActiveUserDetails.length > 0">
+                        <tr
+                          *ngFor="
+                            let userDetail of inActiveUserDetails
+                              | userpipes: '0'
+                              | paginate
+                                : {
+                                    id: 'server',
+                                    itemsPerPage: 10,
+                                    currentPage: inActiveCurrentPageNo,
+                                    totalItems: totalInActiveUserCount
+                                  };
+                            let idx = index
+                          "
+                        >
+                          <!-- <ng-container *ngIf="userDetail.is_active == false"> -->
+
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.first_name }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{ userDetail.first_name }}</i></del
+                            >
+                          </td>
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.last_name }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{ userDetail.last_name }}</i></del
+                            >
+                          </td>
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.user_roles }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{ userDetail.user_roles }}</i></del
+                            >
+                          </td>
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.username }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{ userDetail.username }}</i></del
+                            >
+                          </td>
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.is_active ? "false" : "true" }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{
+                                userDetail.is_active ? "false" : "true"
+                              }}</i></del
+                            >
+                          </td>
+                          <td *ngIf="userDetail.is_active">
+                            {{ userDetail.created_at | date: "MM/dd/yyyy" }}
+                          </td>
+                          <td *ngIf="!userDetail.is_active">
+                            <del
+                              ><i>{{
+                                userDetail.created_at | date: "MM/dd/yyyy"
+                              }}</i></del
+                            >
+                          </td>
+                          <td
+                            *ngIf="
+                              userDetail.updated_at != null &&
+                              userDetail.is_active
+                            "
+                          >
+                            {{ userDetail.updated_at | date: "MM/dd/yyyy" }}
+                          </td>
+                          <td
+                            *ngIf="
+                              userDetail.updated_at != null &&
+                              !userDetail.is_active
+                            "
+                          >
+                            <del
+                              ><i>{{
+                                userDetail.updated_at | date: "MM/dd/yyyy"
+                              }}</i></del
+                            >
+                          </td>
+                          <td
+                            *ngIf="
+                              userDetail.updated_at == null &&
+                              userDetail.is_active
+                            "
+                          ></td>
+                          <td
+                            *ngIf="
+                              userDetail.updated_at == null &&
+                              !userDetail.is_active
+                            "
+                          >
+                            <del><i></i></del>
+                          </td>
+                          <td>
+                            <a [routerLink]="['/user/view', userDetail.id]"
+                              ><i
+                                style="cursor: pointer"
+                                placement="top"
+                                ngbTooltip="View Login"
+                                class="fas fa-eye"
+                                aria-hidden="true"
+                              ></i
+                            ></a>
+                            <a
+                              name="is_active{{ idx }}"
+                              id="{{ idx }}is_active"
+                              (click)="toggleIsActiveUser(userDetail.id)"
+                            >
+                              <i
+                                style="cursor: pointer"
+                                placement="top"
+                                ngbTooltip="{{
+                                  userDetail.is_active
+                                    ? 'Deactivate'
+                                    : 'Activate'
+                                }}"
+                                class="ml-3 fas fa-power-off"
+                                aria-hidden="true"
+                              >
+                              </i>
+                            </a>
+                            <a
+                              [routerLink]="['/user/update', userDetail.id]"
+                              placement="top"
+                              ngbTooltip="Edit User"
+                              ><i class="fas fa-edit ml-3"></i
+                            ></a>
+                            <a
+                              (click)="
+                                openDeleteUserModal(
+                                  deleteUserModal,
+                                  userDetail.id
+                                )
+                              "
+                              ><i
+                                style="cursor: pointer"
+                                placement="top"
+                                ngbTooltip="Delete User"
+                                class="ml-3 fas fa-trash"
+                              ></i
+                            ></a>
+                          </td>
+
+                          <!-- </ng-container> -->
+                        </tr>
+                      </tbody>
+                      <tr *ngIf="inActiveUserDetails.length <= 0">
+                        <td colspan="8">
+                          <p>No Inactive user found</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="row">
+                    <div class="col" *ngIf="this.totalInActiveUserCount > 10">
+                      <!-- <pagination-controls id="pagination2" (pageChange)="q = $event" class="text-right">
+                      </pagination-controls> -->
+                      <pagination-controls
+                        (pageChange)="
+                          inActiveCurrentPageNo = $event; onGetAllUsers()
+                        "
+                        directionLinks="true"
+                        responsive="true"
+                        id="server"
+                        class="text-right"
+                      >
+                      </pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #deleteUserModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Delete User</h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red">Are you sure to delete this user?</h6>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline color"
+        (click)="c('Close click')"
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary color"
+        (click)="onDeleteUser(userId)"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</ng-template>

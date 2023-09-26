@@ -1,0 +1,28 @@
+<!-- <div class="wrapper">
+  <div [class.display_none]="!_sharedService.isSidebarShow" [class.display_block]="_sharedService.isSidebarShow">
+    <app-sidenav></app-sidenav>
+  </div>
+  <div id="content">
+    <router-outlet></router-outlet>
+  </div>
+</div> -->
+
+
+
+
+
+<div class="wrapper">
+
+  <div [class.display_none]="!_sharedService.isSidebarShow" [class.display_block]="_sharedService.isSidebarShow">
+    <app-sidenav></app-sidenav>
+
+  </div>
+  <app-top-nav-bar [class.display_block]="_sharedService.isSidebarShow"></app-top-nav-bar>
+
+  <div id="content" [class.display_padding]="_sharedService.isDisplayNone"
+    [class.display_padding_none]="!_sharedService.isDisplayNone">
+    <div class="fluid-container pb-3 pt-3">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

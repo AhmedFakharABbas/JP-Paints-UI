@@ -1,0 +1,342 @@
+<!-- <section style="margin-top: 6%;">
+  <div class="container">
+    <div class="card" style="background-color: #ee3724;">
+      <div class="card-body" style="padding: 5px;">
+        <h3 style="text-align: center;color: #fff;margin-bottom: 0px;">Search Deleted Customers</h3>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <section class="mb-3">
+  <div class="container">
+    <div class="card ">
+      <div class="card-body">
+        <form (ngSubmit)="customerForm.valid ? onFilterCustomer() :0" #customerForm="ngForm">
+
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <label for="" class="mt-3 mb-2">First Name</label>
+              <input type="text" class="form-control" placeholder="FirstName" name="firstName"
+                [(ngModel)]="customerObj.first_name" />
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <label for="" class="mt-3 mb-2">Last Name</label>
+              <input type="text" class="form-control" placeholder="LastName" name="lastName"
+                [(ngModel)]="customerObj.last_name" />
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <label for="" class="mt-3 mb-2">Phone No/Fax No</label>
+              <input type="text" class="form-control" placeholder="Phone No/Fax No" name="fax"
+                [(ngModel)]="customerObj.fax" />
+            </div>
+
+          </div>
+          <div id="collapseCustomer" class="collapse">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="" class="mt-3 mb-2">Email</label>
+                <input type="text" class="form-control" placeholder="Email" name="email"
+                  [(ngModel)]="customerObj.email" />
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="" class="mt-3 mb-2">Address Line 1</label>
+                <input type="text" class="form-control" placeholder="Address Line 1" name="address1"
+                  [(ngModel)]="customerObj.address_1" />
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="" class="mt-3 mb-2">Address Line 2</label>
+                <input type="text" class="form-control" placeholder="Address Line 2" name="address2"
+                  [(ngModel)]="customerObj.address_2" />
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="" class="mt-3 mb-2">Company</label>
+                <input type="text" class="form-control" placeholder="Company" [(ngModel)]="customerObj.company"
+                  name="company" />
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="" class="mt-3 mb-2">Customer Potential</label>
+                <select id="potentialSelect" class="form-control" [(ngModel)]="customerObj.potential_type_id"
+                  name="potentialTypeID">
+                  <option value="Select Customer Potential">Select Customer Potential</option>
+
+                </select>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="" class="mt-3 mb-2">State</label>
+                <input type="text" class="form-control" placeholder="State" [(ngModel)]="customerObj.state_id"
+                  name="stateID" />
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="" class="mt-3 mb-2">Zip Code</label>
+                <input type="text" maxlength="5" class="form-control" placeholder="Zip Code" name="zip_code"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57"
+                  [(ngModel)]="customerObj.zip_code" />
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="" class="mt-3 mb-2">City</label>
+                <input type="number" class="form-control" placeholder="City" [(ngModel)]="customerObj.city_id"
+                  name="cityID" />
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="" class="mt-3 mb-2">Subdivision Name</label>
+                <input type="text" class="form-control" placeholder="Subdivision Name" name="sub_division_name"
+                  [(ngModel)]="customerObj.sub_division_name" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="" class="mt-3 mb-2">Major Intersection</label>
+                <input type="text" class="form-control" placeholder="Major Intersection" name="major_intersection"
+                  [(ngModel)]="customerObj.major_intersection" />
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label class="mt-3 mb-2">Create Date</label>
+                <input type="datetime-local" class="form-control" [(ngModel)]="customerObj.start_date"
+                  name="startDate" />
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <label class="mt-3 mb-2">&nbsp;</label>
+                <input type="date" class="form-control" [(ngModel)]="customerObj.end_date" name="end_date" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-md-6 float-left">
+              <button data-toggle="collapse" class="btn btn-primary color mt-4" href="#collapseCustomer"
+                aria-expanded="false" aria-controls="collapseCustomer">
+              </button>
+            </div>
+            <div class="col-md-6 col-sm-6 float-right">
+              <button type="submit" class="btn btn-primary color mt-4 float-right" id="search_button">
+                <i class="fas fa-search"></i> Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section class="mb-3">
+  <div class="container">
+    <div class="card-header top-heading-card ">
+      <h3 class="inside-heading mb-0">Restore Customers</h3>
+    </div>
+    <div class="card ">
+      <div class="card-body mt-4">
+        <div class="table-responsive table-striped">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Customer #</th>
+                <th scope="col">First Name </th>
+                <th scope="col">Last Name </th>
+                <th scope="col">Company </th>
+                <th scope="col">Created </th>
+                <th scope="col">Projects</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let softdeletedcustomer of softDeletedCustomersArray">
+                <ng-container *ngIf="softdeletedcustomer.delete_date != null || softdeletedcustomer.delete_date != ''">
+                  <td>{{softdeletedcustomer.customer_no}}</td>
+                  <td>{{softdeletedcustomer.first_name}}</td>
+                  <td>{{softdeletedcustomer.last_name}}</td>
+                  <td>{{softdeletedcustomer.company}}</td>
+                  <td>{{softdeletedcustomer.created_at | date:'short'}}</td>
+                  <td>{{softdeletedcustomer.customer_projects}}</td>
+                  <td>
+                    <a><i style="cursor: pointer" placement="top" ngbTooltip="Restore Customer"
+                        (click)="openRestoreCustomer(restoreCustomer, softdeletedcustomer.customer_no)"
+                        class="fa fa-window-restore"></i></a>
+                  </td>
+                </ng-container>
+              </tr>
+              <tr *ngIf="softDeletedCustomersArray != undefined && softDeletedCustomersArray.length == 0">
+                <td colspan="7">
+                  <p class="text-center">No record found!</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-3">
+  <div class="container">
+    <div class="card ">
+      <div class="card-body">
+        <form #customerForm="ngForm">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" maxlength="150" matInput placeholder="First Name" name="first_name"
+                  [(ngModel)]="searchDeletedCustomerObj.first_name" />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" maxlength="150" matInput placeholder="Last Name" name="last_name"
+                  [(ngModel)]="searchDeletedCustomerObj.last_name" />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" maxlength="150" matInput placeholder="Project Number" name="project_number"
+                  [(ngModel)]="searchDeletedCustomerObj.project_number" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" maxlength="150" matInput placeholder="Home Phone" name="home_phone"
+                  [(ngModel)]="searchDeletedCustomerObj.home_phone" />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" maxlength="150" matInput placeholder="Work Phone" name="work_phone"
+                  [(ngModel)]="searchDeletedCustomerObj.work_phone" />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" maxlength="150" matInput placeholder="Mobile Phone" name="mobile_phone"
+                  [(ngModel)]="searchDeletedCustomerObj.mobile_phone" />
+              </mat-form-field>
+            </div>
+          </div>
+         
+         
+          <div id="collapseCustomer" class="collapse">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <input type="text" maxlength="150" matInput placeholder="Fax" name="fax"
+                    [(ngModel)]="searchDeletedCustomerObj.fax" />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <input type="text" maxlength="150" matInput placeholder="Email" name="email"
+                    [(ngModel)]="searchDeletedCustomerObj.email" />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <input type="text" maxlength="150" matInput placeholder="Company" name="company"
+                    [(ngModel)]="searchDeletedCustomerObj.company" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <input type="text" maxlength="150" matInput placeholder="Address Line 1" name="address_no_1"
+                    [(ngModel)]="searchDeletedCustomerObj.address_1" />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <input type="text" maxlength="150" matInput placeholder="Address Line 2" name="address_no_2"
+                    [(ngModel)]="searchDeletedCustomerObj.address_2" />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <mat-select id="cities" name="cities" #city_id="ngModel" placeholder="City"
+                    [(ngModel)]="searchDeletedCustomerObj.city_id">
+                    <mat-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <mat-select id="state_ID" name="state_id" #state_id="ngModel" placeholder="State"
+                    [(ngModel)]="searchDeletedCustomerObj.state_id">
+                    <mat-option *ngFor="let state of states" [value]="state.id">{{state.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <input type="text" maxlength="5" matInput placeholder="Zip Code" name="zipCode"
+                    onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57"
+                    [(ngModel)]="searchDeletedCustomerObj.zip_code" />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <input type="text" maxlength="150" matInput placeholder="Subdivision Name" name="subdivisionName"
+                    [(ngModel)]="searchDeletedCustomerObj.sub_division_name" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <input type="text" maxlength="150" matInput placeholder="Major Intersection" name="majorIntersection"
+                    [(ngModel)]="searchDeletedCustomerObj.major_intersection" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row justify-content-between">
+            <div class="col-sm-6 col-md-6 float-left">
+              <button type="button" data-toggle="collapse" class="btn btn-primary color" href="#collapseCustomer"
+                aria-expanded="false" aria-controls="collapseCustomer">&nbsp;<i class="fas"></i>
+              </button>
+            </div>
+            <div class="col-sm-6 col-md-6 float-right">
+              <button type="button" class="btn btn-primary color float-right ml-3" id="search_button"
+                (click)="onGetDeletedCustomerSearchFilterMeta()">
+                <i class="fas fa-search mr-2"></i>Search
+              </button>
+              <button type="submit" class="btn btn-outline color d-block ml-auto " (click)="onResetResult()">
+                <i class="fas fa-undo-alt mr-2"></i>Reset
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<ng-template #restoreCustomer let-c="close" let-d="dismiss">
+  <div class="modal-header ">
+    <h6 class="modal-title">
+      Restore Customer</h6>
+    <button type="button" class="close" (click)="c('Close click')">&times;</button>
+  </div>
+
+  <div class="modal-body">
+
+    <h6 style="color: red;">Are you sure to restore this customer?</h6>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline color" (click)="c('Close click')">Close</button>
+      <button type="submit" class="btn btn-primary color" (click)="onRestoreSoftDeletedCustomer()">Submit</button>
+    </div>
+  </div>
+</ng-template>

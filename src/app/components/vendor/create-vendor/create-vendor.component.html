@@ -1,0 +1,276 @@
+<section>
+  <div class="container">
+    <div class="card-header top-heading-card">
+      <h3 class="inside-heading mb-0">
+        {{ vendorObj.id == undefined ? "Create" : "Update" }} Vendor
+      </h3>
+    </div>
+  </div>
+</section>
+<section class="mb-3">
+  <div class="container">
+    <div class="card">
+      <div class="card-body mt-4">
+        <form
+          #createVendorForm="ngForm"
+          (ngSubmit)="
+            createVendorForm.valid
+              ? vendorObj.id != undefined
+                ? onEditVendor()
+                : onCreateVendor()
+              : 0
+          "
+        >
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  matInput
+                  placeholder="Company Name"
+                  #company="ngModel"
+                  id="company"
+                  name="company"
+                  [(ngModel)]="vendorObj.company"
+                  required
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (company.touched || createVendorForm.submitted) &&
+                    !company.valid
+                  "
+                  >* Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  matInput
+                  placeholder="First Name"
+                  id="firstName"
+                  name="first_name"
+                  #firstname="ngModel"
+                  [(ngModel)]="vendorObj.first_name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  placeholder="Last Name"
+                  matInput
+                  name="lastName"
+                  id="lastName"
+                  #lastname="ngModel"
+                  name="last_name"
+                  [(ngModel)]="vendorObj.last_name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  matInput
+                  id="email"
+                  name="email"
+                  name="email"
+                  #email="ngModel"
+                  placeholder="Email"
+                  [(ngModel)]="vendorObj.email"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  id="workPhone"
+                  placeholder="Work Phone"
+                  matInput
+                  name="work_phone"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 46 && event.charCode != 47
+                   && event.charCode <= 57) || event.charCode == 43"
+                  [(ngModel)]="vendorObj.work_phone"
+                  maxlength="13"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  id="extention"
+                  placeholder="Extention"
+                  matInput
+                  name="extension"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :
+                   (event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57) || event.charCode == 43"
+                  [(ngModel)]="vendorObj.extension"
+                  maxlength="13"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  id="mobilePhone"
+                  name="mobilePhone"
+                  matInput
+                  name="mobile_phone"
+                  placeholder="Mobile Phone"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :
+                   (event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57) || event.charCode == 43"
+                  [(ngModel)]="vendorObj.mobile_phone"
+                  maxlength="13"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  id="fax"
+                  name="fax"
+                  name="fax"
+                  matInput
+                  placeholder="Fax"
+                  matInput
+                  [(ngModel)]="vendorObj.fax"
+                  maxlength="13"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  id="city"
+                  name="city"
+                  placeholder="City"
+                  matInput
+                  [formControl]="cityContorl"
+                  [matAutocomplete]="auto"
+                  [(ngModel)]="vendorObj.city_name"
+                />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    (onSelectionChange)="cityClicked(option)"
+                    *ngFor="let option of filteredOptions | async"
+                    [value]="option.name"
+                  >
+                    {{ option.name }}
+                  </mat-option>
+                </mat-autocomplete>
+                <!-- <mat-select
+                  class=""
+                  id="city"
+                  name="city"
+                  [(ngModel)]="vendorObj.city"
+                  placeholder="City hi"
+                  #city="ngModel"
+                >
+                  <mat-option *ngFor="let city of cities" [value]="city.id">{{
+                    city.name
+                  }}</mat-option>
+                </mat-select> -->
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-select
+                  class=""
+                  name="state"
+                  id="state"
+                  placeholder="State"
+                  name="state"
+                  #state="ngModel"
+                  [(ngModel)]="vendorObj.state"
+                >
+                  <mat-option *ngFor="let state of states" [value]="state.id">{{
+                    state.name
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  maxlength="5"
+                  id="zipCode"
+                  id="zipCode"
+                  matInput
+                  placeholder="Zip Code"
+                  name="zip_code"
+                  #zipcode="ngModel"
+                  [(ngModel)]="vendorObj.zip_code"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : 
+                  (event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57) || event.charCode == 43"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  matInput
+                  placeholder="Address Line 1"
+                  name="address_1"
+                  #address_1="ngModel"
+                  [(ngModel)]="vendorObj.address_1"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  matInput
+                  placeholder="Address Line 2"
+                  name="address_2"
+                  [(ngModel)]="vendorObj.address_2"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row justify-content-end mr-0 ml-5">
+            <button
+              type="submit"
+              class="btn btn-primary mt-4"
+              id="submitButton"
+            >
+              {{ vendorObj.id != undefined ? "Update" : "Create" }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

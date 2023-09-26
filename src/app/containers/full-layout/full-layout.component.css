@@ -1,0 +1,16 @@
+#content {
+    width: 100%;
+    /* padding: 20px; */
+    min-height: 100vh;
+    transition: all 0.3s;
+    overflow: auto;
+    background-color: #ececec;
+    transition-timing-function: ease-in-out;
+    transition-delay: -2s;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+}

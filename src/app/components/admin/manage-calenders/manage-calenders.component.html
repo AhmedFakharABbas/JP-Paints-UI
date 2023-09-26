@@ -1,0 +1,66 @@
+<section class="mb-3">
+  <div class="container">
+    <div class="card-header top-heading-card">
+      <h3 class="inside-heading mb-0">Manage Calendars</h3>
+    </div>
+    <div class="card ">
+      <div class="card-body mt-4">
+        <div class="row mb-2">
+          <div class="col-sm-12 float-right">
+            <button [routerLink]="['/admin/create-calendar',0]" class="btn btn-primary color float-right"
+              id="search_button">
+              <i class="fas fa-calendar-plus"></i> Create Calendar
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive table-striped">
+          <table class="table mb-5">
+            <thead>
+              <tr>
+                <th scope="col" colspan="5">Calendar Name</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="calendarsArry!=undefined && calendarsArry.length>0">
+              <tr *ngFor="let calendar of calendarsArry | paginate : { itemsPerPage: 2, currentPage: p }">
+                <td colspan="5">{{calendar.name}}</td>
+                <td>
+                  <a [routerLink]="['/admin/edit-calendar', calendar.id]"><i class=" fas fa-edit" placement="top"
+                      ngbTooltip="Edit Calendar"></i></a>
+                  <a><i class="ml-3 fas fa-trash"
+                      (click)="opendeleteManageCalendars(deleteManageCalendars, calendar.id)" style="cursor: pointer"
+                      placement="top" ngbTooltip="Delete"></i></a>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="calendarsArry==undefined || calendarsArry.length == 0">
+              <tr>
+                <td colspan="6">No record found!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col">
+            <pagination-controls (pageChange)="p = $event" class="text-right"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #deleteManageCalendars let-c="close" let-d="dismiss">
+  <div class="modal-header ">
+    <h6 class="modal-title">
+      Delete Referrel Source</h6>
+    <button type="button" class="close" (click)="c('Close click')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red;">Are you sure to delete this calendar?</h6>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline color" (click)="c('Close click')">Close</button>
+      <button type="submit" class="btn btn-primary color" (click)="deleteCalendar()">Delete</button>
+    </div>
+  </div>
+</ng-template>

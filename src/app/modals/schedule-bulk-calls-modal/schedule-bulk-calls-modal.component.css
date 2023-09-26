@@ -1,0 +1,70 @@
+div>button#cancelButton {
+    display: block;
+    color: #ee3724;
+    border-radius: 34px;
+    width: 120px;
+    height: 40px;
+    font-size: 15px;
+}
+
+div>button#cancelButton:hover {
+    display: block;
+    color: #ee3724;
+    background-color: #fff;
+    border-radius: 34px;
+    width: 120px;
+    height: 40px;
+    border: 2px solid #ee3724;
+}
+
+div>button#submitButton {
+    display: block;
+    background-color: #ee3724;
+    border-color: #ee3724;
+    border: 2px solid #ee3724;
+    border-radius: 50px;
+    height: 40px;
+    font-size: 15px;
+    width: 120px;
+}
+
+div>button#submitButton:hover {
+    display: block;
+    background-color: transparent;
+    border: 2px solid #ee3724;
+    color: #ee3724;
+    border-radius: 50px;
+    height: 40px;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 15px;
+    width: 120px;
+}
+
+/* .modal-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+    border-bottom-right-radius: .3rem;
+    border-bottom-left-radius: .3rem;
+    margin-right: 12px;
+} */
+
+ngb-datepicker {
+    border: 1px solid #dfdfdf;
+    border-radius: .25rem;
+    display: inline-block;
+    margin-top: 16px;
+    /* margin-right: -44px; */
+    margin-left: -9px;
+}
+
+textarea.form-control {
+    /* height: auto; */
+    height: 16.7rem;
+    /* height: 20.5px; */
+}

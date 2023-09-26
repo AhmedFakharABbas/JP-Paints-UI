@@ -1,0 +1,793 @@
+<section class="mb-3">
+  <div class="container">
+    <div class="card-header top-heading-card">
+      <h3 class="inside-heading mb-0">Projects</h3>
+    </div>
+    <div class="card">
+      <div class="card-body mt-4">
+        <div class="row justify-content-end pb-3">
+          <div class="col-auto float-left pr-0">
+            <button
+              type="button"
+              class="btn btn-primary color float-right"
+              (click)="onExportReportsToExcl(false)"
+              id="add_project"
+              placement="top"
+              ngbTooltip="Export Csv"
+            >
+              <i class="fas fa-file-csv mr-1"></i> Export Csv
+            </button>
+          </div>
+          <div class="col-auto float-left">
+            <button
+              type="button"
+              class="btn btn-primary color"
+              id="add_project"
+              (click)="onExportReportsToExcl(true)"
+              placement="top"
+              ngbTooltip="Export Excl"
+            >
+              <i class="fas fa-file-excel mr-1"></i> Export Excel
+            </button>
+          </div>
+        </div>
+        <!-- <div class="row justify-content-end pb-3">
+                    <div class="col-md-6 float-left">
+                        <button type="button" class="btn btn-primary color float-right" id="add_project" placement="top"
+                            ngbTooltip="Add Project" routerLink="/add-edit-project">
+                            <i class="fas fa-task"></i>Add Project
+                        </button>
+                    </div>
+                </div> -->
+        <div class="table-responsive table-striped">
+          <!-- <cdk-virtual-scroll-viewport style="height: 500px" itemSize="8"> -->
+          <table class="table mb-3">
+            <thead>
+              <tr>
+                <th scope="col">Project</th>
+                <th scope="col">Date</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Final Price</th>
+                <th scope="col">Paid Amount</th>
+                <th scope="col">Last Payment</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="projects.length > 0">
+              <!-- *cdkVirtualFor="let project of projects " -->
+              <!-- | paginate: {id:'server', 
+                 itemsPerPage: 10, currentPage: p , totalItems:total} -->
+
+              <tr
+                *ngFor="
+                  let project of projects
+                    | paginate
+                      : {
+                          id: 'server',
+                          itemsPerPage: 10,
+                          currentPage: CurrentPageNo,
+                          totalItems: total
+                        };
+                  let i = index;
+                  first as isFirst;
+                  last as isLast
+                "
+              >
+                <td>{{ project.id }}</td>
+                <td>{{ project.created_at | date: "MM/dd/yyyy" }}</td>
+                <td>{{ project.first_name }} {{ project.last_name }}</td>
+                <td>{{ project.project_type_name }}</td>
+                <td>{{ project.project_status }}</td>
+                <td *ngIf="project.final_price == undefined">-</td>
+                <!-- <td
+                  *ngIf="
+                    project.project_type_id == 1 ||
+                    (project.interior_final_price != undefined &&
+                      project.exterior_price != undefined)
+                  "
+                >
+                  -
+                </td> -->
+                <td *ngIf="project.final_price != undefined">
+                  ${{ project.final_price }}
+                </td>
+                <!--  
+                <td *ngIf="project.final_price != undefined">
+                  {{ project.final_price }}
+                </td>
+                <td
+                  *ngIf="
+                    (project.interior_final_price != undefined ||
+                      project.interior_final_price == 0.0) &&
+                    project.final_price == undefined
+                  "
+                >
+                  {{ project.interior_final_price }}
+                </td>
+                <td
+                  *ngIf="
+                    project.exterior_price != undefined &&
+                    project.interior_final_price == undefined
+                  "
+                >
+                  {{ project.exterior_price }}
+                </td> -->
+                <!-- type logic -->
+                <!-- <td
+                  *ngIf="
+                    project.project_type_id == 4 ||
+                    project.project_type_id == 5 ||
+                    project.project_type_id == 6
+                  "
+                >
+                  {{ project.final_price }}
+                </td>
+
+                <td *ngIf="project.project_type_id == 2">
+                  {{ project.interior_final_price }}
+                </td>
+
+                <td *ngIf="project.project_type_id == 3">
+                  {{ project.exterior_price }}
+                </td> -->
+                <td *ngIf="project.paid_amount != undefined">
+                  ${{ project.paid_amount }}
+                </td>
+                <td *ngIf="project.paid_amount == undefined">-</td>
+
+                <td>{{ project.last_payment_date | date: "MM/dd/yyyy" }}</td>
+                <td>
+                  <!-- [routerLink]="['/project/view', projectdetail.id]" -->
+                  <a
+                    [routerLink]="['/project/view', project.id]"
+                    placement="top"
+                    ngbTooltip="View Project"
+                  >
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <ng-container
+                    *ngIf="_sharedService.role_flags.is_administrator == true"
+                  >
+                    <a
+                      [routerLink]="['/project/update', project.id]"
+                      placement="top"
+                      ngbTooltip="Edit Project"
+                    >
+                      <!-- <i class="fas fa-edit"></i> -->
+                      <svg
+                        aria-hidden="true"
+                        style="width: 12px; margin-left: 7px"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="edit"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512"
+                        class="svg-inline--fa fa-edit fa-w-18 fa-spin fa-lg"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+                          class=""
+                        ></path>
+                      </svg>
+                    </a>
+                    <a
+                      (click)="openProjectModel(deleteProjectModel, project.id)"
+                      placement="top"
+                      ngbTooltip="Delete Project"
+                      ><i class="ml-2 fas fa-trash"></i
+                    ></a>
+
+                    <ng-container
+                      *ngIf="project.project_type_name == 'Exterior'"
+                    >
+                      <a
+                        [routerLink]="['/project/exterior/pdf', project.id]"
+                        placement="top"
+                        ngbTooltip="View Project PDF"
+                        ><i class="fas fa-file-pdf ml-2"></i
+                      ></a>
+                    </ng-container>
+
+                    <ng-container
+                      *ngIf="project.project_type_name == 'Interior'"
+                    >
+                      <a
+                        [routerLink]="['/project/interior/pdf', project.id]"
+                        placement="top"
+                        ngbTooltip="View Project PDF"
+                        ><i class="fas fa-file-pdf ml-2"></i
+                      ></a>
+                    </ng-container>
+
+                    <ng-container
+                      *ngIf="
+                        project.project_type_name != 'Exterior' &&
+                        project.project_type_name != 'Interior'
+                      "
+                    >
+                      <a
+                        [routerLink]="['/project/other/pdf', project.id]"
+                        placement="top"
+                        ngbTooltip="View Project PDF"
+                        ><i class="fas fa-file-pdf ml-2"></i
+                      ></a>
+                    </ng-container>
+                  </ng-container>
+                </td>
+              </tr>
+            </tbody>
+
+            <tr *ngIf="projects?.length == 0">
+              <td colspan="9">
+                <p class="text-center m-0">No projects found</p>
+              </td>
+            </tr>
+          </table>
+          <!-- </cdk-virtual-scroll-viewport> -->
+        </div>
+        <ng-container>
+          <div
+            class="row justify-content-between mt-2"
+            *ngIf="projects?.length > 0"
+          >
+            <div
+              class="col mt-2"
+              *ngIf="_sharedService.role_flags.is_administrator == true"
+            >
+              <button
+                type="button"
+                class="btn btn-primary color"
+                id="add_project"
+                placement="right"
+                ngbTooltip="Use the results to assign phone calls"
+                routerLink="/calls/schedule-bulk"
+              >
+                <i class="fas fa-phone mr-2"></i>Assign
+              </button>
+            </div>
+            <div class="col" *ngIf="this.total > 10">
+              <pagination-controls
+                (pageChange)="
+                  CurrentPageNo = $event; onGetProjectSearchFilterMeta(false)
+                "
+                directionLinks="true"
+                responsive="true"
+                id="server"
+                class="text-right"
+              >
+              </pagination-controls>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-3" style="margin-top: 1.5%">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <form #projectSearchForm="ngForm">
+          <div class="row">
+            <div class="col-lg-12">
+              <button
+                type="button"
+                class="btn btn-primary color float-right"
+                id="add_project"
+                placement="top"
+                ngbTooltip="Add Project"
+                routerLink="/project/create"
+              >
+                <i class="fas fa-briefcase mr-2"></i>Add Project
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="6"
+                  class=""
+                  pattern="[0-9]+"
+                  matInput
+                  placeholder="Project Number"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57"
+                  name="project_number"
+                  [(ngModel)]="searchProjectObj.project_number"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="150"
+                  class=""
+                  matInput
+                  placeholder="First Name"
+                  name="first_name"
+                  [(ngModel)]="searchProjectObj.first_name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input
+                  type="text"
+                  class=""
+                  maxlength="150"
+                  matInput
+                  placeholder="Last Name"
+                  name="last_name"
+                  [(ngModel)]="searchProjectObj.last_name"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div id="collapseProject" class="collapse">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <mat-select
+                    class=""
+                    name="project_type_id"
+                    id="project_type_id"
+                    placeholder="Project Type"
+                    [(ngModel)]="searchProjectObj.project_type_id"
+                  >
+                    <mat-option
+                      *ngFor="let project of project_types"
+                      [value]="project.id"
+                    >
+                      {{ project.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <mat-select
+                    class=""
+                    name="status_id"
+                    id="status_id"
+                    placeholder="Project Status"
+                    [(ngModel)]="searchProjectObj.status_id"
+                  >
+                    <mat-option
+                      *ngFor="let status of statuses"
+                      [value]="status.status_id"
+                    >
+                      {{ status.status_name }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <mat-select
+                    class=""
+                    name="potestial_type_id"
+                    id="potential_type_id"
+                    placeholder="Project Potential"
+                    [(ngModel)]="searchProjectObj.potential_type_id"
+                  >
+                    <mat-option
+                      *ngFor="let potential of potential_types"
+                      [value]="potential.id"
+                    >
+                      {{ potential.name }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row justify-content-around">
+              <div class="col-lg-5-5 col-12 inner-card-section">
+                <h6>Final Price Between</h6>
+                <div class="row">
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <mat-form-field>
+                      <input
+                        type="text"
+                        class=""
+                        matInput
+                        name="from"
+                        maxlength="10"
+                        id="from"
+                        onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57"
+                        placeholder="From $"
+                        [(ngModel)]="searchProjectObj.final_price_from"
+                      />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <mat-form-field>
+                      <input
+                        type="text"
+                        class=""
+                        matInput
+                        name="to"
+                        maxlength="10"
+                        id="to"
+                        onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57"
+                        placeholder="To $"
+                        [(ngModel)]="searchProjectObj.final_price_to"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5-5 col-12 inner-card-section">
+                <h6>Roles</h6>
+                <div class="row">
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <mat-form-field>
+                      <!-- <mat-select class="" name="estimator_id" id="estimator_id" placeholder="Estimator"
+                        [(ngModel)]="searchProjectObj.estimator_id"  [typeahead]="estimatortextSearch$">
+                        <mat-option *ngFor="let estimator of searchResult$ | async" [value]="estimator.id">
+                          {{estimator.name}}</mat-option>
+                      </mat-select> -->
+
+                      <input
+                        type="text"
+                        placeholder="Estimator"
+                        aria-label="Estimator"
+                        matInput
+                        [matAutocomplete]="auto1"
+                        [formControl]="estimatortextSearch$"
+                      />
+                      <mat-hint>Enter text to find estimators by name</mat-hint>
+
+                      <mat-autocomplete #auto1="matAutocomplete">
+                        <mat-option
+                          *ngFor="let estimator of searchResult$"
+                          [value]="estimator.name"
+                          (onSelectionChange)="
+                            optionClicked($event, 'estimator', estimator.id)
+                          "
+                        >
+                          <div>
+                            {{ estimator.name }}
+                          </div>
+                        </mat-option>
+                      </mat-autocomplete>
+
+                      <!-- <mat-label *ngIf="searchLoading">
+                        <div class="select-placeholder-container">
+                          <span>Loading...</span>
+                          <mat-spinner class="spinner" diameter="20"></mat-spinner>
+                        </div>
+                      </mat-label> -->
+                    </mat-form-field>
+
+                    <!-- <ng-select class="floating-select asterik" placeholder="{{ 'COMMON.NAME' | translate}}" id="part_id{{reqPartObj.RequestedPartID}}" name="part_id{{reqPartObj.RequestedPartID}}" [clearable]=false [(ngModel)]="PartName" [items]="AutomotiveParts" bindValue="AutomotivePartID"
+                    bindLabel="PartName" typeToSearchText="Please enter {{minLengthTerm}} or more characters" [typeahead]="partNameInput$" [(ngModel)]="PartName" #PartID="ngModel" [addTag]="addPartNowRef" (change)="onSelectPart($event, reqPartObj.AutomotivePartID)">
+                </ng-select> -->
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <mat-form-field>
+                      <!-- <mat-select class="" name="crew_id" id="crew_id" placeholder="Crew"
+                        [(ngModel)]="searchProjectObj.crew_id">
+                        <mat-option *ngFor="let crew of crews" [value]="crew.crew_id">
+                          {{crew.crew_name}}</mat-option>
+                      </mat-select> -->
+
+                      <input
+                        type="text"
+                        placeholder="Crew"
+                        aria-label="Crew"
+                        matInput
+                        [matAutocomplete]="auto2"
+                        [formControl]="crewtextSearch$"
+                      />
+                      <mat-hint>Enter text to find crews by name</mat-hint>
+
+                      <mat-autocomplete #auto2="matAutocomplete">
+                        <mat-option
+                          *ngFor="let crew of searchResult$"
+                          [value]="crew.name"
+                          (onSelectionChange)="
+                            optionClicked($event, 'crew', crew.id)
+                          "
+                        >
+                          <div>
+                            {{ crew.name }}
+                          </div>
+                        </mat-option>
+                      </mat-autocomplete>
+
+                      <!-- <mat-label *ngIf="searchLoading">
+                      <div class="select-placeholder-container">
+                        <span>Loading...</span>
+                        <mat-spinner class="spinner" diameter="20"></mat-spinner>
+                      </div>
+                    </mat-label> -->
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row inner-card-section mx-6 mt-2">
+              <div class="col-sm-12 col-md-6 col-lg-12">
+                <h6>Other</h6>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-12">
+                <mat-form-field>
+                  <input
+                    type="text"
+                    class=""
+                    matInput
+                    name="nick_name"
+                    maxlength="1000"
+                    id="nick_names"
+                    placeholder="Nicknames"
+                    [(ngModel)]="searchProjectObj.nick_names"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row inner-card-section mx-6 flex-row mt-2">
+              <div class="col-sm-12 col-md-6 col-lg-12">
+                <h6>Dates</h6>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
+                <mat-form-field>
+                  <input
+                    type="date"
+                    step="1"
+                    class=""
+                    matInput
+                    placeholder="Created From"
+                    name="create_date_from"
+                    [(ngModel)]="searchProjectObj.create_date_from"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
+                <mat-form-field>
+                  <input
+                    type="date"
+                    step="1"
+                    class=""
+                    matInput
+                    placeholder="Created To"
+                    name="create_date_to"
+                    [(ngModel)]="searchProjectObj.create_date_to"
+                    min="{{ projectSearchForm.value.create_date_from }}"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
+                <mat-form-field>
+                  <input
+                    type="date"
+                    step="1"
+                    class=""
+                    matInput
+                    placeholder="Started From"
+                    name="start_date_from"
+                    [(ngModel)]="searchProjectObj.start_date_from"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
+                <mat-form-field>
+                  <input
+                    type="date"
+                    step="1"
+                    class=""
+                    matInput
+                    placeholder="Started To"
+                    name="start_date_to"
+                    [(ngModel)]="searchProjectObj.start_date_to"
+                    min="{{ projectSearchForm.value.start_date_from }}"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
+                <mat-form-field>
+                  <input
+                    type="date"
+                    step="1"
+                    class=""
+                    matInput
+                    placeholder="End From"
+                    name="end_date_from"
+                    [(ngModel)]="searchProjectObj.end_date_from"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-3 mt-2">
+                <mat-form-field>
+                  <input
+                    type="date"
+                    step="1"
+                    class=""
+                    matInput
+                    placeholder="End To"
+                    name="end_date_to"
+                    [(ngModel)]="searchProjectObj.end_date_to"
+                    min="{{ projectSearchForm.value.end_date_from }}"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row inner-card-section mx-6 flex-row mt-2">
+              <div class="col-sm-12 col-md-6 col-lg-12">
+                <h6>Address Info</h6>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <mat-select
+                    type="text"
+                    name="city_id"
+                    id="city_id"
+                    class=""
+                    placeholder="City"
+                    [(ngModel)]="searchProjectObj.city_id"
+                  >
+                    <mat-option *ngFor="let city of cities" [value]="city.id"
+                      >{{ city.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <mat-select
+                    type="text"
+                    class=""
+                    name="state_id"
+                    id="state_id"
+                    placeholder="State"
+                    [(ngModel)]="searchProjectObj.state_id"
+                  >
+                    <mat-option *ngFor="let state of states" [value]="state.id"
+                      >{{ state.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <mat-form-field>
+                  <input
+                    type="text"
+                    maxlength="5"
+                    class=""
+                    matInput
+                    placeholder="Zip"
+                    name="zip_code"
+                    onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57"
+                    [(ngModel)]="searchProjectObj.zip_code"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                <mat-form-field>
+                  <input
+                    type="text"
+                    maxlength="150"
+                    class=""
+                    matInput
+                    placeholder="Address Line 1"
+                    name="address_1"
+                    [(ngModel)]="searchProjectObj.address_1"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                <mat-form-field>
+                  <input
+                    type="text"
+                    maxlength="150"
+                    class=""
+                    matInput
+                    placeholder="Address Line 2"
+                    name="address_2"
+                    [(ngModel)]="searchProjectObj.address_2"
+                  />
+                </mat-form-field>
+              </div>
+
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                <mat-form-field>
+                  <input
+                    type="text"
+                    maxlength="150"
+                    class=""
+                    matInput
+                    placeholder="Subdivision Name"
+                    name="sub_division_name"
+                    [(ngModel)]="searchProjectObj.sub_division_name"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                <mat-form-field>
+                  <input
+                    type="text"
+                    maxlength="150"
+                    class=""
+                    matInput
+                    placeholder="Major Intersection"
+                    name="major_intersection"
+                    [(ngModel)]="searchProjectObj.major_intersection"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-lg-12">
+              <button
+                type="button"
+                class="btn btn-primary color float-right ml-auto"
+                id="search_button"
+                (click)="CurrentPageNo = 1; onGetProjectSearchFilterMeta(true)"
+              >
+                <i class="fas fa-search"></i> Search
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-outline color float-right ml-auto mr-3"
+                id="search_button"
+                (click)="onResetResult()"
+              >
+                <i class="fas fa-undo-alt"></i> Reset
+              </button>
+              <button
+                data-toggle="collapse"
+                class="btn btn-primary color"
+                href="#collapseProject"
+                aria-expanded="false"
+                aria-controls="collapseProject"
+              >
+                &nbsp;<i class="fas"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #deleteProjectModel let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Delete Project</h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red">Are you sure to delete this project?</h6>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-primary-outline"
+        (click)="c('Close click')"
+      >
+        Close
+      </button>
+      <button type="submit" class="btn btn-primary" (click)="deleteProject()">
+        Delete
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #elseHyphen> ___ </ng-template>

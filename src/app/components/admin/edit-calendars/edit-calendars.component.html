@@ -1,0 +1,183 @@
+<section class="mb-3">
+  <div class="container">
+    <div class="card py-4">
+      <div class="card-body" style="padding: 5px;">
+        <!-- <div class="row">
+            <div class="col-md-12">
+              <button style="    margin-right: 18px;" class="btn btn-primary color float-right"
+                (click)="openTaskModal(addTaskModal, taskObj.id)"> <i class="fa fa-add mr-2" placement="top"
+                  ngbTooltip="Add Task"></i>Add Task</button>
+            </div>
+          </div> -->
+        <div class="row pt-3">
+          <div class="col-md-12">
+            <div class="col-md-6 float-left">
+              <div class="card pb-3">
+                <div class="card-header">
+                  <h6 class="mb-0">
+                    Current Users on Calendar
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <!-- <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" name="is_completed" id="is_completed"
+                        #isCompleted="ngModel" [(ngModel)]="taskObj.isCompleted">
+                      <label class="custom-control-label" for="is_completed"> <a
+                          (click)="openTodoModal(todoModal, taskObj.id)">
+                          <span id="todo_des">This text should be effected by ellipsis</span></a></label>
+                    </div> -->
+                  <section class="mb-4 mt-5">
+                    <div class="container">
+                      <div class="table-responsive table-striped">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Name</th>
+                              <th scope="col">Username</th>
+                              <th scope="col">Roles</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody
+                            *ngIf="calendarObj!=undefined && calendarObj.calendarUsers!=undefined && calendarObj.calendarUsers.length > 0">
+                            <tr *ngFor="let user of calendarObj.calendarUsers  | paginate: {id : 'pagination1' , itemsPerPage: 3, currentPage: p }">
+                              <td>{{user.name_of_user}}</td>
+                              <td>{{user.username}}</td>
+                              <td>{{user.user_roles}}</td>
+                              <td>
+                                <a placement="top" (click)="onMoveUserUp(user.id)" ngbTooltip="Move up"><i
+                                    class="fas fa-level-up-alt"></i></a>
+                                <a placement="top" (click)="onMoveUserDown(user.id)" ngbTooltip="Move down"
+                                  class="mx-3"><i class="fas fa-level-down-alt"></i></a>
+                                <a placement="top" ngbTooltip="Remove" (click)="onRemoveUserFromCalander(user.id)"
+                                  class=""><i class="fas fa-times"></i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tbody
+                            *ngIf="calendarObj==undefined || calendarObj.calendarUsers==undefined || (calendarObj!=undefined && calendarObj.calendarUsers!=undefined && calendarObj.calendarUsers.length == 0)">
+                            <tr>
+                              <td colspan="4">
+                                <p class="text-center m-0">
+                                  {{calendarObj.id==undefined ? 'Note : Atleast one user required to create a calendar' : 'No record found! Please consider adding a user(s)'}}
+                                </p>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="row justify-content-end">
+                          <div class="col">
+                            <pagination-controls id="pagination1" (pageChange)="p = $event" class="text-right"></pagination-controls>
+                          </div>
+                        </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+              <div class="modal-footer mt-3">
+              </div>
+            </div>
+            <div class="col-md-6 float-left">
+              <div class="card pb-3">
+                <div class="card-header">
+                  <h6 class="mb-0">
+                    Add Users To Calendar
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <!-- <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" name="is_completed" id="is_completed"
+                        #isCompleted="ngModel" [(ngModel)]="taskObj.isCompleted">
+                      <label class="custom-control-label" for="is_completed">Show Phone Calls </label>
+                    </div> -->
+                  <section class="mb-4 mt-5">
+                    <div class="container">
+                      <div class="table-responsive table-striped">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Name</th>
+                              <th scope="col">Username</th>
+                              <th scope="col">Roles</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody *ngIf="allUsers!=undefined && allUsers.length > 0">
+                            <tr *ngFor="let user of allUsers | paginate: { id : 'pagination2' , itemsPerPage: 5, currentPage: q } ">
+                              <td>{{user.name_of_user}}</td>
+                              <td>{{user.username}}</td>
+                              <td>{{user.user_roles}}</td>
+                              <td>
+                                <a placement="top" ngbTooltip="Add User" (click)="onAddUserToCalander(user.id)"
+                                  class=""><i class="fas fa-user-plus"></i></a>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tbody *ngIf="allUsers==undefined && allUsers.length == 0">
+                            <td colspan="4">
+                              <p class="text-center m-0">No record found!</p>
+                            </td>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="row justify-content-end mt-3">
+                        <div class="col">
+                          <pagination-controls id="pagination2" (pageChange)="q = $event" class="text-right"></pagination-controls>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+              <div class="modal-footer mt-3">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <!-- <div class="card-header top-heading-card ">
+      <h3 class="inside-heading mb-0">{{calendarObj.id == undefined ? 'Save Calendar' : 'Update Calendar'}}</h3>
+    </div> -->
+    <section class="mb-3">
+      <div class="container px-0">
+        <div class="card ">
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-4 float-left my-2">
+                  <mat-form-field>
+                    <input type="text" [(ngModel)]="calendarObj.name" matInput class=""
+                      [disabled]="calendarObj.id!=undefined" placeholder="Calendar Name" name="paintBrand"
+                      id="paintBrand" required ngModel #calendar_name="ngModel" />
+                  </mat-form-field>
+                  <div class="error-block">
+                    <small class="help-block-custom" *ngIf="calendar_name.touched && !calendar_name.valid">
+                      Required
+                    </small>
+                  </div>
+                </div>
+                <div class="col mt-3 float-left offset-1">
+                  <button type="submit"
+                    [disabled]="calendarObj.name == undefined || calendarObj.name == '' 
+                  || calendarObj==undefined || calendarObj.calendarUsers==undefined  || (calendarObj!=undefined && calendarObj.calendarUsers!=undefined && calendarObj.calendarUsers.length == 0)"
+                    class="btn btn-primary color float-right mt-2" id="search_button"
+                    (click)="calendarObj.id == undefined ? onSaveCalendar() : onUpdatecalendar()">
+                    {{calendarObj.id == undefined ? 'Save Calendar' : 'Update Calendar'}}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>

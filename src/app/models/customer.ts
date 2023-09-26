@@ -1,0 +1,39 @@
+export class Customer {
+  id: number;
+  customer_no: number; // for the loop in restore customer
+  company: string;
+  first_name: string;
+  last_name: string;
+  address_1: string;
+  address_2: string;
+  city_id: number;
+  city_name: string;
+  state_id: number;
+  zip_code: string;
+  sub_division_name: string;
+  major_intersection: string;
+  location_map_url: string;
+  home_phone: string;
+  work_phone: string;
+  extention: string;
+  mobile_phone: string;
+  fax: string;
+  email: string;
+  referral_source_id: number;
+  referral_source_note: string;
+  potential_type_id: number;
+  reference_status_type_id: number;
+  notes: string;
+  created_by: number;
+  created_user_name: string;
+  created_on: string;
+  start_date: Date;
+  end_date: Date;
+  modified_by: number;
+  modified_on: Date;
+  state_name: string;
+  referralsourcename: string;
+  potentialtypename: string;
+  referencestatusesname: string;
+  created_at: Date;
+}

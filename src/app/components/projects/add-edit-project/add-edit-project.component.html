@@ -1,0 +1,876 @@
+<div class="container">
+  <div class="card-header top-heading-card">
+    <h3 class="inside-heading mb-0">
+      {{ projectObj.id == undefined ? "Create" : "Update" }} Project
+    </h3>
+  </div>
+
+  <div class="card">
+    <div class="card-body mt-4">
+      <form
+        #createProjectForm="ngForm"
+        (ngSubmit)="
+          createProjectForm.valid
+            ? projectObj.id != undefined
+              ? onEditProject()
+              : onCreateProject()
+            : 0
+        "
+      >
+        <div class="container-fluid">
+          <div class="row justify-content-between">
+            <!-- <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input type="text" maxlength="6" matInput name="project_number" id="projectNumber" #project_number="ngModel"
+                onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57"
+                  placeholder="Project Number:" [(ngModel)]="projectObj.project_number" required />
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom" *ngIf="(createProjectForm.submitted || project_number.touched) && !project_number.valid ">*
+                  Required
+                </small>
+              </div>
+            </div> -->
+
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field>
+                <mat-label>Customer</mat-label>
+                <input
+                  type="text"
+                  [(ngModel)]="customerName"
+                  name="customer_name"
+                  id="customer_name"
+                  placeholder="Type to search"
+                  aria-label="customer_detail"
+                  matInput
+                  [matAutocomplete]="auto1"
+                  [formControl]="customerSearch"
+                  [required]="
+                    projectObj.customer_id == undefined &&
+                    createProjectForm.submitted
+                  "
+                />
+                <mat-autocomplete #auto1="matAutocomplete">
+                  <ng-container
+                    *ngIf="
+                      searchCustomersLength != undefined &&
+                      searchCustomersLength > 0
+                    "
+                  >
+                    <mat-option
+                      *ngFor="let customer of searchCustomers"
+                      [value]="customer.name"
+                      (onSelectionChange)="optionClicked(customer.id, customer)"
+                    >
+                      <div>{{ customer.name }}</div>
+                    </mat-option>
+                  </ng-container>
+                  <mat-option
+                    *ngIf="
+                      searchCustomers != undefined &&
+                      searchCustomersLength == 0 &&
+                      !isCustomersLoading
+                    "
+                  >
+                    <div>No customer found</div>
+                  </mat-option>
+                  <mat-option *ngIf="isCustomersLoading">
+                    <mat-spinner diameter="35"></mat-spinner>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    createProjectForm.submitted &&
+                    projectObj.customer_id == undefined
+                  "
+                  >* Required
+                </small>
+              </div>
+              <!-- *ngIf="customerID.valid" -->
+              <!-- *ngIf="
+                    createProjectForm.submitted &&
+                    !customerID.disabled &&
+                    !customerID.valid
+                  " -->
+              <!--<mat-select
+                  type="text"
+                  class=""
+                  name="customer_id"
+                  id="customer_id"
+                  [(ngModel)]="projectObj.customer_id"
+                  placeholder="Customer"
+                  (selectionChange)="onChange()"
+                  [disabled]="projectObj.id != undefined"
+                  required
+                  #customerID="ngModel"
+                >
+                  <mat-option
+                    *ngFor="let customer of customers"
+                    [value]="customer.id"
+                    >{{ customer.customer_name }}
+                  </mat-option>
+                </mat-select>
+              
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (createProjectForm.submitted || customerID.touched) &&
+                    !customerID.disabled &&
+                    !customerID.valid
+                  "
+                  >* Required
+                </small>
+              </div> -->
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <!-- <div class="form-check form-check-inline" style="padding-top: 36px;">
+                <input class="form-check-input" type="radio" name="is_customer_address" id="is_customer_address"
+                  [checked]="projectObj.is_customer_address==true"
+                  (change)="projectObj.is_customer_address = true ; onSelectCustomerAddress()" required>
+                <label class="form-check-label" for="is_customer_address"> Use Customer Address </label>
+              </div> -->
+              <mat-radio-group>
+                <mat-radio-button
+                  name="is_customer_address"
+                  id="is_customer_address"
+                  class="mt-4"
+                  [checked]="projectObj.is_customer_address == 1"
+                  [value]="1"
+                  (change)="
+                    projectObj.is_customer_address = 1;
+                    onSelectCustomerAddress()
+                  "
+                >
+                  Use Customer Address
+                </mat-radio-button>
+                <mat-radio-button
+                  name="is_customer_address2"
+                  id="is_customer_address2"
+                  class="ml-2 mt-4"
+                  [checked]="projectObj.is_customer_address == 0"
+                  [value]="0"
+                  (change)="
+                    projectObj.is_customer_address = 0;
+                    onSelectProjectSpecificAddress()
+                  "
+                >
+                  Use Project Specific Address
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <!-- <div class="col-sm-12 col-md-6 col-lg-3"> -->
+            <!-- <div class="form-check form-check-inline" style="padding-top: 36px;">
+                <input class="form-check-input" type="radio" name="is_customer_address" id="is_customer_address2"
+                  [checked]="projectObj.is_customer_address==false"
+                  (change)="projectObj.is_customer_address = false ; onSelectProjectSpecificAddress()">
+                <label class="form-check-label" for="is_customer_address2">Use Project Specific Address</label>
+              </div> -->
+            <!-- </div> -->
+          </div>
+          <!--  -->
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  matInput
+                  name="address1"
+                  id="address1"
+                  maxlength="250"
+                  [(ngModel)]="projectObj.address_1"
+                  class=""
+                  placeholder="Address Line 1"
+                  #address_1="ngModel"
+                  required
+                  [disabled]="projectObj.is_customer_address == 1"
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (createProjectForm.submitted || address_1.touched) &&
+                    !address_1.disabled &&
+                    !address_1.valid
+                  "
+                  >* Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  matInput
+                  name="address2"
+                  id="address2"
+                  maxlength="250"
+                  [(ngModel)]="projectObj.address_2"
+                  class=""
+                  placeholder="Address Line 2"
+                  #address_2="ngModel"
+                  required
+                  [disabled]="projectObj.is_customer_address == 1"
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (createProjectForm.submitted || address_2.touched) &&
+                    !address_2.disabled &&
+                    !address_2.valid
+                  "
+                  >* Required
+                </small>
+              </div>
+            </div>
+            <!-- <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input type="text" name="address2" matInput id="address2" maxlength="250"
+                  [disabled]="projectObj.is_customer_address == 1" [(ngModel)]="projectObj.address_2" class=""
+                  #address_2="ngModel" placeholder="Address Line 2"/>
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(createProjectForm.submitted || address_2.touched) && !address_2.disabled && !address_2.valid">*
+                  Required
+                </small>
+              </div>
+            </div> -->
+            <!-- [disabled]="projectObj.is_customer_address == 1" -->
+            <div class="col-sm-12 col-md-6 col-lg-2">
+              <!-- previous working city dropdown -->
+              <!-- <mat-form-field>
+                <mat-select
+                  type="text"
+                  name="city_id"
+                  id="city_id"
+                  [(ngModel)]="projectObj.city_id"
+                  #city_id="ngModel"
+                  class=""
+                  placeholder="City"
+                  required
+                  #cityID="ngModel"
+                  [disabled]="projectObj.is_customer_address == 1"
+                >
+                  <mat-option *ngFor="let city of cities" [value]="city.id">{{
+                    city.name
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (createProjectForm.submitted || cityID.touched) &&
+                    !cityID.disabled &&
+                    !cityID.valid
+                  "
+                  >* Required
+                </small>
+              </div> -->
+              <!-- previous working city dropdown -->
+              <!-- <p>{{ options | json }}</p> -->
+              <!-- [matAutocompleteDisabled]="
+                    projectObj.is_customer_address == 1
+                  " -->
+              <!-- [(ngModel)]="projectObj.city_name" -->
+              <!-- <p>{{ projectObj.city_name }}</p> -->
+
+              <mat-form-field>
+                <mat-label>City</mat-label>
+                <input
+                  type="text"
+                  class=""
+                  id="city_id"
+                  matInput
+                  [formControl]="cityContorl"
+                  [matAutocomplete]="auto"
+                  [(ngModel)]="projectObj.city_name"
+                  [matAutocompleteDisabled]="
+                    projectObj.is_customer_address == 1
+                  "
+                  [readonly]="projectObj.is_customer_address == 1"
+                />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    (onSelectionChange)="cityClicked(option)"
+                    *ngFor="let option of filteredOptions | async"
+                    [value]="option.name"
+                  >
+                    {{ option.name }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    createProjectForm.submitted &&
+                    projectObj.city_id == undefined &&
+                    projectObj.is_customer_address == 0
+                  "
+                  >* Required
+                </small>
+              </div>
+              <!-- (onSelectionChange)="cityClicked(option)" -->
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-2">
+              <mat-form-field>
+                <mat-select
+                  type="text"
+                  class=""
+                  name="state_id"
+                  id="state_id"
+                  [(ngModel)]="projectObj.state_id"
+                  #state_id="ngModel"
+                  placeholder="State"
+                  required
+                  #stateID="ngModel"
+                  [disabled]="projectObj.is_customer_address == 1"
+                >
+                  <mat-option *ngFor="let state of states" [value]="state.id">{{
+                    state.name
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (createProjectForm.submitted || stateID.touched) &&
+                    !stateID.disabled &&
+                    !stateID.valid
+                  "
+                  >* Required
+                </small>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-2">
+              <mat-form-field>
+                <input
+                  type="text"
+                  matInput
+                  name="zip_code"
+                  min="0"
+                  maxlength="5"
+                  id="zip_code"
+                  [(ngModel)]="projectObj.zip_code"
+                  #zip_code="ngModel"
+                  placeholder="Zip Code"
+                  [disabled]="projectObj.is_customer_address == 1"
+                  required
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (createProjectForm.submitted || zip_code.touched) &&
+                    !zip_code.disabled &&
+                    !zip_code.valid
+                  "
+                  >* Required
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input
+                  type="text"
+                  matInput
+                  name="sub_division_name"
+                  maxlength="250"
+                  id="sub_division_name"
+                  [disabled]="projectObj.is_customer_address == 1"
+                  [(ngModel)]="projectObj.sub_division_name"
+                  #sub_division_name="ngModel"
+                  class=""
+                  placeholder="Subdivision Name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input
+                  type="text"
+                  name="major_intersection"
+                  matInput
+                  maxlength="250"
+                  id="major_intersection"
+                  [disabled]="projectObj.is_customer_address == 1"
+                  [(ngModel)]="projectObj.major_intersection"
+                  #major_intersection="ngModel"
+                  class=""
+                  placeholder="Major Intersection"
+                />
+              </mat-form-field>
+            </div>
+            <!-- project number -->
+            <!-- <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  name="project_number"
+                  matInput
+                  maxlength="250"
+                  id="project_number"
+                  [(ngModel)]="projectObj.project_number"
+                  #project_number="ngModel"
+                  class=""
+                  placeholder="Project Number"
+                />
+              </mat-form-field>
+            </div> -->
+            <!-- <h1>{{ projectObj.project_type_id }}</h1> -->
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <!-- {{ projectObj.pro ject_type_id }} -->
+              <!-- {{ project_types | json }} -->
+              <mat-form-field>
+                <mat-select
+                  class=""
+                  name="project_type_id"
+                  id="project_type_id"
+                  placeholder="Project Type "
+                  [(ngModel)]="projectObj.project_type_id"
+                  #project_type_id="ngModel"
+                >
+                  <mat-option
+                    *ngFor="let project of project_types"
+                    [value]="project.id"
+                    >{{ project.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <textarea
+                  type="text"
+                  name="project_description"
+                  matInput
+                  maxlength="1000"
+                  id="project_description"
+                  [(ngModel)]="projectObj.project_description"
+                  #project_description="ngModel"
+                  class=""
+                  rows="1"
+                  placeholder="Project Description"
+                >
+                </textarea>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <textarea
+                  type="text"
+                  class=""
+                  matInput
+                  name="internal_notes"
+                  maxlength="1000"
+                  id="internal_notes"
+                  [(ngModel)]="projectObj.internal_notes"
+                  #internal_notes="ngModel"
+                  placeholder="Internal Notes"
+                  rows="1"
+                >
+                </textarea>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <!-- <input type="text" name="nick_name" matInput maxlength="15" id="nick_name"
+                  [(ngModel)]="projectObj.nick_names" #nickName="ngModel" class=""
+                  placeholder="Nickname" required /> -->
+                <textarea
+                  type="text"
+                  class=""
+                  matInput
+                  name="nick_name"
+                  maxlength="1000"
+                  id="nick_name"
+                  rows="1"
+                  [(ngModel)]="projectObj.nick_names"
+                  #nickName="ngModel"
+                  placeholder="Nicknames"
+                >
+                </textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-4">
+              <mat-form-field>
+                <mat-select
+                  class=""
+                  name="status_id"
+                  id="status_id"
+                  [(ngModel)]="projectObj.status_id"
+                  placeholder="Status"
+                  #status_id="ngModel"
+                >
+                  <mat-option
+                    *ngFor="let status of statuses"
+                    [value]="status.status_id"
+                    >{{ status.status_name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4">
+              <mat-form-field>
+                <mat-select
+                  class=""
+                  name="potestial_type_id"
+                  id="potestial_type_id"
+                  placeholder="Project Potential"
+                  [(ngModel)]="projectObj.potential_type_id"
+                  #potential_type_id="ngModel"
+                >
+                  <mat-option
+                    *ngFor="let potential of potential_types"
+                    [value]="potential.id"
+                    >{{ potential.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4">
+              <mat-form-field>
+                <mat-label>Supervisor</mat-label>
+                <input
+                  type="text"
+                  [(ngModel)]="supervisorName"
+                  name="supervisor-name"
+                  id="supervisor_name"
+                  placeholder="Type to search"
+                  aria-label="supervisor_detail"
+                  matInput
+                  [matAutocomplete]="supervisor_auto"
+                  [formControl]="supervisorSearch"
+                />
+
+                <mat-autocomplete #supervisor_auto="matAutocomplete">
+                  <ng-container
+                    *ngIf="
+                      searchSupervisors != undefined && supervisorsLength > 0
+                    "
+                  >
+                    <mat-option
+                      *ngFor="let supervisor of searchSupervisors"
+                      [value]="supervisor.user_name"
+                      (onSelectionChange)="
+                        supervisorClicked(supervisor.user_id)
+                      "
+                    >
+                      <div>{{ supervisor.user_name }}</div>
+                    </mat-option>
+                  </ng-container>
+                  <mat-option
+                    *ngIf="
+                      searchSupervisors != undefined &&
+                      supervisorsLength == 0 &&
+                      !isSupervisorLoading
+                    "
+                  >
+                    <div>No supervisor found</div>
+                  </mat-option>
+                  <mat-option *ngIf="isSupervisorLoading">
+                    <mat-spinner diameter="35"></mat-spinner>
+                  </mat-option>
+                </mat-autocomplete>
+                <!-- <mat-select
+                  class=""
+                  name="supervisior_id"
+                  id="supervisior_id"
+                  placeholder="Supervisor"
+                  #supervisor_id="ngModel"
+                  [(ngModel)]="projectObj.supervisor_id"
+                >
+                  <mat-option *ngFor="let user of users" [value]="user.user_id"
+                    >{{ user.user_name }}
+                  </mat-option>
+                </mat-select> -->
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3">
+              <mat-form-field>
+                <mat-label>Estimator</mat-label>
+                <input
+                  type="text"
+                  [(ngModel)]="estimatorName"
+                  name="estimator"
+                  id="estimator"
+                  placeholder="Type to search"
+                  aria-label="estimator"
+                  matInput
+                  [matAutocomplete]="estimator_auto"
+                  [formControl]="estimatorSearch"
+                />
+
+                <mat-autocomplete #estimator_auto="matAutocomplete">
+                  <ng-container
+                    *ngIf="
+                      searchEstimators != undefined && estimatorsLength > 0
+                    "
+                  >
+                    <mat-option
+                      *ngFor="let estimator of searchEstimators"
+                      [value]="estimator.name"
+                      (onSelectionChange)="estimatorsClicked(estimator.id)"
+                    >
+                      <div>{{ estimator.name }}</div>
+                    </mat-option>
+                  </ng-container>
+                  <mat-option
+                    *ngIf="
+                      searchEstimators != undefined &&
+                      estimatorsLength == 0 &&
+                      !isEstimatorsLoading
+                    "
+                  >
+                    <div>No estimator found</div>
+                  </mat-option>
+                  <mat-option *ngIf="isEstimatorsLoading">
+                    <mat-spinner diameter="35"></mat-spinner>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+              <mat-form-field>
+                <mat-label>Crew</mat-label>
+                <input
+                  type="text"
+                  [(ngModel)]="crewName"
+                  name="crewName"
+                  id="crewName"
+                  placeholder="Type to search"
+                  aria-label="crewName"
+                  matInput
+                  [matAutocomplete]="crew_auto"
+                  [formControl]="crewSearch"
+                />
+
+                <mat-autocomplete #crew_auto="matAutocomplete">
+                  <ng-container
+                    *ngIf="searchcrews != undefined && searchcrewsLength > 0"
+                  >
+                    <mat-option
+                      *ngFor="let crew of searchcrews"
+                      [value]="crew.name"
+                      (onSelectionChange)="crewClicked(crew.id)"
+                    >
+                      <div>{{ crew.name }}</div>
+                    </mat-option>
+                  </ng-container>
+                  <mat-option
+                    *ngIf="
+                      searchcrews != undefined &&
+                      searchcrewsLength == 0 &&
+                      !isCrewsLoading
+                    "
+                  >
+                    <div>No crew found</div>
+                  </mat-option>
+                  <mat-option *ngIf="isCrewsLoading">
+                    <mat-spinner diameter="35"></mat-spinner>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="date"
+                  matInput
+                  name="start_date"
+                  id="start_date"
+                  [(ngModel)]="projectObj.start_date"
+                  #start_date="ngModel"
+                  class=""
+                  placeholder="Start Date"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="date"
+                  name="end_date"
+                  id="end_date"
+                  matInput
+                  [(ngModel)]="projectObj.end_date"
+                  #end_date="ngModel"
+                  class=""
+                  placeholder="End Date"
+                  min="{{ createProjectForm.value.start_date }}"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row justify-content-end mr-0 ml-5">
+            <button
+              type="submit"
+              class="btn btn-primary color mt-4"
+              id="submitButton"
+            >
+              {{ projectObj.id != undefined ? "Update" : "Create" }}
+            </button>
+          </div>
+        </div>
+      </form>
+      <ng-container>
+        <h5 class="text-center">Gallery</h5>
+        <div class="row justify-content-center">
+          <div class="row justify-content-center" style="width: 100%">
+            <ng-container
+              *ngIf="
+                projectObj.attachments != undefined &&
+                projectObj.attachments.length > 0
+              "
+            >
+              <div
+                class="
+                  col-xs-12 col-sm-12 col-md-12 col-lg-3
+                  divcontainer
+                  drag-item
+                "
+                *ngFor="let attachment of projectObj.attachments"
+                style="width: auto !important; cursor: grab"
+              >
+                <img
+                  style="height: 200px !important"
+                  src="{{ _sharedService.storage_url }}{{
+                    attachment.encrypted_name
+                  }}"
+                  class="image"
+                  width="100%"
+                />
+                <div class="middle col-sm-12">
+                  <button
+                    class="btn fas fa-trash icon"
+                    title="Delete Attachment"
+                    (click)="
+                      openDeleteAttachmentModal(
+                        deleteProjectAttachment,
+                        attachment.id,
+                        attachment.encrypted_name
+                      )
+                    "
+                  ></button>
+                </div>
+                <div
+                  class="tag col-sm-12"
+                  style="
+                    color: #77080c;
+                    top: -38px;
+                    text-align: right;
+                    -webkit-text-stroke: 0.5px white;
+                    background: white;
+                  "
+                >
+                  <p style="font-size: larger; font-weight: bolder">
+                    <small
+                      class="dotted-text"
+                      style="
+                        font-weight: bolder;
+                        font-size: 10px;
+                        float: left;
+                        margin-top: 8px;
+                      "
+                      >{{ attachment.original_name }}
+                    </small>
+                    <span style="text-transform: uppercase"
+                      >{{
+                        attachment.original_name
+                          | slice
+                            : attachment.original_name.length - 3
+                            : attachment.original_name.length
+                      }}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container>
+              <div
+                class="
+                  col-xs-12 col-sm-12 col-md-12 col-lg-3
+                  divcontainer
+                  drag-item
+                "
+                style="width: auto !important"
+              >
+                <img
+                  src="../../../../assets/img/upload-image.jpg"
+                  class="image"
+                  width="100%"
+                />
+                <div class="middle col-sm-12">
+                  <button
+                    class="btn fas fa-upload icon w-100 h-100"
+                    title="Upload Attachments"
+                    (click)="onTriggerUpload()"
+                  ></button>
+                  <input
+                    id="file_upload"
+                    type="file"
+                    multiple
+                    style="display: none"
+                    (change)="onCompressImages($event)"
+                  />
+                </div>
+                <div class="tag col-sm-12">
+                  <p><small>File Name</small> EXT</p>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #deleteProjectAttachment let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Delete Attachment</h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red">Are you sure to delete this attchament?</h6>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-primary-outline"
+        (click)="c('Close click')"
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="onDeleteProjectAttachment()"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</ng-template>

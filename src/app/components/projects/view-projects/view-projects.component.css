@@ -1,0 +1,412 @@
+/* ---------------------------------------------------
+    NAVBAR STYLE
+----------------------------------------------------- */
+
+#sidebarCollapse span {
+  display: none;
+}
+
+.btn:hover {
+  color: #ee3724;
+}
+
+.navbar-brand {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0.25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+}
+
+.navbar .form-control {
+  padding: 0.75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.fa-file-pdf {
+  color: white !important;
+}
+
+.pdf-icon {
+  position: absolute;
+  z-index: 9999;
+  top: 22px;
+}
+
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+/* End */
+
+.headertitle {
+  font-family: "Raleway";
+  margin: 0;
+  padding: 0;
+  color: #000;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
+  font-size: 29px;
+  line-height: 40px;
+}
+
+.headertitle::after {
+  width: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  background-color: #ee3724;
+  display: block;
+  content: "";
+  height: 1.5px;
+}
+
+.card {
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06);
+}
+
+li {
+  list-style: none;
+}
+
+h6 {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+h4 {
+  font-family: "Raleway", "sans-serif";
+  font-weight: bold;
+  background: #e4e4e4;
+  border-color: #858d94;
+  text-align: -webkit-center;
+  color: #000000;
+  border-bottom: 2px solid #1f15135e;
+  padding: 9px 0px;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+p {
+  font-size: 12px;
+  padding: 5px 0px;
+  text-align: -webkit-center;
+  margin-bottom: 0;
+}
+
+span {
+  float: right;
+}
+
+a {
+  color: #000;
+}
+
+a:hover {
+  color: #ee3724;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+label {
+  font-weight: 700;
+  font-size: 13px;
+  color: #000;
+  /* padding-bottom: 8px; */
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+::placeholder {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+/* ---------------------------------------------------
+    tabs
+----------------------------------------------------- */
+
+nav > .nav.nav-tabs {
+  border: none;
+  color: #fff;
+  background: #e74c3c;
+  border-radius: 0;
+}
+
+nav > div a.nav-item.nav-link,
+nav > div a.nav-item.nav-link.active {
+  border: none;
+  font-size: 14px;
+  color: #fff;
+  background: #e74c3c;
+  border-radius: 0;
+}
+
+nav > div a.nav-item.nav-link.active:after {
+  content: "";
+  position: relative;
+  bottom: -39px;
+  left: -18%;
+  border: 7px solid transparent;
+  border-top-color: #e74c3c;
+}
+
+.tab-content {
+  background: #fdfdfd;
+  line-height: 25px;
+  border: 1px solid #ddd;
+  border-top: 5px solid #272e38;
+  border-bottom: 5px solid #e74c3c;
+  padding: 30px 25px;
+}
+
+nav > div a.nav-item.nav-link:hover,
+nav > div a.nav-item.nav-link {
+  border: none;
+  background: #272e38;
+  color: #fff;
+  border-radius: 0;
+  transition: background 0.2s linear;
+}
+
+nav > div a.nav-item.nav-link.active:after {
+  content: "";
+  position: relative;
+  bottom: -39px;
+  left: -40%;
+  border: 9px solid transparent;
+  border-top-color: #e74c3c;
+}
+
+table {
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+/* .table td,.table th {
+    padding: .75rem;
+    border-top: 1px solid #dee2e6;
+} */
+
+th,
+td {
+  font-size: 12px;
+  border-bottom: 1px solid black;
+}
+
+thead {
+  background-color: #ee3724;
+  color: #fff;
+  font-family: "Raleway", "sans-serif";
+}
+
+td {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+}
+
+label {
+  font-family: "Raleway", "sans-serif";
+  font-size: 14px;
+}
+
+label.select-label {
+  width: 8rem;
+}
+
+/* select {
+    width: 12rem;
+} */
+
+td.price {
+  text-align: right;
+  padding-right: 10px;
+  padding-left: 0;
+  /* width: 90px; */
+  border-right: 1px solid #888;
+}
+
+/* td.description textarea {
+    width: 874px;
+} */
+
+.form-control:focus {
+  border-color: #ee3724;
+  box-shadow: 0 0 0 0.2rem rgba(238, 55, 36, 0.25);
+}
+
+.form-check-inline {
+  display: -webkit-inline-box;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-left: 0;
+  margin-right: 0.75rem;
+}
+
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid #dee2e6;
+}
+
+textarea.form-control {
+  height: calc(1.5em + 0.75rem + 2px);
+}
+
+td.price > input.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  margin-left: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+td.area {
+  padding: 10px;
+}
+td.price {
+  padding: 10px;
+}
+
+td.area textarea {
+  width: 180px !important;
+}
+
+td.checkbox {
+  width: 450px !important;
+}
+
+.mt-4 {
+  margin-top: 2.1rem !important;
+}
+
+[disabled] {
+  cursor: not-allowed;
+}
+
+button[disabled] {
+  background-color: #e74c3c;
+  color: white;
+  border: 1px #e74c3c;
+}
+
+button[disabled]:hover {
+  background-color: white;
+  color: #e74c3c;
+}
+
+.body_padding {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+div.card-header.p-2 {
+  border-radius: 0px;
+}
+
+section#projectExpensesDetail.my-3 {
+  margin-top: 1.25rem;
+}
+
+div#parentCard.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 15px;
+}
+
+td.w-17 {
+  width: 17% !important;
+}
+
+/* input field colors */
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #ee3724 !important;
+}
+
+::ng-deep .mat-form-field-label {
+  /*change color of label*/
+  color: #ee3724 !important;
+}
+
+/* #ffac0b */
+
+/* ::ng-deep.mat-form-field-underline {
+    background-color: #ee3724 !important;
+  } */
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #ee3724 !important;
+}
+
+::ng-deep input.mat-input-element {
+  color: black;
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #ee3724;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  color: rgb(66, 134, 244);
+  background-color: #ee3724;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color: rgb(255, 37, 37, 0.26);
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: #ee3724;
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background,
+.mat-checkbox-indeterminate .mat-checkbox-background {
+  background-color: #ee3724 !important;
+}
+
+/* mat-form-field {
+    width: 100%;
+} */
+
+.dis-btn[disabled] {
+  background-color: white;
+  color: black;
+}
+.input-disabled[disabled] {
+  color: unset;
+}
+mat-form-field {
+  width: 100%;
+}
+
+/* end */

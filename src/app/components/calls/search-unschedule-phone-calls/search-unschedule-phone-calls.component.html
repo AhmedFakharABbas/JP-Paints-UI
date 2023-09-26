@@ -1,0 +1,310 @@
+<section class="mb-3">
+  <div class="container">
+    <div class="card-header top-heading-card">
+      <h3 class="inside-heading mb-0">Search UnScheduled Calls</h3>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <form
+          #unSchedledCallsCustomersInfoForm="ngForm"
+          (ngSubmit)="
+            unSchedledCallsCustomersInfoForm.valid
+              ? getUnScheduledPhoneCallsCustomers()
+              : 0
+          "
+        >
+          <div class="row justify-content-between">
+            <div class="col-sm-12">
+              <h5>Enter UnScheduled Date</h5>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="form-inline form-check-inline mt-4">
+                <!-- <label class="form-check-label firstCard">Search Customers/Projects With No Scheduled Calls after:
+              </label> -->
+                <mat-form-field>
+                  <mat-label>Unscheduled Date</mat-label>
+                  <input
+                    matInput
+                    class="form-check-input mx-2"
+                    type="date"
+                    id="unscheduled_date_id"
+                    name="unscheduled_date_name"
+                    #unscheduled_date_model="ngModel"
+                    [(ngModel)]="
+                      SearchUnscheduledPhoneCallsObj.unscheduled_date
+                    "
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- <div class="col-sm-12 col-md-6 col-lg-4">
+            <label class="mb-2">Phone Call Title</label>
+            <input type="text" class="" placeholder="Title" id="phoneCallTitle" name="phoneCallTitle" />
+          </div> -->
+            <div class="col-sm-2 col-md-6 col-lg-4">
+              <button
+                type="submit"
+                class="btn btn-primary color mt-4 float-right"
+                id="submitButton"
+              >
+                <i class="fas fa-search"></i> Show Unscheduled Customers
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="mb-3">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <form
+          #unSchedledCallsProjectInfoForm="ngForm"
+          (ngSubmit)="
+            unSchedledCallsProjectInfoForm.valid
+              ? getUnScheduledPhoneCallsProjects()
+              : 0
+          "
+        >
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <h5>Optional Project Info</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-label>Project Type</mat-label>
+                <mat-select
+                  id="projectType"
+                  name="projectType"
+                  placeholder="select an option"
+                  #project_type="ngModel"
+                  [(ngModel)]="SearchUnscheduledPhoneCallsObj.project_type_id"
+                >
+                  <mat-option
+                    *ngFor="let project_type of project_types"
+                    [value]="project_type.id"
+                    >{{ project_type.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-label>Project Status</mat-label>
+                <mat-select
+                  id="projectStatus"
+                  name="projectStatus"
+                  placeholder="select an option"
+                  #project_status="ngModel"
+                  [(ngModel)]="SearchUnscheduledPhoneCallsObj.project_status_id"
+                >
+                  <mat-option
+                    *ngFor="let project_status of project_statuses"
+                    [value]="project_status.id"
+                  >
+                    {{ project_status.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-label>Project Potential</mat-label>
+                <mat-select
+                  id="projectPotential"
+                  name="projectPotential"
+                  placeholder="select an option"
+                  #project_potential="ngModel"
+                  [(ngModel)]="
+                    SearchUnscheduledPhoneCallsObj.project_potential_id
+                  "
+                >
+                  <mat-option
+                    *ngFor="let project_potential of project_potentials"
+                    [value]="project_potential.id"
+                  >
+                    {{ project_potential.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field>
+                <mat-label>Estimator</mat-label>
+                <mat-select
+                  name="estimator"
+                  id="estimator"
+                  placeholder="select an option"
+                  #estimator="ngModel"
+                  [(ngModel)]="SearchUnscheduledPhoneCallsObj.estimator_id"
+                >
+                  <mat-option
+                    *ngFor="let estimator of estimators"
+                    [value]="estimator.id"
+                    >{{ estimator.estimator_name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <mat-form-field>
+                <mat-label>Crew</mat-label>
+                <mat-select
+                  name="crew"
+                  id="crew"
+                  class=""
+                  id="phoneCallsFilter"
+                  name="phoneCallsFilter"
+                  placeholder="select an option"
+                  #crew="ngModel"
+                  [(ngModel)]="SearchUnscheduledPhoneCallsObj.crew_id"
+                >
+                  <mat-option *ngFor="let crew of crews" [value]="crew.id">{{
+                    crew.crew_name
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row justify-content-end mr-0 ml-5">
+            <button
+              type="submit"
+              class="btn btn-primary color mt-4"
+              id="submitButton"
+            >
+              <i class="fas fa-search"></i> Search Unscheduled Projects
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container" *ngIf="unScheduledCustomers.length > 0">
+  <div class="card-header top-heading-card">
+    <h3 class="inside-heading mb-0">Customers</h3>
+  </div>
+  <div class="card">
+    <div class="card-body mt-4">
+      <div class="table-responsive table-striped">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Company</th>
+              <th scope="col">Create Date</th>
+              <th scope="col">Date Modified</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let unScheduledCustomer of unScheduledCustomers
+                  | paginate: { itemsPerPage: 5, currentPage: p }
+              "
+            >
+              <td>{{ unScheduledCustomer.id }}</td>
+              <td>{{ unScheduledCustomer.company }}</td>
+              <td>{{ unScheduledCustomer.company_name }}</td>
+              <td>
+                {{ unScheduledCustomer.create_date | date: "MM/dd/yyyy" }}
+              </td>
+              <td>
+                {{ unScheduledCustomer.modified_date | date: "MM/dd/yyyy" }}
+              </td>
+            </tr>
+            <tr *ngIf="unScheduledCustomers.length == 0">
+              <td colspan="6">
+                <p class="text-center m-0">No record found!</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="row justify-content-end"
+        *ngIf="unScheduledCustomers.length != 0"
+      >
+        <div class="col">
+          <p class="py-0 my-2">
+            {{ unScheduledCustomers.length }} unscheduled customers found.
+          </p>
+        </div>
+        <div class="col">
+          <pagination-controls
+            (pageChange)="p = $event"
+            class="text-right"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="unScheduledProjects.length > 0">
+  <div class="card-header top-heading-card">
+    <h3 class="inside-heading mb-0">Projects</h3>
+  </div>
+  <div class="card">
+    <div class="card-body mt-4">
+      <div class="table-responsive table-striped">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Project</th>
+              <th scope="col">Date</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Type</th>
+              <th scope="col">Status</th>
+              <th scope="col">Final Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let unScheduledProject of unScheduledProjects
+                  | paginate: { itemsPerPage: 5, currentPage: p }
+              "
+            >
+              <td>{{ unScheduledProject.project_number }}</td>
+              <td>{{ unScheduledProject.create_date | date: "MM/dd/yyyy" }}</td>
+              <td>{{ unScheduledProject.customer_name }}</td>
+              <td>{{ unScheduledProject.project_type_name }}</td>
+              <td>{{ unScheduledProject.status_name }}</td>
+              <td>{{ unScheduledProject.total_cost }}</td>
+            </tr>
+            <tr *ngIf="unScheduledProjects.length == 0">
+              <td colspan="6">
+                <p class="text-center m-0">No record found!</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="row justify-content-end"
+        *ngIf="unScheduledProjects.length != 0"
+      >
+        <div class="col">
+          <p class="py-0 my-2">
+            {{ unScheduledProjects.length }} unscheduled projects found.
+          </p>
+        </div>
+        <div class="col">
+          <pagination-controls
+            (pageChange)="p = $event"
+            class="text-right"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

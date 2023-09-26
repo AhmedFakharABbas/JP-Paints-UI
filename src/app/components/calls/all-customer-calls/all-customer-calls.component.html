@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="card-header top-heading-card">
+    <h3 class="inside-heading mb-0">Customer Calls</h3>
+  </div>
+  <div class="card">
+    <div class="card-body mt-4">
+      <div class="table-responsive table-striped">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Due Date</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Project Number</th>
+              <th scope="col">Title</th>
+              <th scope="col">Reason</th>
+              <th scope="col">Assigned To</th>
+              <th scope="col">Status</th>
+              <th scope="col">Result</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let allCustomerPhoneCall of allCustomerPhoneCalls
+                  | paginate: { itemsPerPage: 3, currentPage: p }
+              "
+            >
+              <td>{{ allCustomerPhoneCall.call_date | date: "MM/dd/yyyy" }}</td>
+              <td>
+                {{ allCustomerPhoneCall.customer_first_name }}
+                {{ allCustomerPhoneCall.customer_last_name }}
+              </td>
+              <td>{{ allCustomerPhoneCall.project_number }}</td>
+              <td>{{ allCustomerPhoneCall.title }}</td>
+              <td>{{ allCustomerPhoneCall.reason }}</td>
+              <td>{{ allCustomerPhoneCall.assigned_to }}</td>
+
+              <td *ngIf="allCustomerPhoneCall.status != null">
+                {{ allCustomerPhoneCall.status }}
+              </td>
+              <td
+                *ngIf="
+                  allCustomerPhoneCall.status == null ||
+                  allCustomerPhoneCall.status == undefined
+                "
+              >
+                Scheduled
+              </td>
+              <td>{{ allCustomerPhoneCall.result }}</td>
+              <td>
+                <!--  -->
+                <a placement="bottom" ngbTooltip="Call"
+                  ><i class="fas fa-phone mr-2"></i>
+                </a>
+                <a
+                  (click)="
+                    openAllCustomerPhoneCallsModal(
+                      deleteAllCustomerPhoneCallsModal,
+                      allCustomerPhoneCall.id
+                    )
+                  "
+                  placement="bottom"
+                  ngbTooltip="Delete"
+                  ><i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            <tr *ngIf="allCustomerPhoneCalls.length == 0">
+              <td colspan="13">
+                <p class="text-center m-0">No record found!</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col">
+          <!-- <pagination-controls (pageChange)="p = $event" class="text-right"></pagination-controls> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #deleteAllCustomerPhoneCallsModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Delete Phone Call</h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red">Are you sure to delete this phone call?</h6>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-primary-outline color"
+        (click)="c('Close click')"
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary color"
+        (click)="DeleteScheduledPhoneCall(phoneCallsId)"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</ng-template>

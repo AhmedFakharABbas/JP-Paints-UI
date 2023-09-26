@@ -1,0 +1,279 @@
+.img-fluid {
+    width: 100%;
+    height: auto;
+}
+
+img {
+    position: relative;
+    height: auto;
+    width: 100%;
+    background-position: bottom;
+}
+
+div.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+
+/* 
+@media only screen and (max-width:1140px) {
+    .img-fluid {
+        width: 70%;
+        height: auto;
+    }
+} */
+
+.slider-content-box {
+    max-width: 460px;
+    max-height: auto;
+    width: 460px;
+    white-space: normal;
+    color: white;
+    text-align: left;
+    padding-right: 0px;
+    margin-bottom: 80px;
+    margin-left: 120px;
+}
+
+.slider-box-title {
+    background: rgba(38, 38, 40, 0.85);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 21px 30px 20px;
+    font-size: 29px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bolder;
+    margin: 0;
+}
+
+.slider-box-content {
+    font-size: 16px;
+    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    padding: 23px 30px 40px;
+    background: rgba(38, 38, 40, 0.7);
+}
+
+hr {
+    background: #f4bc16;
+    margin: 0;
+}
+
+section#Services {
+    background-color: #d3d3d34a;
+}
+
+.headertitle {
+    font-family: 'Raleway';
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 29px;
+    line-height: 40px;
+}
+
+.headertitle::after {
+    width: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    background-color: #f4bc16;
+    display: block;
+    content: "";
+    height: 1.5px;
+}
+
+.headertitletext {
+    font-size: 16px;
+    line-height: 26px;
+    font-family: 'Raleway';
+    color: #444;
+    text-align: center;
+}
+
+section#Services h4 {
+    font-size: 18px;
+    line-height: 28px;
+    font-family: 'Raleway';
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #000;
+    text-align: center;
+}
+
+section#Services h4:after {
+    width: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    background-color: #f4bc16;
+    display: block;
+    content: "";
+    height: 1.5px;
+}
+
+section#Services p {
+    text-align: center;
+    font-family: 'Raleway';
+    font-size: 14px;
+    line-height: 24px;
+    padding: 24px 25px 0;
+    margin: 0;
+}
+
+.btn-Primary {
+    background-color: #f4bc16;
+    color: white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 16px 23px 15px;
+    font-size: 12px;
+    font-family: 'Raleway';
+    font-weight: 600;
+    line-height: normal;
+    border-radius: 34px;
+    width: 180px;
+    transition: ease-in 0.3;
+    border: 2px solid #f4bc16;
+    -webkit-transition: all 0.3s ease 0s
+}
+
+.btn-Primary:hover {
+    transition: ease-in 0.3;
+    color: #000;
+    background-color: transparent;
+    font-weight: 600;
+    line-height: normal;
+    -webkit-transition: all 0.3s ease 0s
+}
+
+
+/* --- Start of Recent Project Images  */
+
+
+/* section#primary div.container-fluid {
+    width: 100%;
+    position: relative;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.imagebox {
+    background: black;
+    padding: 0px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: auto;
+}
+
+.imagebox:hover img {
+    opacity: 0.5;
+    transition: 0.5s opacity;
+}
+
+.imagebox img {
+    opacity: 1;
+} */
+
+section#primary div.container-fluid {
+    width: 100%;
+    position: relative;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.imagebox {
+    background: black;
+    padding: 0px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: auto;
+}
+
+.imagebox:hover img {
+    opacity: 0.5;
+    transition: 0.5s opacity;
+}
+
+
+/* for color */
+
+.imagebox img {
+    opacity: 1;
+}
+
+
+/* for push up */
+
+.imagebox:hover .imagebox-desc {
+    padding-bottom: 30%;
+    /* background: linear-gradient( white, #0091cc); */
+}
+
+.imagebox .imagebox-desc {
+    bottom: 0px;
+    color: white;
+    font-family: 'Raleway';
+    font-size: 14px;
+    left: 0px;
+    padding: 10px 15px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 1px;
+    color: #FFF;
+    line-height: 24px;
+    -webkit-transition: all 0.3s ease 0s;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+
+/* --- End of Recent Project Images */
+
+section#exploreOurProjects h3 {
+    font-size: 22px;
+    line-height: 28px;
+    font-family: 'Raleway';
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #000;
+    text-align: center;
+}
+
+section#exploreOurProjects {
+    background-color: #d3d3d34a;
+}

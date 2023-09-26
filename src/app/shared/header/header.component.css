@@ -1,0 +1,38 @@
+header#navbar-header nav div a.navbar-brand {
+    color: #f4bc16;
+    font-size: 37px;
+    line-height: 1px;
+    letter-spacing: 1px;
+    font-family: 'Raleway', sans-serif;
+}
+
+header#navbar-header nav {
+    background-color: #F5F5F5;
+}
+
+header#navbar-header nav a h2 {
+    text-align: center;
+}
+
+header#navbar-header nav div a:hover {
+    color: #f4bc16;
+    cursor: pointer;
+}
+
+header#navbar-header nav div a {
+    color: #252531;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    font-family: 'Raleway', sans-serif;
+    padding: 12px 0px 12px 16px
+}
+
+header#navbar-header nav div a[active] {
+    color: #f4bc16;
+}
+
+.carousel-caption {
+    left: 0;
+    right: auto;
+}

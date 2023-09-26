@@ -1,0 +1,963 @@
+<section id="calendar" style="display: grid">
+  <div class="card m-0">
+    <div class="card-body custom-padding">
+      <div class="card-block">
+        <div
+          class="
+            d-flex
+            flex-wrap
+            justify-content-md-between
+            no-gutters
+            align-items-center
+          "
+        >
+          <div class="col">
+            <div class="btn-group d-none d-sm-none d-md-none d-lg-block">
+              <a
+                class="btn btn-raised btn-primary custom-button-padding"
+                mwlCalendarPreviousView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (click)="onGetMonthlyEvents()"
+              >
+                Previous
+              </a>
+              <a
+                class="btn btn-raised btn-danger custom-button-padding"
+                mwlCalendarToday
+                [(viewDate)]="viewDate"
+                (click)="onGetMonthlyEvents()"
+              >
+                Today
+              </a>
+              <a
+                class="btn btn-raised btn-primary custom-button-padding"
+                mwlCalendarNextView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (click)="onGetMonthlyEvents()"
+              >
+                Next
+              </a>
+            </div>
+
+            <div class="btn-group d-block d-sm-block d-md-block d-lg-none">
+              <a
+                class="
+                  btn btn-raised btn-primary
+                  ft-chevron-left
+                  custom-button-padding
+                "
+                mwlCalendarPreviousView
+                [(viewDate)]="viewDate"
+                (click)="onGetMonthlyEvents()"
+              >
+                [view]="view" [(viewDate)]="viewDate" >
+                <i class="icon icon-arrows-left"></i>
+              </a>
+              <a
+                class="
+                  btn btn-raised btn-danger
+                  ft-bookmark
+                  custom-button-padding
+                "
+                mwlCalendarToday
+                [(viewDate)]="viewDate"
+                (click)="onGetMonthlyEvents()"
+              >
+                <i class="icon icon-arrows-sign-down"></i>
+              </a>
+              <a
+                class="
+                  btn btn-raised btn-primary
+                  ft-chevron-right
+                  custom-button-padding
+                "
+                mwlCalendarNextView
+                [view]="view"
+                [(viewDate)]="viewDate"
+                (click)="onGetMonthlyEvents()"
+              >
+                <i class="icon icon-arrows-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <h1 class="inside-heading mb-0">
+            {{ viewDate | calendarDate: view + "ViewTitle" }}
+          </h1>
+
+          <div class="col text-right">
+            <div class="btn-group d-none d-sm-none d-md-none d-lg-block">
+              <a
+                class="btn btn-raised btn-primary custom-button-padding"
+                (click)="view = 'month'"
+                [class.active]="view === 'month'"
+              >
+                Month
+              </a>
+              <a
+                class="btn btn-raised btn-primary custom-button-padding"
+                (click)="view = 'week'"
+                [class.active]="view === 'week'"
+              >
+                Week
+              </a>
+              <a
+                class="btn btn-raised btn-primary custom-button-padding"
+                (click)="view = 'day'"
+                [class.active]="view === 'day'"
+              >
+                Day
+              </a>
+            </div>
+
+            <div class="btn-group d-block d-sm-block d-md-block d-lg-none">
+              <a
+                class="
+                  btn btn-raised btn-primary btn-icon-icon
+                  custom-button-padding
+                "
+                (click)="view = 'month'"
+                [class.active]="view === 'month'"
+              >
+                <i class="fa fa-th"></i>
+              </a>
+              <a
+                class="
+                  btn btn-raised btn-primary btn-icon-icon
+                  custom-button-padding
+                "
+                (click)="view = 'week'"
+                [class.active]="view === 'week'"
+              >
+                <i class="fa fa-columns"></i>
+              </a>
+
+              <a
+                class="
+                  btn btn-raised btn-primary btn-icon-icon
+                  custom-button-padding
+                "
+                (click)="view = 'day'"
+                [class.active]="view === 'day'"
+              >
+                <i class="fa fa-th-list"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row flex-row flex-nowrap">
+      <!-- <div class="col-3">
+        <div class="card card-block">Card</div>
+      </div>
+      <div class="col-3">
+        <div class="card card-block">Card</div>
+      </div>
+      <div class="col-3">
+        <div class="card card-block">Card</div>
+      </div>
+      <div class="col-3">
+        <div class="card card-block">Card</div>
+      </div>
+      <div class="col-3">
+        <div class="card card-block">Card</div>
+      </div>
+      <div class="col-3">
+        <div class="card card-block">Card</div>
+      </div>
+      <div class="col-3">
+        <div class="card card-block">Card</div>
+      </div> -->
+
+      <div class="card mt-3 w-100">
+        <div class="card-body">
+          <div class="card-block">
+            <div class="row mr-1">
+              <div class="col-xs-12 col-sm-6 col-md-6 mb-3">
+                <button
+                  class="pull-left btn btn-primary color"
+                  type="submit"
+                  (click)="openBookAppointment(modalContent)"
+                >
+                  Add Appointment
+                </button>
+              </div>
+              <div
+                class="col- pull-left d-block ml-auto"
+                *ngIf="is_navigated == false"
+              >
+                <mat-form-field>
+                  <mat-select
+                    md-autofocus="autofocus"
+                    id="roleFilter"
+                    name="roleFilter"
+                    #roleFilter="ngModel"
+                    (selectionChange)="onselectCrewLeader($event)"
+                    [(ngModel)]="calendarId"
+                    placeholder="Select a Calendar"
+                  >
+                    <mat-option *ngFor="let cl of calendars" [value]="cl.id">
+                      {{ cl.calendarName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="px-0">
+              <div class="row card_row">
+                <div class="col card_cell px-0">
+                  <div
+                    class="row mx-0"
+                    style="
+                      padding-bottom: 1rem;
+                      white-space: nowrap;
+                      height: 150px;
+                      overflow-y: scroll;
+                    "
+                  >
+                    <ng-container *ngIf="is_navigated == false">
+                      <div
+                        class="crew_card m-2"
+                        [class.crew_card_checked]="isSelectAll == true"
+                        (click)="onSelectAllUsers()"
+                      >
+                        <div
+                          class="card-body"
+                          style="
+                            padding: 0px !important;
+                            text-align: center;
+                            padding-top: 1rem;
+                          "
+                        >
+                          <small class="card-title text-center"
+                            >All Users</small
+                          >
+                        </div>
+                      </div>
+                    </ng-container>
+                    <ng-container
+                      *ngFor="
+                        let all_user of users
+                          | filter: calendarId:'manage_calendars_id'
+                      "
+                    >
+                      <div
+                        class="crew_card m-2"
+                        [class.crew_card_checked]="all_user.id == userID"
+                        (click)="onclickSelectedName(all_user.id)"
+                      >
+                        <div
+                          class="px-1 ellipses"
+                          style="
+                            padding: 0px !important;
+                            text-align: center;
+                            padding-top: 0.5rem;
+                          "
+                        >
+                          <small class="card-title text-center"
+                            >{{ all_user.first_name }}
+                            {{ all_user.last_name }}</small
+                          >
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div [ngSwitch]="view">
+              <mwl-calendar-month-view
+                *ngSwitchCase="'month'"
+                [viewDate]="viewDate"
+                [events]="events"
+                [refresh]="refresh"
+                [activeDayIsOpen]="activeDayIsOpen"
+                (dayClicked)="dayClicked($event.day)"
+                (columnHeaderClicked)="clickedColumn = $event.isoDayNumber"
+                (dayClicked)="clickedDate = $event.day.date"
+                (eventClicked)="handleEvent('Clicked', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)"
+              >
+              </mwl-calendar-month-view>
+
+              <mwl-calendar-week-view
+                *ngSwitchCase="'week'"
+                [viewDate]="viewDate"
+                [events]="events"
+                [refresh]="refresh"
+                (dayHeaderClicked)="clickedDate = $event.day.date"
+                (hourSegmentClicked)="clickedDate = $event.date"
+                (eventClicked)="handleEvent('Clicked', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)"
+              >
+              </mwl-calendar-week-view>
+
+              <mwl-calendar-day-view
+                *ngSwitchCase="'day'"
+                [viewDate]="viewDate"
+                [events]="events"
+                [refresh]="refresh"
+                (eventClicked)="handleEvent('Clicked', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)"
+                (hourSegmentClicked)="OnAddNewEvent($event.date)"
+              >
+              </mwl-calendar-day-view>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<button
+  hidden
+  id="delModelBtn"
+  (click)="openAppointmentModel(deleteModalCalendar)"
+></button>
+
+<button
+  hidden
+  id="updateModelBtn"
+  (click)="openUpdateBookAppointment(modalContent)"
+></button>
+
+<button
+  hidden
+  id="viewModelBtn"
+  (click)="openViewAppointment(viewModalCalendar)"
+></button>
+
+<button
+  hidden
+  id="CreateModelBtn"
+  (click)="openBookAppointment(modalContent)"
+></button>
+
+<ng-template #modalContent let-close="close">
+  <div class="modal-header" style="background-color: #ee3724">
+    <h5 class="modal-title text-white">
+      {{ calendarsObj.id != undefined ? "Update Event" : "Create new event" }}
+    </h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" *ngIf="calendarsObj != undefined">
+    <form
+      action="#"
+      class="form form-horizontal"
+      #calendarform="ngForm"
+      (ngSubmit)="
+        calendarform.valid
+          ? calendarsObj.appointment_type != 85 &&
+            calendarsObj.appointment_with == undefined
+            ? '0'
+            : calendarsObj.id != undefined
+            ? onEditEvent()
+            : onCreateEvent()
+          : 0
+      "
+    >
+      <div class="container-fluid">
+        <!-- {{calendarform.valid}}<br>
+        {{calendarsObj.appointment_type != 85 && calendarsObj.appointment_with == undefined}}<br>
+        {{calendarsObj.id}}
+      (selectionChange)="onChangeAppointmentType()"
+      -->
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+            <!-- <p>{{ calendarsObj.appointment_type }}</p> -->
+            <mat-form-field>
+              <mat-select
+                id="appointment_type"
+                name="appointment_type"
+                #appointment_type="ngModel"
+                #appointment_type="ngModel"
+                placeholder="Type Of Appointment"
+                [(ngModel)]="calendarsObj.appointment_type"
+                required
+              >
+                <mat-option
+                  *ngFor="let type_of_appointment of types_of_appointment"
+                  [value]="type_of_appointment.ObjectTypeID"
+                >
+                  {{ type_of_appointment.ObjectName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="error-block">
+              <small
+                class="help-block-custom"
+                *ngIf="
+                  (appointment_type.touched || calendarform.submitted) &&
+                  !appointment_type.valid
+                "
+              >
+                Required
+              </small>
+            </div>
+          </div>
+
+          <!-- d2 -->
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+            <!-- <mat-form-field>
+              <mat-select #input1 md-autofocus="autofocus" id="appointment_for" name="appointment_for"
+                (selectionChange)="onChange($event)" #appointment_for="ngModel" placeholder="Appointment For"
+                [(ngModel)]="calendarsObj.appointment_for" required>
+                <mat-option
+                  *ngFor="let user of users | customFilter : calendarsObj.appointment_type : 'objectTypes' : 'ObjectTypeID'"
+                  [value][]="user.id">
+                  {{user.first_name }} {{ user.last_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> 
+           [(ngModel)]="appointmerForName"-->
+            <!-- <p>{{ appointmentForName }}</p> -->
+
+            <mat-form-field>
+              <input
+                type="text"
+                id="appointment_for"
+                placeholder="Appointment For *"
+                aria-label="Appointment For"
+                matInput
+                [matAutocomplete]="auto1"
+                [formControl]="appointmentForTextSearch$"
+                [(ngModel)]="appointmentForName"
+              />
+              <mat-hint *ngIf="calendarsObj.appointment_type != undefined"
+                >Enter text to find appointment for
+              </mat-hint>
+              <mat-hint
+                *ngIf="calendarsObj.appointment_type == undefined"
+                style="color: #ee3724"
+                >Choose type of appointment *
+              </mat-hint>
+              <mat-autocomplete #auto1="matAutocomplete">
+                <ng-container
+                  *ngIf="searchResult$ != undefined && searchResultLength > 0"
+                >
+                  <mat-option
+                    *ngFor="let user of searchResult$"
+                    [value]="user.name"
+                    (onSelectionChange)="optionClicked('user', user)"
+                  >
+                    <div>
+                      {{ user.name }}
+                    </div>
+                  </mat-option>
+                </ng-container>
+                <mat-option
+                  *ngIf="
+                    searchResult$ != undefined &&
+                    searchResultLength == 0 &&
+                    !isAppointmentForLoading
+                  "
+                >
+                  <div>No customer found</div>
+                </mat-option>
+                <mat-option *ngIf="isAppointmentForLoading">
+                  <mat-spinner diameter="35"></mat-spinner>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div class="error-block">
+              <small
+                class="help-block-custom"
+                *ngIf="
+                  calendarform.submitted &&
+                  calendarsObj.appointment_for == undefined
+                "
+              >
+                Required *
+              </small>
+            </div>
+          </div>
+
+          <div
+            class="col-xs-12 col-sm-12 col-md-6 col-lg-3"
+            *ngIf="calendarsObj.appointment_type != 85"
+          >
+            <!-- <mat-form-field>
+              <mat-label>Appointment With</mat-label>
+              <input id="typeahead-format" type="text" matInput [ngbTypeahead]="search" name="calendarsObj"
+                [(ngModel)]="calendarsObj.appointment_with_obj" [resultFormatter]="formatter"
+                [inputFormatter]="formatter" #appointment_With1="ngModel" placeholder="Type to search"
+                typeahead-editable="false" [required]="calendarsObj.appointment_with == undefined"
+                (blur)="setCustomerID() ; onGetProjectsOfCustomers()" />
+            </mat-form-field> -->
+
+            <mat-form-field>
+              <input
+                type="text"
+                id="appointment_with"
+                placeholder="Appointment With *"
+                aria-label="Appointment With"
+                matInput
+                [matAutocomplete]="auto2"
+                [formControl]="appointmentWithTextSearch$"
+                (blur)="onGetProjectsOfCustomers()"
+                [(ngModel)]="customerName"
+              />
+              <mat-hint>Enter text to find appointment with</mat-hint>
+              <mat-autocomplete #auto2="matAutocomplete">
+                <ng-container
+                  *ngIf="
+                    customersSearchResult$ != undefined &&
+                    customerssearchResultLength > 0
+                  "
+                >
+                  <mat-option
+                    *ngFor="let customer of customersSearchResult$"
+                    [value]="customer.name"
+                    (onSelectionChange)="optionClicked('customer', customer)"
+                  >
+                    <div>
+                      {{ customer.name }}
+                    </div>
+                  </mat-option>
+                </ng-container>
+                <mat-option
+                  *ngIf="
+                    customersSearchResult$ != undefined &&
+                    customerssearchResultLength == 0 &&
+                    !iscustomerLoading
+                  "
+                >
+                  <div>No user found</div>
+                </mat-option>
+                <mat-option *ngIf="iscustomerLoading">
+                  <mat-spinner diameter="35"></mat-spinner>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <div
+              class="error-block"
+              *ngIf="
+                calendarform.submitted &&
+                calendarsObj.appointment_with == undefined
+              "
+            >
+              <small class="help-block-custom"> Required * </small>
+            </div>
+          </div>
+          <!-- {{calendarsObj.appointment_with == undefined ? '' : project.project_name}} -->
+          <!--  [disabled]="calendarsObj.appointment_with == undefined" -->
+          <!-- | filter : calendarsObj.appointment_with : 'customer_id' -->
+          <div
+            class="col-xs-12 col-sm-12 col-md-6 col-lg-3"
+            *ngIf="
+              calendarsObj.appointment_type != 82 &&
+              calendarsObj.appointment_type != 83 &&
+              calendarsObj.appointment_type != 84 &&
+              calendarsObj.appointment_type != 85
+            "
+          >
+            <!-- <mat-form-field>
+              <mat-select
+                name="Project"
+                id="projectID"
+                (selectionChange)="
+                  setSubProjectFlag(calendarsObj.project_for_appointment)
+                "
+                [(ngModel)]="calendarsObj.project_for_appointment"
+                placeholder="Choose project"
+                #projectID="ngModel"
+                required
+              >
+               
+
+                <mat-option
+                  *ngFor="let project of projects"
+                  [value]="project.project_number"
+                >
+                
+                  {{ project.project_number }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="error-block">
+              <small
+                class="help-block-custom"
+                *ngIf="
+                  (projectID.dirty ||
+                    projectID.touched ||
+                    calendarform.submitted) &&
+                  !projectID.valid
+                "
+              >
+                Required
+              </small>
+            </div> 
+          -->
+            <!-- (onSelectionChange)="optionClicked('customer', customer.id)" -->
+            <!-- *ngIf="
+                  (projectID.dirty ||
+                    projectID.touched ||
+                    calendarform.submitted) &&
+                  !projectID.valid
+                "
+              [(ngModel)]="calendarsObj.project_for_appointment"
+              -->
+            <!-- <p>{{ this.calendarsObj.project_for_appointment }}</p> -->
+
+            <mat-form-field>
+              <input
+                name="Project"
+                type="text"
+                id="projectID"
+                placeholder="Choose project *"
+                [formControl]="projecttSearch$"
+                matInput
+                [matAutocomplete]="projectAuto"
+                [(ngModel)]="projectNumber"
+              />
+
+              <mat-autocomplete #projectAuto="matAutocomplete">
+                <ng-container
+                  *ngIf="projects != undefined && projectsLength > 0"
+                >
+                  <mat-option
+                    *ngFor="let project of projects"
+                    [value]="project.project_number"
+                    (onSelectionChange)="projectClicked(project)"
+                  >
+                    <div>
+                      {{ project.project_number }}
+                    </div>
+                  </mat-option>
+                </ng-container>
+                <mat-option
+                  *ngIf="
+                    projects != undefined &&
+                    projectsLength == 0 &&
+                    !isProjectLoading
+                  "
+                >
+                  <div>No project found</div>
+                </mat-option>
+                <mat-option *ngIf="isProjectLoading">
+                  <mat-spinner diameter="35"></mat-spinner>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div
+              *ngIf="
+                calendarform.submitted &&
+                this.calendarsObj.project_for_appointment == undefined
+              "
+              class="error-block"
+            >
+              <small class="help-block-custom"> Required </small>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <mat-form-field>
+              <input
+                type="text"
+                matInput
+                placeholder="Title"
+                name="display_Text"
+                #display_text="ngModel"
+                [(ngModel)]="calendarsObj.display_text"
+                required
+              />
+            </mat-form-field>
+            <div class="error-block">
+              <small
+                class="help-block-custom"
+                *ngIf="
+                  (display_text.touched || calendarform.submitted) &&
+                  !display_text.valid
+                "
+              >
+                Required
+              </small>
+            </div>
+          </div>
+          <!-- <div class="col-sm-12 col-xs-12 col-md-6 col-lg-2">
+                        <mat-form-field>
+                            <select id="roleId" name="roleId" #roleId="ngModel"
+                                (change)="calendarsObj.appointment_for = undefined" placeholder="Select Calendar"
+                                matNativeControl [(ngModel)]="calendarsObj.role_id">
+                                <option *ngFor="let user_role of user_roles" [value]="user_role.id" required>
+                                    {{user_role.calendarName}}
+                                </option>
+                            </select>
+                        </mat-form-field>
+                        <div class="error-block">
+                            <small class="help-block-custom"
+                                *ngIf="(roleId.touched || calendarform.submitted) && !roleId.valid">
+                                Required
+                            </small>
+                        </div>
+                    </div> -->
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <mat-form-field>
+              <textarea
+                name="appointmentDetails"
+                id="appointmentDetails"
+                rows="1"
+                matInput
+                placeholder="Appointment Details/Notes"
+                name="appointment_details"
+                [(ngModel)]="calendarsObj.appointment_details"
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+            <mat-form-field>
+              <input
+                type="date"
+                matInput
+                placeholder="Start Date"
+                name="start_date"
+                #start_date="ngModel"
+                [(ngModel)]="calendarsObj.start_date"
+                required
+              />
+            </mat-form-field>
+            <div class="error-block">
+              <small
+                class="help-block-custom"
+                *ngIf="
+                  (start_date.touched || calendarform.submitted) &&
+                  !start_date.valid
+                "
+              >
+                Required
+              </small>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-2">
+            <mat-form-field>
+              <input
+                type="time"
+                matInput
+                placeholder="Start Time (hh:mm)"
+                name="s_time"
+                #s_time="ngModel"
+                (blur)="onChangeDuration()"
+                (change)="onChangeDuration()"
+                required
+                [(ngModel)]="calendarsObj.start_time"
+              />
+            </mat-form-field>
+            <div class="error-block">
+              <small
+                class="help-block-custom"
+                *ngIf="
+                  (s_time.touched || calendarform.submitted) && !s_time.valid
+                "
+              >
+                Required
+              </small>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+            <mat-form-field>
+              <input
+                type="date"
+                matInput
+                placeholder="End Date"
+                name="end_date"
+                #end_date="ngModel"
+                [(ngModel)]="calendarsObj.end_date"
+                required
+                min="{{ calendarform.value.start_date }}"
+              />
+            </mat-form-field>
+            <div class="error-block">
+              <small
+                class="help-block-custom"
+                *ngIf="
+                  (end_date.touched || calendarform.submitted) &&
+                  !end_date.valid
+                "
+              >
+                Required
+              </small>
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-2">
+            <mat-form-field>
+              <mat-select
+                matNativeControl
+                placeholder="Duration (hh:mm)"
+                name="durion"
+                (selectionChange)="onChangeDuration()"
+                #durion="ngModel"
+                [(ngModel)]="calendarsObj.duration"
+                id="durion"
+              >
+                <mat-option *ngFor="let du of duration" [value]="du.value">
+                  {{ du.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-2">
+            <mat-form-field>
+              <input
+                type="time"
+                matInput
+                placeholder="End Time (hh:mm)"
+                name="end_time"
+                #end_time="ngModel"
+                [(ngModel)]="calendarsObj.end_time"
+                disabled
+              />
+            </mat-form-field>
+            <!-- <div class="error-block">
+              <small class="help-block-custom" *ngIf="(end_time.touched || calendarform.submitted) && !end_time.valid">
+                Required
+              </small>
+            </div> -->
+          </div>
+
+          <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-2">
+              <mat-form-field>
+                <select matNativeControl placeholder="Duration (hh:mm)"  name="du"
+                  #du="ngModel" [(ngModel)]="calendarsObj.time_duration" id="du">
+                  <option *ngFor="let du of duration">
+                    {{du.value}}
+                  </option>
+                </select>
+              </mat-form-field>
+            </div> -->
+        </div>
+      </div>
+      <div class="row justify-content-end mr-3">
+        <button type="submit" class="btn btn-primary color">
+          {{ calendarsObj.id != undefined ? "Update Event" : "Create Event" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #deleteModalCalendar let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Delete Event</h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red">Are you sure to delete this event?</h6>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-primary-outline"
+        (click)="c('Close click')"
+      >
+        Close
+      </button>
+      <button type="submit" class="btn btn-primary" (click)="onDeleteEvent()">
+        Delete
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #viewModalCalendar let-c="close" let-d="dismiss">
+  <ng-container *ngIf="eventDetail != undefined">
+    <div class="modal-header" style="background-color: #ee3724; color: white">
+      <h5>
+        Crew Work for {{ eventDetail.customer_name }} by
+        {{ eventDetail.appointment_for_name }}
+      </h5>
+      <button type="button" class="close" (click)="c('Close click')">
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h4>Start Date</h4>
+            <p
+              *ngIf="
+                eventDetail.start_date != undefined &&
+                eventDetail.start_date != ''
+              "
+            >
+              {{ eventDetail.start_date | date: "short" }}
+            </p>
+          </div>
+          <div class="col">
+            <h4>Time</h4>
+            <p>{{ eventDetail.start_time }} - {{ eventDetail.end_time }}</p>
+          </div>
+          <div class="col">
+            <h4>Project Number</h4>
+            <p>{{ eventDetail.project_number }}</p>
+          </div>
+          <div class="col">
+            <h4>Project Type</h4>
+            <p>{{ eventDetail.project_type_name }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h4>Project Description</h4>
+            <p>{{ eventDetail.project_description }}</p>
+          </div>
+          <div class="col">
+            <h4>Project Notes</h4>
+            <p>{{ eventDetail.internal_notes }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h4>Appointment Details/Notes</h4>
+            <p>{{ eventDetail.appointment_details }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline color"
+          (click)="c('Close click')"
+          [routerLink]="['/customer/view', eventDetail.customer_id]"
+        >
+          View Customer
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary color"
+          (click)="c('Close click')"
+          [routerLink]="['/project/view', eventDetail.project_number]"
+        >
+          View Project
+        </button>
+        <!-- <button type="button" class="btn btn-outline color" (click)="c('Close click')">
+                Edit Appointment
+            </button>
+            <button type="submit" class="btn btn-primary color">
+                Delete Appointment
+            </button> -->
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

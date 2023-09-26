@@ -1,0 +1,384 @@
+<!-- <section style="margin-top: 6%;">
+  <div class="container">
+    <div class="card" style="background-color: #ee3724;">
+      <div class="card-body" style="padding: 5px;">
+        <h3 style="text-align: center;color: #fff;margin-bottom: 0px;">Calls</h3>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<div class="container">
+  <div class="card-header top-heading-card">
+    <h3 class="inside-heading mb-0">Manage Calls</h3>
+  </div>
+  <div class="card">
+    <div class="card-body mt-4">
+      <div class="row justify-content-end my-2">
+        <div class="col-sm-12 col-md-auto px-0">
+          <mat-form-field>
+            <mat-select
+              id="phoneCallsFilter"
+              name="phoneCallsFilter"
+              #phoneCallsFilter="ngModel"
+              placeholder="select an option"
+              [(ngModel)]="phoneCallObj.filter_id"
+              (selectionChange)="CurrentPageNo = 1;onChange($event)"
+            >
+              <mat-option
+                *ngFor="let callfilterName of callfilterNames"
+                [value]="callfilterName.filter_type_id"
+              >
+                {{ callfilterName.filter_type_name }}</mat-option
+              >
+
+              <mat-option value="1">Search Phone Calls</mat-option>
+              <mat-option value="2">Search Unscheduled Phone Calls</mat-option>
+              <mat-option value="3">View Today's Interactions</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-auto px-0 mx-3">
+          <button
+            class="btn btn-primary color my-3 d-block ml-auto"
+            ngbTooltip="Schedule phone call"
+            placeholder="top"
+            [routerLink]="['/calls/schedule']"
+          >
+            <i class="fas fa-calendar-day mr-2"></i>Schedule
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive table-striped">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Due Date</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Project Number</th>
+              <th scope="col" *ngIf="!isHideFields">Estimator</th>
+              <th scope="col">Title</th>
+              <th scope="col">Reason</th>
+              <th scope="col" *ngIf="isHideFields">Status</th>
+              <th scope="col" *ngIf="isHideFields">Result</th>
+              <th scope="col" *ngIf="isHideFields">Completed By</th>
+              <th scope="col" *ngIf="isHideFields">Call Made On</th>
+              <th scope="col" *ngIf="!isHideFields">Scheduled By</th>
+              <th scope="col" *ngIf="!isHideFields">Assigned To</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let phoneCallDetail of phoneCallDetails
+                  | paginate
+                    : {
+                        id: 'server',
+                        itemsPerPage: 10,
+                        currentPage: CurrentPageNo,
+                        totalItems: total
+                      };
+                let i = index;
+                first as isFirst;
+                last as isLast
+              "
+            >
+              <td>{{ phoneCallDetail.call_date | date: "MM/dd/yyyy" }}</td>
+              <td>
+                {{ phoneCallDetail.customer_first_name }}
+                {{ phoneCallDetail.customer_last_name }}
+              </td>
+              <td>{{ phoneCallDetail.project_number }}</td>
+              <td *ngIf="!isHideFields">
+                {{ phoneCallDetail.estimator_name }}
+              </td>
+              <td>{{ phoneCallDetail.title }}</td>
+              <td>{{ phoneCallDetail.reason }}</td>
+              <td *ngIf="isHideFields">{{ phoneCallDetail.status_name }}</td>
+              <td *ngIf="isHideFields">{{ phoneCallDetail.result }}</td>
+              <td *ngIf="isHideFields">
+                {{ phoneCallDetail.completed_by_name }}
+              </td>
+              <td *ngIf="isHideFields">
+                {{ phoneCallDetail.created_at | date: "medium" }}
+              </td>
+              <td *ngIf="!isHideFields">
+                {{ phoneCallDetail.scheduled_by_name }}
+              </td>
+              <td *ngIf="!isHideFields">
+                {{ phoneCallDetail.first_name }} {{ phoneCallDetail.last_name }}
+              </td>
+              <td>
+                <a
+                  placement="bottom"
+                  ngbTooltip="Make Call"
+                  *ngIf="phoneCallsFilterID != 76 && phoneCallsFilterID != 77"
+                  (click)="
+                    openDialMyPhoneCallsModal(
+                      dialPhoneCallModal,
+                      phoneCallDetail.id
+                    )
+                  "
+                >
+                  <i class="fas fa-phone mr-2"></i>
+                </a>
+
+                <a
+                  placement="bottom"
+                  ngbTooltip="Delete"
+                  (click)="
+                    openDeleteScheduledPhoneCallsModal(
+                      deleteScheduledPhoneCallsModal,
+                      phoneCallDetail.id
+                    )
+                  "
+                >
+                  <i class="fas fa-trash"></i
+                ></a>
+              </td>
+            </tr>
+            <tr *ngIf="phoneCallDetails.length == 0">
+              <td colspan="10">
+                <p class="text-center m-0">
+                  No record found! Try selecting another option
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col">
+          <pagination-controls
+            (pageChange)="CurrentPageNo = $event; onChange()"
+            directionLinks="true"
+            responsive="true"
+            id="server"
+            class="text-right"
+          >
+          </pagination-controls>
+        </div>
+      </div>
+      <div class="row justify-content-end" *ngIf="phoneCallDetails.length != 0">
+        <div class="col">
+          <!-- <pagination-controls (pageChange)="p = $event" class="text-right"></pagination-controls> -->
+        </div>
+      </div>
+      <!-- <div class="row my-3 justify-content-between">
+          <div class="col-sm-12 col-md-auto">
+            <a routerLink="/schedule-bulk-calls"><u>364 phone calls found</u></a>
+          </div>
+          <div class="col-sm-12 col-md-auto">
+            <a routerLink="/schedule-phone-call"><button class="btn btn-primary color">Schedule New Phone
+                Call</button></a>
+          </div>
+        </div> -->
+    </div>
+  </div>
+</div>
+
+<ng-template #dialPhoneCallModal let-c="close" let-d="dismiss">
+  <div class="modal-header" style="background-color: #ee3724">
+    <h6 class="modal-title" style="color: white">Dial Phone Call</h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <!-- <section class="my-5 mx-3">
+      <div id="controls">
+        <div id="info">
+          <div id="client-name"></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <mat-form-field>
+              <input id="phone-number" type="text" matInput placeholder="Customer Mobile Number"
+                [value]="phoneNumber" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-xs-12 col-sm-6">
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <select matNativeControl name="statusSelect" id="statusSelect" placeholder="Status"
+                [(ngModel)]="phoneCallsDetailObj.status">
+                <option *ngFor="let callStatusName of callStatusNames" [value]="callStatusName.id">
+                  {{callStatusName.name}}</option>
+              </select>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12">
+            <mat-form-field>
+              <textarea name="resultTextArea" id="resultTextArea" matInput rows="1" placeholder="result"
+                [(ngModel)]="phoneCallsDetailObj.result">
+             </textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div id="log"></div>
+      </div>
+    </section> -->
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step>
+        <form>
+          <ng-template matStepLabel>Dial</ng-template>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Phone Number"
+              [value]="phoneNumber"
+              id="phone-number"
+              required
+            />
+          </mat-form-field>
+          <div class="container-fluid">
+            <div class="row justify-content-end">
+              <div class="col-sm-auto px-0">
+                <button
+                  type="submit"
+                  class="btn btn-outline color mr-2"
+                  id="button-call"
+                  (click)="onCallCustomer(phoneNumber)"
+                >
+                  Dial
+                </button>
+              </div>
+              <div class="col-sm-auto px-0">
+                <button
+                  mat-button
+                  matStepperNext
+                  class="btn btn-primary color d-block ml-auto"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="log"></div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <form>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12">
+              <ng-template matStepLabel>Status</ng-template>
+              <mat-form-field>
+                <mat-label>Status</mat-label>
+                <select
+                  matNativeControl
+                  name="statusSelect"
+                  id="statusSelect"
+                  placeholder="Status"
+                  [(ngModel)]="phoneCallsDetailObj.status"
+                  required
+                >
+                  <option
+                    *ngFor="let callStatusName of callStatusNames"
+                    [value]="callStatusName.id"
+                  >
+                    {{ callStatusName.name }}
+                  </option>
+                </select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row justify-content-end">
+              <div class="col-sm-auto px-0">
+                <button
+                  mat-button
+                  matStepperPrevious
+                  class="btn btn-outline color mr-2"
+                >
+                  Back
+                </button>
+              </div>
+              <div class="col-sm-auto px-0">
+                <button mat-button matStepperNext class="btn btn-primary color">
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Result</ng-template>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12">
+            <mat-form-field>
+              <textarea
+                name="resultTextArea"
+                id="resultTextArea"
+                matInput
+                rows="1"
+                placeholder="result"
+                [(ngModel)]="phoneCallsDetailObj.result"
+                required
+              >
+              </textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row justify-content-end">
+            <div class="col-sm-auto px-0">
+              <button
+                mat-button
+                matStepperPrevious
+                class="btn btn-outline color mr-2"
+              >
+                Back
+              </button>
+            </div>
+            <div class="col-sm-auto px-0">
+              <button
+                type="submit"
+                class="btn btn-primary color"
+                (click)="onCreatePhoneCallsDetail()"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</ng-template>
+
+<ng-template #deleteScheduledPhoneCallsModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Delete Phone Call</h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red">Are you sure to delete this phone call?</h6>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-primary-outline color"
+        (click)="c('Close click')"
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary color"
+        (click)="DeleteScheduledPhoneCall(phoneCallsId)"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</ng-template>

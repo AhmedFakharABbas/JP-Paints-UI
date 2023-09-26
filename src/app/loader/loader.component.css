@@ -1,0 +1,66 @@
+/* .spinner {
+  margin: 100px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+} */
+
+.stroke {
+  width: 340px;
+  height: 9px;
+  position: absolute;
+  background: linear-gradient(to left, #ef4836 3%, #f15848, #f2695b 38px, #f4796d 67%, #f58a7f, #f69b91, #f8aba3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: unset;
+}
+
+.stroke:before {
+  content: '';
+  position: absolute;
+  /* top:-2px; */
+  left: 0;
+  width: 7%;
+  height: 100%;
+  margin-right: 100px;
+  background-color:black;
+  /* background-color: #ececec; */
+  animation: line 5s linear infinite;
+}
+
+.stroke:after {
+  content: '\f1fc';
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background: rgba(255,255,255,1); */
+  animation: line 5s linear infinite;
+  color: #ee3742;
+  font-size: 50px;
+  transform: translateY(-44px);
+  animation-timing-function: cubic-brezier(.75, .84, 0, .86);
+  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    font-weight: 900;
+}
+
+@keyframes line {
+  0% {
+    left: 0;
+  }
+  5% {
+    left: 100%;
+  }
+  100% {
+    left: 0;
+  }
+}

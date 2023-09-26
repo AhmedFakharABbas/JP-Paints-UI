@@ -1,0 +1,195 @@
+<section class="mb-3">
+  <div class="container">
+    <div class="card ">
+      <div class="card-body" [style.padding-bottom]="customerInteractions.length == 0?'15px':'0px'">
+        <form (ngSubmit)="customerInterectionForm.valid ? onFilterCustomerInteraction() :0"
+          #customerInterectionForm="ngForm">
+          <div class="row">
+            <div class="col-sm-4 col-md-4  float-left col-lg-2">
+              <div class="form-check form-check-inline">
+                <mat-checkbox name="is_show_notes" [(ngModel)]="customerInteractionsFilterObj.is_show_notes">Show Notes
+                </mat-checkbox>
+              </div>
+              <!-- <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="show_notes" name="showNotes"
+                  [(ngModel)]="customerInteractionsFilterObj.is_show_notes">
+                <label class="custom-control-label" for="showNotes">Show Notes </label>
+              </div> -->
+            </div>
+            <div class="col-sm-4 float-left col-lg-2">
+
+              <div class="form-check form-check-inline">
+                <mat-checkbox name="is_show_projects" id="is_show_projects"
+                  [(ngModel)]="customerInteractionsFilterObj.is_show_projects">
+                  Show Projects
+                </mat-checkbox>
+              </div>
+            </div>
+            <div class="col-sm-4 float-left col-lg-2">
+
+              <div class="form-check form-check-inline">
+                <mat-checkbox name="is_show_appointments"
+                  [(ngModel)]="customerInteractionsFilterObj.is_show_appointments">
+                  Show Appointments
+                </mat-checkbox>
+              </div>
+            </div>
+          </div>
+
+          <div id="collapseCustomerInterection" class="collapse">
+            <div class="row pt-2">
+              <div class="col-md-12 p-0">
+                <div class="col-md-4 float-left col-lg-2">
+                  <div class="form-check form-check-inline">
+                    <mat-checkbox name="is_show_calls" [(ngModel)]="customerInteractionsFilterObj.is_show_calls">
+                      Show Phone Calls
+                    </mat-checkbox>
+                  </div>
+                </div>
+                <div class="col-md-4 float-left col-lg-2">
+                  <div class="form-check form-check-inline">
+                    <mat-checkbox name="is_show_expenses" [(ngModel)]="customerInteractionsFilterObj.is_show_expenses">
+                      Show Expenses
+                    </mat-checkbox>
+                  </div>
+                </div>
+                <div class="col-md-4 float-left col-lg-2">
+                  <div class="form-check form-check-inline">
+                    <mat-checkbox name="is_show_payments" [(ngModel)]="customerInteractionsFilterObj.is_show_payments">
+                      Show Payments
+                    </mat-checkbox>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row my-2" *ngIf="customerInteractionsFilterObj.pcurrent_date == null">
+              <div class="col-sm-12 col-md-4 offset-4 col-lg-3">
+                <mat-form-field>
+                  <mat-select id="available_projects" placeholder="Available Projects" name="available_projects"
+                    [(ngModel)]="customerInteractionsFilterObj.customer_projects" #available_projects="ngModel"
+                      multiple>
+                    <mat-option *ngFor="let customer_project of customer_projects"
+                      [value]="customer_project.project_number" >
+                      {{customer_project.project_number}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div class="error-block">
+                  <small class="help-block-custom"
+                    *ngIf="(available_projects.touched || customerInterectionForm.submitted) && !available_projects.valid">
+                    Required
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row my-2" *ngIf="customerInteractionsFilterObj.pcurrent_date != null">
+              <div class="col-sm-12 col-md-4 offset-4 col-lg-3">
+                <mat-form-field>
+                  <input matInput [value]="customerInteractionsFilterObj.pcurrent_date" name="current_date" disabled>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-between my-3">
+            <div class="col-md-6 col-sm-5 col-4 float-left">
+              <button type="button" data-toggle="collapse" class="btn btn-primary color "
+                href="#collapseCustomerInterection" aria-expanded="false"
+                aria-controls="collapseCustomerInterection">&nbsp;
+                <i class="fas mr-2"></i>
+              </button>
+            </div>
+            <div class="col-md-6 col-sm-5 col-4 float-left">
+              <button type="submit" class="btn btn-primary color  float-right" id="search_button">
+                <i class="fas fa-search"></i> Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-3">
+  <div class="container">
+    <div class="card ">
+      <div class="card-body">
+
+        <div class="row pb-2">
+
+          <div class="col-md-6 float-left mb-3">
+
+            <form #noteForm="ngForm" (ngSubmit)="noteForm.valid ? onAddNewNote(noteForm) :0">
+
+              <mat-form-field>
+                <mat-label>Notes</mat-label>
+                <input type="text" matInput rows="1" style="margin-bottom: 5px;" name="notes" id="notes"
+                  #notes="ngModel" [(ngModel)]="customerInteractionsObj.interaction_notes" required />
+                <span>
+                  <button type="submit" class="float-right" id="note_button">
+                    <i class="fas fa-sticky-note" style="background: none"></i>
+                  </button>
+                </span>
+              </mat-form-field>
+              <div class="error-block mr-5 my-4">
+                <small class="help-block-custom"
+                  *ngIf="(notes.touched || noteForm.submitted) && !notes.valid">
+                  Required
+                </small>
+              </div>
+
+            </form>
+
+          </div>
+
+          <div class="col-sm-12 col-md-6 float-right mt-2">
+            <a routerLink="/calls/schedule" [queryParams]="{queryParam: customerID}"><button type="submit"
+                class="btn btn-primary color float-right" id="schedule_button">
+                <i class="fa fa-phone" aria-hidden="true"></i> Schedule a Call
+              </button>
+            </a>
+            <a routerLink="/calls/customer-all" [queryParams]="{queryParam: customerID}">
+              <button type="submit" style="margin-right: 15px;" class="btn btn-primary color float-right"
+                id="schedule_button">
+                <i class="fas fa-eye"></i> All Calls
+              </button>
+            </a>
+          </div>
+
+        </div>
+        <div class="table-responsive table-striped">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"> Date</th>
+                <th scope="col">Interaction Type</th>
+                <th scope="col">Notes</th>
+                <th scope="col">Performed By</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let customerInteraction of customerInteractions | paginate: { itemsPerPage: 5, currentPage: p } ">
+                <td>{{customerInteraction.created_at | date:'short'}}</td>
+                <td>{{customerInteraction.interaction_type}}</td>
+                <td>{{customerInteraction.interaction_notes}}</td>
+                <td>{{customerInteraction.performed_by_name}}</td>
+              </tr>
+              <tr *ngIf="customerInteractions.length == 0">
+                <td colspan="4">
+                  <p class="text-center m-0">No Record Found!</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-end" *ngIf="customerInteractions.length != 0">
+          <div class="col">
+            <pagination-controls (pageChange)="p = $event" class="text-right"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

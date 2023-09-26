@@ -1,0 +1,175 @@
+<!--Calendar Starts-->
+<div class="container">
+    <div class="row">
+        <div class="col px-0">
+            
+        </div>
+    </div>
+</div>
+
+
+<section id="calendar">
+    <ng-template #modalContent let-close="close">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ modalData?.action }}</h5>
+            <button type="button" class="close" (click)="close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="#" class="form form-horizontal">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label>Event Title</label>
+                        <input type="text" name="event-title" class="form-control" [(ngModel)]="modalData?.event.title"
+                            (keyup)="refresh.next()">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Primary Color</label>
+                                <input type="color" name="primary-color" [(ngModel)]="modalData?.event.color.primary"
+                                    (change)="refresh.next()">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Secondary Color</label>
+                                <input type="color" name="secondary-color"
+                                    [(ngModel)]="modalData?.event.color.secondary" (change)="refresh.next()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Starts At</label>
+                                <!-- <mwl-demo-utils-date-time-picker name="starts-at" [(ngModel)]="modalData?.event.start"
+                                    (ngModelChange)="refresh.next()" placeholder="Not set">
+                                </mwl-demo-utils-date-time-picker> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="form-group">
+                                <label>Ends At</label>
+                                <!-- <mwl-demo-utils-date-time-picker name="ends-at" [(ngModel)]="modalData?.event.end"
+                                    (ngModelChange)="refresh.next()" placeholder="Not set">
+                                </mwl-demo-utils-date-time-picker> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
+        </div>
+    </ng-template>
+    <div class="col text-center align-self-center">
+        <h1 class="title_heading mb-0 ">
+            {{ viewDate | calendarDate:(view + 'ViewTitle')}}</h1>
+    </div>
+    <div class="card m-0">
+        <div class="card-body">
+            <div class="card-block">
+                <div class="d-flex flex-wrap justify-content-md-between no-gutters">
+                    <div class="col">
+                        <div class="btn-group d-none d-sm-none d-md-none d-lg-block">
+                            <a class="btn btn-raised btn-primary" mwlCalendarPreviousView [view]="view"
+                                [(viewDate)]="viewDate">
+                                Previous
+                            </a>
+                            <a class="btn btn-raised btn-danger" mwlCalendarToday [(viewDate)]="viewDate">
+                                Today
+                            </a>
+                            <a class="btn btn-raised btn-primary" mwlCalendarNextView [view]="view"
+                                [(viewDate)]="viewDate">
+                                Next
+                            </a>
+                        </div>
+
+                        <div class="btn-group d-block d-sm-block d-md-block d-lg-none">
+                            <a class="btn btn-raised btn-primary ft-chevron-left" mwlCalendarPreviousView [view]="view"
+                                [(viewDate)]="viewDate">
+                                <i class="icon icon-arrows-left"></i>
+                            </a>
+                            <a class="btn btn-raised btn-danger ft-bookmark" mwlCalendarToday [(viewDate)]="viewDate">
+                                <i class="icon icon-arrows-sign-down"></i>
+                            </a>
+                            <a class="btn btn-raised btn-primary ft-chevron-right" mwlCalendarNextView [view]="view"
+                                [(viewDate)]="viewDate">
+                                <i class="icon icon-arrows-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col text-right">
+                        <div class="btn-group d-none d-sm-none d-md-none d-lg-block">
+                            <a class="btn btn-raised btn-primary" (click)="view = 'month'"
+                                [class.active]="view === 'month'">
+                                Month
+                            </a>
+                            <a class="btn btn-raised btn-primary" (click)="view = 'week'"
+                                [class.active]="view === 'week'">
+                                Week
+                            </a>
+                            <a class="btn btn-raised btn-primary" (click)="view = 'day'"
+                                [class.active]="view === 'day'">
+                                Day
+                            </a>
+                        </div>
+
+                        <div class="btn-group d-block d-sm-block d-md-block d-lg-none">
+                            <a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'month'"
+                                [class.active]="view === 'month'">
+                                <i class="fa fa-th"></i>
+                            </a>
+                            <a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'week'"
+                                [class.active]="view === 'week'">
+                                <i class="fa fa-columns"></i>
+                            </a>
+                            <a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'day'"
+                                [class.active]="view === 'day'">
+                                <i class="fa fa-th-list"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="card-block">
+                <div class="row pb-3">
+                    <div class="col-12" style="text-align: -webkit-right;">
+                        <div class="col-12  padding_0">
+                            <div class="book_btn">
+                                <button class=" pull-right btn btn-primary color" (click)="addEvent()">Add Appointment
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div [ngSwitch]="view">
+                    <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
+                        [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+                        (eventClicked)="handleEvent('Clicked', $event.event)"
+                        (eventTimesChanged)="eventTimesChanged($event)">
+                    </mwl-calendar-month-view>
+                    <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"
+                        [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                        (eventTimesChanged)="eventTimesChanged($event)">
+                    </mwl-calendar-week-view>
+                    <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events"
+                        [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                        (eventTimesChanged)="eventTimesChanged($event)">
+                    </mwl-calendar-day-view>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

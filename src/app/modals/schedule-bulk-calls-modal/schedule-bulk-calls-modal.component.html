@@ -1,0 +1,50 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
+
+
+<div class="modal-header">
+  <h4 class="modal-title">Please input todo details</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #form="ngForm">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-8">
+          <input type="text" placeholder="Phone Call Title (same for all calls)" class="form-control"
+            name="bulkPhoneCallTitle">
+        </div>
+        <div class="col-sm-12 col-md-4 pl-1">
+          <select name="" id="" class="form-control" name="bulkPhoneCallAssignedTo" 
+            >
+            <option value="">Any User</option>
+            <option value="">Lois/Carpentry</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-8">
+          <textarea name="" id="" rows="11" placeholder="Description / Reason for Call (same for all calls)"
+            class="form-control my-3" name="bulkPhoneCallDescription" 
+            ></textarea>
+        </div>
+        <div class="col-sm-12 col-md-4 pr-5">
+          <!-- <input type="datetime-local" placeholder="" name="calendar" class="form-control"> -->
+          <ngb-datepicker #dp name="bulkPhoneCallDateToCall" 
+             (navigate)="date = $event.next"></ngb-datepicker>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <!-- <button type="submit" class="btn btn-outline-primary">Schedule Calls</button> -->
+  <button type="button" class="btn btn-light mt-4 " id="cancelButton">
+    &times;<span class="text-center"> Cancel</span>
+  </button>
+  <button type="submit" class="btn btn-primary mt-4  ml-2 mr-3" id="submitButton">
+    Submit
+  </button>
+  <!-- <button type="button" class="btn btn-outline-dark">Close</button> -->
+</div>

@@ -1,0 +1,242 @@
+<section class="mb-3">
+  <div class="container" style="margin-top: 2%">
+    <div class="card-header top-heading-card">
+      <h3 class="inside-heading mb-0">Referral Sources</h3>
+    </div>
+    <div class="card">
+      <div class="card-body mt-4">
+        <div class="table-responsive table-striped">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Referral Source</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody
+              *ngIf="referralSources != undefined && referralSources.length > 0"
+            >
+              <tr
+                *ngFor="
+                  let referral of referralSources
+                    | paginate: { itemsPerPage: 5, currentPage: p }
+                "
+              >
+                <td>{{ referral.name }}</td>
+                <td *ngIf="referral.is_active == null">Inactive</td>
+                <td *ngIf="referral.is_active == true">Active</td>
+                <td *ngIf="referral.is_active == false">Inactive</td>
+                <td>
+                  <a
+                    ><i
+                      style="cursor: pointer"
+                      (click)="openReferralSource(paintBrand, referral)"
+                      placement="top"
+                      ngbTooltip="Edit Referral Source"
+                      class="fa fa-edit"
+                    ></i
+                  ></a>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              *ngIf="
+                referralSources == undefined || referralSources.length == 0
+              "
+            >
+              <tr>
+                <td colspan="4">No record found!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col">
+            <!-- | paginate: { itemsPerPage: 10, currentPage: p } -->
+            <!-- <pagination-controls (pageChange)="p = $event" class="text-right"></pagination-controls> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-3">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <form
+          #referralSourceForm="ngForm"
+          (ngSubmit)="
+            referralSourceForm.valid
+              ? referralSourceObj.id != undefined
+                ? updateReferralSource()
+                : onAddReferralSource()
+              : 0
+          "
+        >
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4 float-left my-2">
+              <mat-form-field>
+                <input
+                  type="text"
+                  [(ngModel)]="referralSourceObj.name"
+                  matInput
+                  placeholder="Referral Source"
+                  name="paintBrand"
+                  id="paintBrand"
+                  required
+                  #referral_source="ngModel"
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="referral_source.touched && !referral_source.valid"
+                >
+                  Required
+                </small>
+              </div>
+            </div>
+            <div class="col-2 float-left mt-3">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  type="radio"
+                  id="activeRadioButton"
+                  (change)="referralSourceObj.is_active = true"
+                  class="custom-control-input"
+                  [checked]="referralSourceObj.is_active == true"
+                  name="status"
+                  value="active"
+                />
+
+                <label class="custom-control-label" for="activeRadioButton"
+                  >Active</label
+                >
+              </div>
+            </div>
+            <div class="col-2 float-left mt-3">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  type="radio"
+                  id="inActiveRadioButton"
+                  (change)="referralSourceObj.is_active = false"
+                  class="custom-control-input"
+                  [checked]="referralSourceObj.is_active == false"
+                  name="status"
+                  value="inActive"
+                />
+
+                <label class="custom-control-label" for="inActiveRadioButton"
+                  >Inactive</label
+                >
+              </div>
+            </div>
+            <div class="col mt-4 float-left offset-1">
+              <button
+                class="btn btn-primary color float-right mt-2"
+                id="search_button"
+                type="submit"
+              >
+                <i class="fas fa-user-friends"></i> Add Referral Source
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #paintBrand let-c="close" let-d="dismiss">
+  <div class="modal-header" style="background-color: #ee3724; color: white">
+    <h6 class="modal-title">Update Referral Source</h6>
+    <button
+      type="button"
+      class="close"
+      (click)="c('Close click'); onModalClose()"
+    >
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-sm-6 col-md-4 col-lg-5 float-left">
+          <mat-form-field>
+            <input
+              type="text"
+              matInput
+              placeholder="Referrel Source"
+              id="referral_source"
+              name="referral_source"
+              [(ngModel)]="referralSourceObj.name"
+              required
+              #painBrand="ngModel"
+            />
+          </mat-form-field>
+          <div class="error-block">
+            <small
+              class="help-block-custom"
+              *ngIf="painBrand.touched && !painBrand.valid"
+            >
+              Required
+            </small>
+          </div>
+        </div>
+        <div class="col-2 float-left mt-4">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input
+              type="radio"
+              id="activeRadioButton"
+              (change)="referralSourceObj.is_active = true"
+              name="isActive"
+              class="custom-control-input"
+              [checked]="referralSourceObj.is_active == true"
+              name="status"
+              value="active"
+            />
+            <label class="custom-control-label" for="activeRadioButton"
+              >Active</label
+            >
+          </div>
+        </div>
+        <div class="col-2 float-left mt-4">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input
+              type="radio"
+              id="inActiveRadioButton"
+              (change)="referralSourceObj.is_active = false"
+              name="isActive"
+              class="custom-control-input"
+              [checked]="referralSourceObj.is_active == false"
+              name="status"
+              value="inActive"
+            />
+            <label class="custom-control-label" for="inActiveRadioButton"
+              >Inactive</label
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer mt-2">
+      <button
+        type="button"
+        class="btn btn-outline color"
+        (click)="c('Close click'); onModalClose()"
+      >
+        Close
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary color"
+        (click)="updateReferralSource()"
+      >
+        Submit
+      </button>
+      <!--         [disabled]="referralSourceObj.name == undefined || referralSourceObj.name == ''" -->
+    </div>
+  </div>
+</ng-template>

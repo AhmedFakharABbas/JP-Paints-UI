@@ -1,0 +1,186 @@
+table {
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+th,
+td {
+  font-size: 12px;
+  border-bottom: 1px solid black;
+}
+
+thead {
+  background-color: #ee3724;
+  color: #fff;
+  font-family: "Raleway", "sans-serif";
+}
+
+td {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+}
+
+a {
+  color: #000;
+}
+
+a:hover {
+  color: #ee3724;
+  cursor: pointer;
+}
+
+.btn.focus,
+.btn:focus {
+  outline: 0;
+  box-shadow: none;
+}
+/* input field colors */
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #ee3724 !important;
+}
+
+::ng-deep .mat-form-field-label {
+  /*change color of label*/
+  color: #ee3724 !important;
+}
+
+/* #ffac0b */
+
+/* ::ng-deep.mat-form-field-underline {
+  background-color: #ee3724 !important;
+} */
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #ee3724 !important;
+}
+
+::ng-deep input.mat-input-element {
+  color: black;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* user tabs start */
+
+.project-tab {
+  margin-top: 0%;
+}
+.project-tab #tabs {
+  background: #007b5e;
+  color: #eee;
+}
+.project-tab #tabs h6.section-title {
+  color: #eee;
+}
+
+.project-tab #tabs .nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: #0062cc;
+  background-color: transparent;
+  border-color: transparent transparent #f3f3f3;
+  /* border-bottom: 3px solid !important; */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.project-tab .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  color: #0062cc;
+  font-size: 16px;
+  font-weight: 600;
+}
+.project-tab .nav-link:hover {
+  border: none;
+}
+.project-tab {
+  background: #f3f3f3;
+  color: #333;
+}
+.project-tab a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+nav > .nav.nav-tabs {
+  border: none;
+  color: #fff;
+  background: #e74c3c;
+  border-radius: 0;
+}
+
+nav > div a.nav-item.nav-link.active {
+  border: none;
+  font-size: 14px;
+  color: #fff;
+  background: #e74c3c;
+  border-radius: 0;
+  box-shadow: 0 0 8px 1px #00000055;
+}
+
+nav > div a.nav-item.nav-link {
+  border: none;
+  font-size: 14px;
+  color: #fff;
+  background: #272e38;
+  border-radius: 0;
+}
+
+/* nav > div a.nav-item.nav-link.active:after {
+  content: "";
+  position: relative;
+  bottom: -39px;
+  left: -18%;
+  border: 7px solid transparent;
+  border-top-color: #e74c3c;
+} 
+ */
+/* .nav.nav-tabs[_ngcontent-cte-c5] {
+  
+} */
+/* .useractivestatus {
+  border-bottom: 5px solid #272e38;
+} */
+.tab-content {
+  background: #fdfdfd;
+  line-height: 25px;
+  border: 1px solid #ddd;
+  border-bottom: 5px solid #e74c3c;
+}
+
+nav > div a.nav-item.nav-link:hover,
+nav > div a.nav-item.nav-link {
+  border: none;
+  /* background: #272e38; */
+  color: #fff;
+  border-radius: 0;
+  transition: background 0.2s linear;
+}
+
+/* nav > div a.nav-item.nav-link.active:after {
+  content: "";
+  position: relative;
+  bottom: -39px;
+  left: -40%;
+  border: 9px solid transparent;
+  border-top-color: #e74c3c;
+} */
+
+/* user tabs end */
+.searchbtn {
+  border: 2px solid #fff;
+  color: #ee3724;
+  background-color: #fff;
+}
+.searchbtn:hover {
+  color: #272e38;
+}

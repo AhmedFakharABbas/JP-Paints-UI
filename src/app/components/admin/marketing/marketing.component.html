@@ -1,0 +1,199 @@
+<section class="mb-3" style="margin-top:2%">
+  <div class="container">
+    <div class="card-header top-heading-card ">
+      <h3 class="inside-heading mb-0">Marketing Expenditures</h3>
+    </div>
+    <div class="card ">
+      <div class="card-body mt-4">
+        <div class="table-responsive table-striped">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Referral Source</th>
+                <th scope="col">Total Spent</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="referralDetails!=undefined && referralDetails.length>0">
+
+              <tr *ngFor="let referral of referralDetails | paginate: { itemsPerPage: 5, currentPage: p } ">
+                <td>{{referral.referral_source_name}}</td>
+                <td>{{referral.amount_spent | currency }}</td>
+                <td>
+                  <a (click)="opendetailMarketing(detailMarketing, referral)"> <i style="cursor: pointer"
+                      placement="top" ngbTooltip="See Expenditure Details" class="fa fa-eye"></i>
+                  </a>
+                </td>
+              </tr>
+
+            </tbody>
+            <tbody *ngIf="referralDetails==undefined || referralDetails.length == 0">
+              <tr>
+                <td colspan="4">No record found!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col">
+            <!-- | paginate: { itemsPerPage: 10, currentPage: p } -->
+            <!-- <pagination-controls (pageChange)="p = $event" class="text-right"></pagination-controls> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-3">
+  <div class="container">
+    <div class="card ">
+      <div class="card-body mt-4">
+        <form #marketingForm="ngForm" (ngSubmit)="marketingForm.valid ? onCreateMarketingExpenditure() :0">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <mat-select class="" name="referralSource" placeholder="Referral Source"
+                  [(ngModel)]="referralSourceObj.referral_source_id" required #referral_id="ngModel">
+                  <!-- <mat-option [value]="undefined" disabled>Select Referral Source</mat-option> -->
+                  <ng-container *ngIf="this.referralSourcesArray != undefined">
+                    <mat-option *ngFor="let referral of this.referralSourcesArray" [value]="referral.id">
+                      {{referral.name}}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(referral_id.touched || marketingForm.submitted) && !referral_id.valid">
+                  Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="text" class="" placeholder="Amount" name="amount" matInput
+                  [(ngModel)]="referralSourceObj.amount_spent" required ngModel #amountPaid="ngModel" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && 
+                    event.charCode != 47 && event.charCode <= 57" />
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(amountPaid.touched || marketingForm.submitted) && !amountPaid.valid">
+                  Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <mat-form-field>
+                <input type="date" class="" placeholder="Applies From" name="dateTo" matInput
+                  [(ngModel)]="referralSourceObj.applies_from" required ngModel #appliesFrom="ngModel" />
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(appliesFrom.touched || marketingForm.submitted) && !appliesFrom.valid">
+                  Required
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              <mat-form-field>
+                <input type="date" class="" placeholder="Applies Until" name="dateFrom" matInput
+                  [(ngModel)]="referralSourceObj.applies_until" required ngModel #appliesUntil="ngModel"
+                  min="{{marketingForm.value.dateTo}}" />
+              </mat-form-field>
+              <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(appliesUntil.touched || marketingForm.submitted) && !appliesUntil.valid">
+                  Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8">
+              <mat-form-field>
+                <input type="text" class="" placeholder="Note" name="note" matInput
+                  [(ngModel)]="referralSourceObj.note" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 float-right">
+              <button type="submit" class="btn btn-primary color mt-4 float-right" id="search_button">
+                <i class="fas fa-search"></i> Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<ng-template #detailMarketing let-c="close" let-d="dismiss">
+  <div class="modal-header" style="background-color: #ee3724 ; color: white;">
+    <h5 class="modal-title">
+      Marketing Money Spent Details</h5>
+    <button type="button" class="close" (click)="c('Close click')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="table-responsive table-striped">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Referral Source</th>
+            <th scope="col">Amount Spent</th>
+            <th scope="col">Applies from</th>
+            <th scope="col">Applies to</th>
+            <th scope="col">Note</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="marketingExpendituresArray!=undefined && marketingExpendituresArray.length>0">
+          <tr *ngFor="let referral of marketingExpendituresArray ">
+            <td>{{referral.referral_source_name}}</td>
+            <td>{{referral.amount_spent | currency}}</td>
+            <td>
+              <ng-container *ngIf="referral.applies_from!=undefined && referral.applies_from != ''">
+                {{referral.applies_from | date : 'short'}}</ng-container>
+            </td>
+            <td>
+              <ng-container *ngIf="referral.applies_until!=undefined && referral.applies_until != ''">
+                {{referral.applies_until | date : 'short'}}</ng-container>
+            </td>
+            <td>{{referral.note}}</td>
+            <td>
+              <a (click)="opendeleteMarketing(deleteMarketingModel, referral)"><i style="cursor: pointer"
+                  placement="top" ngbTooltip="Delete" class="fas fa-trash"></i></a> </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="marketingExpendituresArray==undefined || marketingExpendituresArray.length == 0">
+          <tr>
+            <td colspan="6">No record found!</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline color" (click)="c('Close click')">Close</button>
+      <!-- <button type="submit" class="btn btn-primary color" (click)="deleteUser()">Delete</button> -->
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #deleteMarketingModel let-c="close" let-d="dismiss">
+  <div class="modal-header ">
+    <h6 class="modal-title">
+      Delete Referrel Source</h6>
+    <button type="button" class="close" (click)="c('Close click')">&times;</button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red;">Are you sure to delete this marketing expenditure?</h6>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline color" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-primary color" (click)="deleteMarketing()">Delete</button>
+    </div>
+  </div>
+</ng-template>

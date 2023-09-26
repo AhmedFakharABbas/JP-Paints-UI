@@ -1,0 +1,153 @@
+/* #ee3724
+#ffac0b */
+
+/* ---------------------------------------------------
+    NAVBAR STYLE
+----------------------------------------------------- */
+
+#sidebarCollapse span {
+    display: none;
+}
+
+.navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+}
+
+.form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+/* End */
+
+.headertitle {
+    font-family: 'Raleway';
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 29px;
+    line-height: 40px;
+}
+
+.headertitle::after {
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    background-color: #ee3724;
+    display: block;
+    content: "";
+    height: 1.5px;
+}
+
+label {
+    font-weight: 700;
+    font-size: 13px;
+    color: #000;
+    /* padding-bottom: 8px; */
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+::placeholder {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.form-control:focus {
+    border-color: #ee3724;
+    box-shadow: 0 0 0 0.2rem rgba(238, 55, 36, 0.25);
+}
+
+.card {
+    box-shadow: 0 6px 0 0 rgba(0, 0, 0, .01), 0 15px 32px 0 rgba(0, 0, 0, .06);
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+th, td {
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+
+thead {
+    background-color: #ee3724;
+    color: #fff;
+    font-family: 'Raleway', 'sans-serif';
+}
+
+td {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+}
+
+a {
+    color: #000;
+}
+
+a:hover {
+    color: #ee3724;
+    cursor: pointer;
+}
+
+/* input field colors */
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: #ee3724 !important;
+}
+
+::ng-deep .mat-form-field-label {
+    /*change color of label*/
+    color: #ee3724 !important;
+}
+
+/* #ffac0b */
+
+/* ::ng-deep.mat-form-field-underline {
+    background-color: #ee3724 !important;
+  } */
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: #ee3724 !important;
+    ;
+}
+
+::ng-deep input.mat-input-element {
+    color: black;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+/* end */
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */

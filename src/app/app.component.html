@@ -1,0 +1,9 @@
+<router-outlet></router-outlet>
+
+<div *ngIf="_sharedService.loading == true">
+    <div class="centerspinner">
+        <div class="spinnerposition">
+            <app-loader></app-loader>
+        </div>
+    </div>
+</div>

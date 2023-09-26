@@ -1,0 +1,31 @@
+
+.card{
+    box-shadow: 0 6px 0 0 rgba(0,0,0,.01), 0 15px 32px 0 rgba(0,0,0,.06);
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+th, td {
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+
+thead {
+    background-color: #ee3724;
+    color: #fff;
+    font-family: 'Raleway', 'sans-serif';
+}
+
+td {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+}
+
+*:focus {
+    box-shadow: none !important
+}

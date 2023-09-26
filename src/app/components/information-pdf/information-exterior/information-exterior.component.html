@@ -1,0 +1,399 @@
+<div id="content" #content>
+  <div class="row flex-row-reverse m-0">
+    <button type="button" class="btn btn-primary color mr-4" value="Download PDF" (click)="captureScreen()"
+      placement="left" ngbTooltip="Export PDF">
+      <i class="fas fa-file-excel mr-1"></i> Export PDF
+    </button>
+  </div>
+</div>
+<div class="container bg-grad pb-4 pt-4" id="contentToConvert">
+  <div class="row">
+    <img src="../../../../assets/img/jp-pdf-cover.png" alt="cover-photo" width="100%" height="auto">
+  </div>
+
+  <h4 class="section-heading">EXTERIOR INFORMATION</h4>
+  <div class="col-12 border-black">
+    <div class="row">
+      <h4 class="bg-heading-transparent">Job Specifications:
+        <p class="break-all-text"><u>{{projectDetailsObj.project_information.project_description}}</u></p>
+      </h4>
+    </div>
+  </div>
+
+  <div class="col-lg-12 border-black mt-2 ">
+    <div class="row justify-content-around">
+      <div class="col-2 padding_0 bg-heading">Area</div>
+      <div class="col padding_0 bg-heading">Front</div>
+      <div class="col padding_0 bg-heading">Right</div>
+      <div class="col padding_0 bg-heading">Back</div>
+      <div class="col padding_0 bg-heading">Left</div>
+      <div class="col padding_0 bg-heading">Qty</div>
+      <div class="col padding_0 bg-heading">Price</div>
+      <div class="col padding_0 bg-heading">Total 01</div>
+      <div class="col padding_0 bg-heading">Total 02</div>
+      <div class="col padding_0 bg-heading">Final</div>
+    </div>
+    <ng-container>
+
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">P.Wash</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Cornise</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Windows</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Windows</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Siding</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Shutters</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Front Door</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Garage Door</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Bay Tops</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Iron Railing</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Stucco</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Stuc, Trim</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Decks</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Porch</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+      <div class="row border-1 text-center">
+        <div class="col-2 padding_0 border-rigth-black">Carpentry</div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+        <div class="col padding_0 border-rigth-black"></div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="col-12 border-black minus-margin mt-2">
+    <div class="row">
+      <h4 class="bg-heading ">We Always use TOP OF THE LINE PAINTS! Because they are durable, washable and hold their
+        color better.
+      </h4>
+    </div>
+
+    <div class="row ">
+      <div class="col-10 b-b-1">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-8">
+            <div class="row">
+              <label class="check col"> Sherwin Williams
+                <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_seal_cracks == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Poter
+                <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_seal_around_trim == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Benjamin Moore
+                <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_seal_dow_corning == 1">
+                <span class="checkmark"></span>
+              </label>
+              <label class="check col"> Others
+                <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.is_seal_dow_corning == 1">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 b-l-1 b-b-1"></div>
+    </div>
+    <div class="row">
+      &nbsp;
+      <div class="col-4 b-l-1 b-b-1"></div>
+    </div>
+  </div>
+
+  <div class="col-12 border-black minus-margin mt-2"
+    *ngIf="projectDetailsObj!=undefined && projectDetailsObj.estimate !=undefined">
+
+    <div class="row ">
+      <div class="col-8">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-4 bolder">
+            <h6 class="bolder m-0">Special Instructions:</h6>
+          </div>
+          <div class="col-8 pl-0">{{projectDetailsObj.estimate.interior_special_notes}}</div>
+        </div>
+      </div>
+      <div class="col-4  b-b-1 b-l-1">
+        <div class="row">
+          <span class="form-field col-6 px-1 bolder text-right">Price include materials:</span>
+          <label class="check col"> Yes
+            <input type="checkbox" name="is_name"
+              [checked]="projectDetailsObj.estimate.is_interior_paint_material_included == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col"> No
+            <input type="checkbox" name="is_name"
+              [checked]="projectDetailsObj.estimate.is_interior_paint_material_included != 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col"> Partial
+            <input type="checkbox" name="is_name">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8">
+        <div class="align-items-center row justify-content-around mb-1 align-items-center">
+          <div class="col-12 pl-0 b-b-1 mb-1"></div>
+        </div>
+      </div>
+      <div class="col-4  b-b-1 b-l-1">
+        <div class="row">
+          <span class="form-field col-6 px-2 text-right bolder">Payment by check:</span>
+          <label class="check col"> Yes
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.interior_payment_method == 2">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col"> No
+            <input type="checkbox" name="is_name" [checked]="projectDetailsObj.estimate.interior_payment_method != 2">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-8">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0 b-b-1 mb-1"></div>
+        </div>
+      </div>
+      <div class="col-4 b-b-1 b-l-1 ">
+        <div class="row">
+          <span class="form-field col-6 text-right px-2 bolder">TOTAL:</span>
+          <span class="form-value"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-8">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0 b-b-1 mb-1"></div>
+        </div>
+      </div>
+      <div class="col-4 b-b-1 b-l-1 ">
+        <div class="row mt-1">
+          <span class="form-field col-6 text-right px-2 bolder">DEPOSIT:</span>
+          <span class="form-value">
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-8 ">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0 b-b-1 mb-1"></div>
+        </div>
+      </div>
+      <div class="col-4 b-l-1 ">
+        <div class="row">
+          <span class="form-field col-6 text-right px-2 bolder">BALANCE DUE:</span>
+          <span class="form-value"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-8 ">
+      <div class="align-items-center row justify-content-around">
+        <div class="col-12 pl-0 ">
+          <div class="row m-0">
+            <div class="col-1">
+              <img src="../../../../assets/img/cards.png" alt="cards" class="w-100">
+            </div>
+            Note: A convinience charge will be added when using a credit card:
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 border-black minus-margin mt-2 bg-gray ">
+    <div class="row">
+      <h4 class="bg-heading ">Dependability, Quality, Value, Experience Make the Difference. Thank You for Letting Us
+        Serve You.
+      </h4>
+    </div>
+    <div class="row">
+      <div class="col-3 min-height-sig b-red-r-1">
+        <span class="form-field px-2 col-prim">Job Approved By:</span><span class="form-value"></span>
+      </div>
+      <div class="col-6 min-height-sig b-red-r-1">
+        <span class="form-field col-6 px-2 col-prim">Signature:</span><span class="form-value"></span>
+      </div>
+      <div class="col-3 min-height-sig b-red-r-1">
+        <span class="form-field col-3 px-2 col-prim">Due to Start:</span><span class="form-value"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-around mt-3 mb-2">
+    <h6 class="red-heading ">We Appriciate Your Buisness. Please Make Check Payable To JP</h6>
+  </div>
+
+</div>

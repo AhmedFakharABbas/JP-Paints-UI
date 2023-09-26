@@ -1,0 +1,30 @@
+<section id="login" class="full img-fluid" style="background-image:url(assets/img/background_image.jpg)">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <form class="form" #loginForm="ngForm" (ngSubmit)="loginForm.valid ? OnSubmit(loginForm) : undefined">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <picture>
+                                    <source type="image/webp" srcset="assets/img/JP_logo.webp">
+                                    <img src="assets/img/JP_logo.png" class="logo img-fluid">
+                                </picture>
+                            </div>
+                        </div>
+                    </div>
+                    <mat-form-field class="w-100">
+                        <input type="text" matInput name="email" [(ngModel)]="userObj.userName" placeholder="username"
+                            required ngModel #user_email="ngModel">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input type="password" matInput name="password" [(ngModel)]="userObj.password"
+                            placeholder="password" required ngModel #user_password="ngModel">
+                    </mat-form-field>
+                    <button [disabled]="!loginForm.valid"
+                        class="btn my-3 justify-content-center text-center">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

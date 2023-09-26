@@ -1,0 +1,264 @@
+<!-- <section id="projectListDatatable">
+    <div class="table-responsive table-striped">
+      <table class="table my-5">
+        <thead>
+          <tr role="row">
+            <th role="col">Project</th>
+            <th role="col">Date</th>
+            <th role="col">Customer</th>
+            <th role="col">Type</th>
+            <th role="col">Status</th>
+            <th role="col">Final Price</th>
+            <th role="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr role="row">
+            <td role="col">918774</td>
+            <td role="col">5/27/2019</td>
+            <td role="col">David Jones</td>
+            <td role="col">Other</td>
+            <td role="col">Estimate Completed</td>
+            <td role="col">$3,636.00</td>
+            <td role="col">
+              <a routerLink="/viewprojects"><i class="fas fa-eye"></i></a>
+              <a><i class="ml-3 fas fa-edit"></i></a>
+              <a><i class="ml-3 fas fa-trash"></i></a>
+            </td>
+          </tr>
+          <tr role="row">
+            <td role="col">918775</td>
+            <td role="col">5/27/2019</td>
+            <td role="col">David Jones</td>
+            <td role="col">Other</td>
+            <td role="col">Work Complete - Payment Complete</td>
+            <td role="col">$3,636.00</td>
+            <td role="col">
+              <a>
+                <i class="fas fa-eye"></i>
+                <i class="ml-3 fas fa-edit"></i><i class="ml-3 fas fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+          <tr role="row">
+            <td role="col">918775</td>
+            <td role="col">5/27/2019</td>
+            <td role="col">David Jones</td>
+            <td role="col">Other</td>
+            <td role="col">Estimate Completed</td>
+            <td role="col">$3,636.00</td>
+            <td role="col">
+              <a>
+                <i class="fas fa-eye"></i>
+                <i class="ml-3 fas fa-edit"></i><i class="ml-3 fas fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+          <tr role="row">
+            <td role="col">918775</td>
+            <td role="col">5/27/2019</td>
+            <td role="col">David Jones</td>
+            <td role="col">Other</td>
+            <td role="col">Estimate Completed</td>
+            <td role="col">$3,636.00</td>
+            <td role="col">
+              <a>
+                <i class="fas fa-eye"></i>
+                <i class="ml-3 fas fa-edit"></i><i class="ml-3 fas fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col my-5">
+          <p class="mb-0 mt-2">Showing 4 of 70 Records</p>
+        </div>
+        <div class="col">
+          <nav aria-label="Page navigation example" class="my-5">
+            <ul class="pagination justify-content-end">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+<section class="mb-3">
+  <div class="container">
+    <div class="card-header top-heading-card">
+      <h3 class="inside-heading mb-0">Schedule Bulk Calls</h3>
+    </div>
+    <div class="card ">
+      <div class="card-body mt-4">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr role="row">
+                <th role="col">
+                  <input type="checkbox" class="form-check regular-checkbox-all-select"
+                    (change)="onSelectAll($event.target.checked)" (click)="isAllSelected = true"
+                    [checked]="isAllSelected" />
+                </th>
+                <th role="col">Project</th>
+                <th role="col">Date</th>
+                <th role="col">Customer</th>
+                <th role="col">Type</th>
+                <th role="col">Status</th>
+                <th role="col">Final Price</th>
+                <th role="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr role="row" *ngFor="let project of projects | paginate: { itemsPerPage: 5, currentPage: p }">
+                <td>
+                  <input type="checkbox" class="form-check regular-checkbox" name="bulkCallsCheckbox"
+                    (change)="onChange(project.id,$event.target.checked) ; isAllSelected = false"
+                    [checked]="(phoneCallObj.phone_call_array | idFilter : project.id)?.length > 0" />
+                </td>
+
+                <!-- (change)="onChange(phn.id, $event.target.checked)" -->
+                <!--start-->
+                <!-- <h4>Categories</h4>s
+                <div class="form-check" *ngFor="let cat of categories">
+                  <input class="form-check-input" (change)="onChange(cat.name, $event.target.checked)"
+                    name="{{ cat.name }}" type="checkbox" id="{{cat.name}}">
+                  <label class="form-check-label" for="{{cat.name}}">
+                    {{cat.name}}
+                  </label>
+                </div> -->
+                <!--end-->
+                <!-- <tr *ngFor="let project of projects  | paginate: { itemsPerPage: 5, currentPage: p }">
+                  <td>{{project.project_number}}</td>
+                  <td>{{project.project_type_name}}</td>
+                  <td>{{project.status_name}}</td>
+                  <td>{{project.potential_type_name}}</td>
+                  <td>{{project.created_at | date : 'medium'}}</td>
+                  <td>{{project.total_cost}}</td>
+                  <td>
+                      <a [routerLink]="['/project/view',project.id]"><i class="fas fa-eye"></i></a>
+                      <a [routerLink]="['/project/update', project.id]" placement="top"
+                          ngbTooltip="Edit Customer"><i class="ml-3 fas fa-edit"></i>
+                      </a>
+                      <a (click)="openProjectModel(deleteProjectModel, project.id)"><i
+                              class="ml-3 fas fa-trash"></i></a>
+                  </td>
+                 </tr> -->
+
+                <td role="col">{{project.id}}</td>
+                <td role="col">{{project.created_at | date:'MM/dd/yyyy'}}</td>
+                <td role="col">{{project.customer_name}}</td>
+                <td role="col">{{project.project_type_name}}</td>
+                <td role="col">{{project.status_name}}</td>
+                <td role="col">{{project.total_cost}}</td>
+                <td role="col">
+                  <a [routerLink]="['/project/view',project.id]"><i class="fas fa-eye"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col">
+            <!-- | paginate: { itemsPerPage: 10, currentPage: p } -->
+            <pagination-controls (pageChange)="p = $event" class="text-right"></pagination-controls>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col pr-0">
+              <button type="button" class="btn btn-primary color mt-3 d-block ml-auto" id="doneButton"
+                (click)="openBulkCallsModel(scheduleBulkPhoneCallsModel)" [disabled]="callCount <= 0">
+                <i class="fas fa-check"></i> Done
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<ng-template #scheduleBulkPhoneCallsModel let-c="close" let-d="dismiss">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
+  <div class="modal-header" style="background-color: #ee3724 ; color: white;">
+    <h4 class="modal-title mx-3">Schedule Bulk Phone Calls</h4>
+    <button type="button" class="close text-white" aria-label="Close" (click)="c('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <section style="margin-top: 2.5%">
+    <div class="container">
+      <div class="row px-4">
+        <div class="col px-2">
+          <h6 class="text-center" style="background: #e4e4e4;color:black;border-bottom: 2px solid #1f15135e">
+            {{callCount}} phone call(s) will be created</h6>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="modal-body">
+    <form #form="ngForm">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-7">
+            <mat-form-field>
+              <input type="text" matInput placeholder="Phone Call Title (same for all calls)" class=""
+                name="bulkPhoneCallTitle" [(ngModel)]="phoneCallObj.title">
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-5 pl-1">
+            <mat-form-field>
+              <mat-label>Phone Call(s) Assigned To</mat-label>
+              <mat-select class="" name="bulkPhoneCallAssignedTo" [(ngModel)]="phoneCallObj.assigned_to">
+                <mat-option *ngFor="let user of users" [value]="user.id">{{user.user_name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-7">
+            <mat-form-field>
+              <textarea rows="1" matInput placeholder="Description / Reason for Call (same for all calls)" class=""
+                name="bulkPhoneCallDescription" [(ngModel)]="phoneCallObj.reason"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-5 pl-1">
+            <mat-form-field>
+              <input type="datetime-local" matInput placeholder="" name="calendar" class=""
+                [(ngModel)]="phoneCallObj.call_date">
+            </mat-form-field>
+            <!-- <ngb-datepicker #dp name="bulkPhoneCallDateToCall" (navigate)="date = $event.next" [(ngModel)]="phoneCallObj.bulk_phone_call_date_to_call"></ngb-datepicker> -->
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <!-- <button type="submit" class="btn btn-outline-primary">Schedule Calls</button> -->
+
+    <button type="button" class="btn btn-outline color mt-4"  id="cancelButton" (click)="c('Close click')">
+      <i class="fas fa-times mr-2"></i>Cancel
+    </button>
+    <button type="submit" class="btn btn-primary mt-4  ml-2 mr-3" id="submitButton"
+      (click)="onScheduleBulkPhoneCalls()">
+      Submit
+    </button>
+    <!-- <button type="button" class="btn btn-outline-dark">Close</button> -->
+  </div>
+
+</ng-template>

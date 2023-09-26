@@ -1,0 +1,517 @@
+<section class="mb-3">
+  <div class="container">
+    <div class="card-header top-heading-card">
+      <h3 class="inside-heading mb-0">
+        {{ customerObj.id == undefined ? "Create" : "Update" }} Customer
+      </h3>
+    </div>
+    <div class="card">
+      <div class="card-body mt-4">
+        <form
+          #createCustomerForm="ngForm"
+          (ngSubmit)="
+            createCustomerForm.valid
+              ? customerObj.id != undefined
+                ? onEditCustomer()
+                : onCreateCustomer()
+              : 0
+          "
+        >
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="text"
+                  maxlength="50"
+                  placeholder="Company Name"
+                  id="company"
+                  name="company"
+                  #company="ngModel"
+                  [(ngModel)]="customerObj.company"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="30"
+                  matInput
+                  placeholder="First Name"
+                  id="firstName"
+                  name="first_name"
+                  #first_name="ngModel"
+                  [(ngModel)]="customerObj.first_name"
+                  required
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (first_name.touched || createCustomerForm.submitted) &&
+                    !first_name.valid
+                  "
+                >
+                  Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="30"
+                  matInput
+                  placeholder="Last Name"
+                  name="last_name"
+                  id="lastName"
+                  #last_name="ngModel"
+                  [(ngModel)]="customerObj.last_name"
+                  required
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (last_name.touched || createCustomerForm.submitted) &&
+                    !last_name.valid
+                  "
+                >
+                  Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="250"
+                  matInput
+                  placeholder="Address Line 1"
+                  name="address_1"
+                  #address_1="ngModel"
+                  id="addressLine1"
+                  [(ngModel)]="customerObj.address_1"
+                  required
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (address_1.touched || createCustomerForm.submitted) &&
+                    !address_1.valid
+                  "
+                >
+                  Required
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="250"
+                  matInput
+                  placeholder="Address Line 2"
+                  name="address_2"
+                  #address_2="ngModel"
+                  [(ngModel)]="customerObj.address_2"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <!-- <mat-label>City</mat-label> -->
+                <input
+                  type="text"
+                  class=""
+                  id="cities"
+                  name="cities"
+                  placeholder="City *"
+                  matInput
+                  [formControl]="cityContorl"
+                  [(ngModel)]="customerObj.city_name"
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    (onSelectionChange)="cityClicked(option)"
+                    *ngFor="let option of filteredOptions | async"
+                    [value]="option.name"
+                  >
+                    {{ option.name }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    customerObj.city_id == undefined &&
+                    createCustomerForm.submitted
+                  "
+                  >* Required
+                </small>
+              </div>
+              <!-- <mat-select
+                  class=""
+                  id="cities"
+                  name="cities"
+                  #city_id="ngModel"
+                  placeholder="City"
+                  [(ngModel)]="customerObj.city_id"
+                  required
+                >
+                  <mat-option [value]="undefined" disabled selected
+                    >Select your option</mat-option
+                  >
+                  <mat-option *ngFor="let city of cities" [value]="city.id">{{
+                    city.name
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (city_id.touched || createCustomerForm.submitted) &&
+                    !city_id.valid
+                  "
+                  >* Required
+                </small>
+              </div> -->
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <mat-select
+                  class=""
+                  id="state_ID"
+                  name="state_id"
+                  #state_id="ngModel"
+                  placeholder="State"
+                  [(ngModel)]="customerObj.state_id"
+                  required
+                >
+                  <mat-option [value]="undefined" disabled selected
+                    >Select your option</mat-option
+                  >
+                  <mat-option *ngFor="let state of states" [value]="state.id">{{
+                    state.name
+                  }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (state_id.touched || createCustomerForm.submitted) &&
+                    !state_id.valid
+                  "
+                  >* Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="5"
+                  matInput
+                  id="zipCode"
+                  placeholder="Zip Code"
+                  name="zip_code"
+                  #zip_code="ngModel"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57"
+                  [(ngModel)]="customerObj.zip_code"
+                  required
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (zip_code.touched || createCustomerForm.submitted) &&
+                    !zip_code.valid
+                  "
+                  >* Required
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="250"
+                  matInput
+                  placeholder="Subdivision Name"
+                  id="subdivisionName"
+                  name="sub_division_name"
+                  #sub_division_name="ngModel"
+                  [(ngModel)]="customerObj.sub_division_name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="250"
+                  matInput
+                  placeholder="Major Intersection"
+                  id="majorIntersection"
+                  name="major_intersection"
+                  #major_intersection="ngModel"
+                  [(ngModel)]="customerObj.major_intersection"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="13"
+                  matInput
+                  id="homePhone"
+                  placeholder="Home Phone"
+                  name="home_phone"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57) || event.charCode == 43"
+                  #home_phone="ngModel"
+                  [(ngModel)]="customerObj.home_phone"
+                />
+              </mat-form-field>
+              <!-- <div class="error-block">
+                <small class="help-block-custom"
+                  *ngIf="(home_phone.touched || createCustomerForm.submitted) && !home_phone.valid">*
+                  Required
+                </small>
+              </div> -->
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="13"
+                  matInput
+                  id="workPhone"
+                  placeholder="Work Phone"
+                  name="work_phone"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57) || event.charCode == 43"
+                  #work_phone="ngModel"
+                  [(ngModel)]="customerObj.work_phone"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="10"
+                  matInput
+                  id="extention"
+                  placeholder="Extention"
+                  name="extention"
+                  #extention="ngModel"
+                  [(ngModel)]="customerObj.extention"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="13"
+                  matInput
+                  id="mobilePhone"
+                  placeholder="Mobile Phone"
+                  name="mobile_phone"
+                  #mobile_phone="ngModel"
+                  [(ngModel)]="customerObj.mobile_phone"
+                  required
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57) || event.charCode == 43"
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (mobile_phone.touched || createCustomerForm.submitted) &&
+                    !mobile_phone.valid
+                  "
+                  >* Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="13"
+                  matInput
+                  id="fax"
+                  name="fax"
+                  #fax="ngModel"
+                  [(ngModel)]="customerObj.fax"
+                  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : (event.charCode >= 46 && event.charCode != 47 && event.charCode <= 57) || event.charCode == 43"
+                  placeholder="Fax"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="150"
+                  matInput
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  #email="ngModel"
+                  email
+                  [(ngModel)]="customerObj.email"
+                  #email="ngModel"
+                />
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (email.touched || createCustomerForm.submitted) &&
+                    !email.valid &&
+                    email.errors.email
+                  "
+                  >Invalid
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-3">
+              <mat-form-field>
+                <mat-select
+                  class=""
+                  id="source"
+                  name="referral_source_id"
+                  #referral_source_id="ngModel"
+                  placeholder="Referral Source"
+                  [(ngModel)]="customerObj.referral_source_id"
+                  required
+                >
+                  <mat-option [value]="undefined"
+                    >Select your option</mat-option
+                  >
+                  <mat-option
+                    *ngFor="let source of sources"
+                    [value]="source.id"
+                    >{{ source.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+              <div class="error-block">
+                <small
+                  class="help-block-custom"
+                  *ngIf="
+                    (referral_source_id.touched ||
+                      createCustomerForm.submitted) &&
+                    !referral_source_id.valid
+                  "
+                  >* Required
+                </small>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+              <mat-form-field>
+                <input
+                  type="text"
+                  maxlength="250"
+                  matInput
+                  placeholder="Referral Source Extra Info/Name"
+                  id="referralSourceNote"
+                  name="referral_source_note"
+                  #referral_source_note="ngModel"
+                  [(ngModel)]="customerObj.referral_source_note"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+              <mat-form-field>
+                <mat-select
+                  class=""
+                  id="potentialTypes"
+                  name="potentialTypes"
+                  #potentialTypes="ngModel"
+                  placeholder="Potential"
+                  [(ngModel)]="customerObj.potential_type_id"
+                >
+                  <mat-option [value]="undefined" disabled selected
+                    >Select your option</mat-option
+                  >
+                  <mat-option
+                    *ngFor="let potentialtype of potential"
+                    [value]="potentialtype.id"
+                    >{{ potentialtype.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+              <mat-form-field>
+                <mat-select
+                  class=""
+                  id="referenceStatus"
+                  name="referenceStatus"
+                  placeholder="Reference Status"
+                  #referenceStatus="ngModel"
+                  [(ngModel)]="customerObj.reference_status_type_id"
+                >
+                  <mat-option [value]="undefined" disabled selected
+                    >Select your option</mat-option
+                  >
+                  <mat-option
+                    *ngFor="let status of statuses"
+                    [value]="status.id"
+                    >{{ status.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <mat-form-field>
+                <textarea
+                  id="notes"
+                  matInput
+                  placeholder="Notes"
+                  name="notes"
+                  rows="1"
+                  #notes="ngModel"
+                  maxlength="2000"
+                  [(ngModel)]="customerObj.notes"
+                ></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row justify-content-end mr-0 ml-5">
+            <button
+              type="submit"
+              class="btn btn-primary color"
+              id="submitButton"
+            >
+              {{ customerObj.id != undefined ? "Update" : "Create" }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

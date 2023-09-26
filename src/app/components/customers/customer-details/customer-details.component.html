@@ -1,0 +1,212 @@
+<section class="mb-3">
+  <div class="container">
+    <div class="card ">
+      <div class="card-body">
+        <div class="row justify-content-end" style="margin-right: 1px;">
+          <button class="btn btn-outline color mt-4 mr-2 " id="edit_customer_button" placement="top"
+            ngbTooltip="Edit Customer" [routerLink]="['/customer/edit', customerObj.id]">
+            <svg aria-hidden="true" style="width: 20px;" focusable="false" data-prefix="fas" data-icon="edit" role="img"
+              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+              class="svg-inline--fa fa-edit fa-w-18 fa-spin fa-lg">
+              <path fill="currentColor"
+                d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+                class=""></path>
+            </svg>
+          </button>
+          <button class="btn btn-primary color mt-4" id="customer_Interactions_button" placement="top"
+            [routerLink]="['/customer/customer-interection/view' , customerObj.id]" ngbTooltip="Customer Interaction">
+            <i class="fas fa-eye"></i> Interactions
+          </button>
+        </div>
+        <div class="row" *ngIf="(customerObj | json) != '{}' && customerObj != undefined">
+          <div class="col">
+            <div class="container-fluid my-5 px-0">
+              <div class="row my-3">
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Customer Number</h4>
+                  <p>{{customerObj.id}}</p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <!-- <p>Wendy Marlow<span><a><i class="far fa-eye" placement="bottom" ngbTooltip="View Customer Detail"></i></a></span></p> -->
+                  <h4>Create Date</h4>
+                  <p>{{customerObj.created_at}}</p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Name</h4>
+                  <p>{{customerObj.first_name}} {{customerObj.last_name}}</p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Company</h4>
+                  <p>{{customerObj.company}}</p>
+                </div>
+              </div>
+              <div class="row my-3">
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Address</h4>
+                  <p>
+                    {{customerObj.address_1}}
+                    <span class="icons_placement">
+                      <a href="https://www.mapquest.com" target="blank" routerLinkActive="router-link-active">
+                        <i class="fas fa-map-pin" placement="bottom" ngbTooltip="View Map"></i>
+                      </a>
+                    </span>
+                    <ng-container *ngIf="customerObj.address_2 != undefined">
+                      ,<br>
+                      {{customerObj.address_2}},
+
+                    </ng-container>
+                    <br>
+                    {{customerObj.city_name}}, {{customerObj.state_name}}, {{customerObj.zip_code}}
+                  </p>
+
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Subdivision Name</h4>
+                  <p>{{customerObj.sub_division_name}}</p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Major Intersection</h4>
+                  <p>{{customerObj.major_intersection}}</p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Home Phone</h4>
+                  <p>{{customerObj.home_phone}}</p>
+                </div>
+              </div>
+              <div class="row my-3">
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Work Phone</h4>
+                  <p>{{customerObj.work_phone}}</p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Mobile Phone</h4>
+                  <p>{{customerObj.mobile_phone}}</p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Email</h4>
+                  <p>{{customerObj.email}}</p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Referral Source</h4>
+                  <p>{{customerObj.referralsourcename}}</p>
+                </div>
+              </div>
+              <div class="row my-3">
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Referral Source Extra</h4>
+                  <p>{{customerObj.referral_source_note}}</p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Customer Potential</h4>
+                  <p>{{customerObj.potentialtypename}}</p>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <h4>Reference Status</h4>
+                  <p>{{customerObj.referencestatusesname}}</p>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                  <h4>Notes</h4>
+                  <p>
+                    {{customerObj.notes}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row my-4" *ngIf="(customerObj | json) == '{}'">
+          <div class="col">
+            <p class="info alert-info">This customer is no longer exists</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-3">
+  <!-- <div class="container">
+    <div class="card" style="background-color: #ee3724;">
+      <div class="card-body" style="padding: 5px;">
+        <h3 style="text-align: center;color: #fff;margin-bottom: 0px;">
+          Projects Information
+        </h3>
+      </div>
+    </div>
+  </div> -->
+  <div class="container">
+    <div class="card ">
+      <div class="card-body">
+        <div class="row justify-content-end py-4">
+          <div class="col-md-6 float-left">
+            <button type="button" class="btn btn-primary color float-right" id="add_project" placement="top"
+              ngbTooltip="Add Project" routerLink="/project/create" [queryParams]="{queryParam: customerID}">
+              <i class="fas fa-briefcase mr-2"></i>Add Project
+            </button>
+          </div>
+        </div>
+        <div class="table-responsive table-striped">
+          <table class="table mb-5">
+            <thead>
+              <tr>
+                <th scope="col">Project Number</th>
+                <th scope="col">Type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Potential</th>
+                <th scope="col">Date Created</th>
+                <th scope="col">Total Cost</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let customerProject of customerProjects">
+                <td>{{customerProject.id}}</td>
+                <td>{{customerProject.project_type_name}}</td>
+                <td>{{customerProject.status_name}}</td>
+                <td>{{customerProject.potential_type_name}}</td>
+                <td>{{customerProject.created_at}}</td>
+                <td>{{customerProject.total_cost}}</td>
+                <td>
+                  <a [routerLink]="['/project/view/',customerProject.id]" placement="top" ngbTooltip="View Project"><i
+                      class="fas fa-eye"></i></a>
+                  <a [routerLink]="['/project/update/',customerProject.id]" placement="top" ngbTooltip="Edit Project"><i
+                      class="ml-3 fas fa-edit"></i></a>
+                  <a placement="top" ngbTooltip="Delete Project"
+                    (click)="openDeleteProjectModal(deleteModalProject,customerProject.id)"><i
+                      class="ml-3 fas fa-trash"></i></a>
+                </td>
+              </tr>
+              <tr *ngIf="customerProjects == undefined && customerProjects.length == 0">
+                <td colspan="7" class="text-center">This customer has no project(s)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<ng-template #deleteModalProject let-c="close" let-d="dismiss">
+  <div class="modal-header ">
+    <h6 class="modal-title">
+      Delete Project
+    </h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red;">Are you sure to delete this project?</h6>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary-outline" (click)="c('Close click')">
+        Close
+      </button>
+      <button type="submit" class="btn btn-primary" (click)="deleteProject(projectId)">
+        Delete
+      </button>
+    </div>
+  </div>
+</ng-template>

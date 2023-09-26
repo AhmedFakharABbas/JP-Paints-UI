@@ -1,0 +1,13 @@
+a.btn.btn-raised.btn-primary {
+    background-color: black;
+    border-color: black;
+    color: #fff;
+}
+a.btn.btn-raised.btn-danger {
+    color: #fff;
+}
+.btn-primary:not(:disabled):not(.disabled).active{
+    background-color: #ffad09 !important;
+    border-color: #ffad09 !important;
+    color: #fff;
+}

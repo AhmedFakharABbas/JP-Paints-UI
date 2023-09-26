@@ -1,0 +1,377 @@
+<!--
+<section style="margin-top: 6%;">
+  <div class="container">
+    <div class="card" style="background-color: #ee3724;">
+      <div class="card-body" style="padding: 5px;">
+        <h3 style="text-align: center;color: #fff;margin-bottom: 0px;">TO DO LISTS</h3>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section class="mb-3">
+  <div class="container">
+    <div class="card py-4">
+      <div class="card-body" style="padding: 5px">
+        <div class="row">
+          <div class="col-md-12">
+            <button
+              style="margin-right: 18px"
+              class="btn btn-primary color float-right"
+              (click)="openTodoModal(addTaskModal)"
+            >
+              <i
+                class="fa fa-plus mr-2"
+                placement="top"
+                ngbTooltip="Add Task"
+              ></i>
+              Add Task
+            </button>
+          </div>
+        </div>
+
+        <section class="mb-3">
+          <div class="container">
+            <div class="row py-3">
+              <div class="col-md-12">
+                <div class="col-md-6 float-left">
+                  <div class="card pb-3">
+                    <div class="card-header heading-card">
+                      <h6 class="mb-0 inside-heading">Company To do</h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive table-striped">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <!-- <th scope="col">Estimator Name</th> -->
+                              <th scope="col">Task Name</th>
+                              <th scope="col">Task Description</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr
+                              *ngFor="
+                                let ct of todo_tasks
+                                  | filter: 87:'task_type_id'
+                                  | paginate
+                                    : {
+                                        id: 'companyTodo',
+                                        itemsPerPage: 10,
+                                        currentPage: companyTodoCurrentPageNo,
+                                        totalItems: company_todo_count
+                                      }
+                              "
+                            >
+                              <td>{{ ct.name }}</td>
+                              <td>{{ ct.description }}</td>
+                              <td>
+                                <div class="row mx-0 px-0">
+                                  <div class="col-sm-2 px-0">
+                                    <a
+                                      (click)="onCompleteTask(ct.id)"
+                                      placement="top"
+                                      ngbTooltip="Complete Task"
+                                    >
+                                      <i class="fas fa-check"></i>
+                                    </a>
+                                  </div>
+                                  <div class="col-sm-2 px-0">
+                                    <a
+                                      (click)="
+                                        openDeleteTaskModal(
+                                          deleteCompanyTaskModel,
+                                          ct.id
+                                        )
+                                      "
+                                      placement="top"
+                                      ngbTooltip="Delete Task"
+                                      ><i class="fas fa-trash trashicon"></i>
+                                    </a>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr
+                              *ngIf="
+                                (todo_tasks | filter: 87:'task_type_id')
+                                  .length == 0
+                              "
+                            >
+                              <td colspan="4">
+                                <p class="text-center m-0">No Record found!</p>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- paggination -->
+                      <div class="row justify-content-end">
+                        <div *ngIf="company_todo_count > 10" class="col">
+                          <pagination-controls
+                            (pageChange)="
+                              companyTodoCurrentPageNo = $event; onGetTasks()
+                            "
+                            directionLinks="true"
+                            responsive="true"
+                            id="companyTodo"
+                            class="text-right"
+                          ></pagination-controls>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 float-left">
+                  <div class="card pb-3">
+                    <div class="card-header heading-card">
+                      <h6 class="mb-0 inside-heading">Personal To Do</h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive table-striped">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Task Name</th>
+                              <th scope="col">Task Description</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr
+                              *ngFor="
+                                let pt of todo_tasks
+                                  | filter: 86:'task_type_id'
+                                  | paginate
+                                    : {
+                                        id: 'PersonalTodo',
+                                        itemsPerPage: 10,
+                                        currentPage: personalTodoCurrentPageNo,
+                                        totalItems: personal_todo_count
+                                      }
+                              "
+                            >
+                              <td>{{ pt.name }}</td>
+                              <td>{{ pt.description }}</td>
+                              <td>
+                                <div class="row mx-0 px-0">
+                                  <div class="col-sm-2 px-0">
+                                    <a
+                                      (click)="onCompleteTask(pt.id)"
+                                      placement="top"
+                                      ngbTooltip="Complete Task"
+                                    >
+                                      <i class="fas fa-check"></i>
+                                    </a>
+                                  </div>
+                                  <div class="col-sm-2 px-0">
+                                    <a
+                                      (click)="
+                                        openDeleteTaskModal(
+                                          deletePersonalTaskModel,
+                                          pt.id
+                                        )
+                                      "
+                                      placement="top"
+                                      ngbTooltip="Delete Task"
+                                      ><i class="fas fa-trash trashicon"></i>
+                                    </a>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr
+                              *ngIf="
+                                (todo_tasks | filter: 86:'task_type_id')
+                                  .length == 0
+                              "
+                            >
+                              <td colspan="4">
+                                <p class="text-center m-0">No Record found!</p>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- paggination -->
+                      <div class="row justify-content-end">
+                        <div *ngIf="personal_todo_count > 10" class="col">
+                          <pagination-controls
+                            (pageChange)="
+                              personalTodoCurrentPageNo = $event; onGetTasks()
+                            "
+                            directionLinks="true"
+                            responsive="true"
+                            id="PersonalTodo"
+                            class="text-right"
+                          ></pagination-controls>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #addTaskModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Add New Task</h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="taskForm.valid ? onCreateTask() : 0" #taskForm="ngForm">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-6 float-left">
+            <mat-form-field>
+              <input
+                type="text"
+                maxlength="35"
+                matInput
+                placeholder="Task Name"
+                name="task_name"
+                #task_name="ngModel"
+                [(ngModel)]="taskObj.name"
+                required
+              />
+            </mat-form-field>
+            <div class="error-block">
+              <small
+                class="help-block-custom"
+                *ngIf="
+                  (task_name.touched || taskForm.submitted) && !task_name.valid
+                "
+                >* Required
+              </small>
+            </div>
+          </div>
+          <div class="col-md-6 float-left">
+            <mat-form-field>
+              <select
+                matNativeControl
+                name="task_type_id"
+                id="task_type_id"
+                required
+                #task_type="ngModel"
+                [(ngModel)]="taskObj.task_type_id"
+                placeholder="Select Type"
+              >
+                <option
+                  *ngFor="let task_type of task_types"
+                  [value]="task_type.ObjectTypeID"
+                >
+                  {{ task_type.ObjectName }}
+                </option>
+              </select>
+            </mat-form-field>
+          </div>
+          <div class="error-block">
+            <small
+              class="help-block-custom"
+              *ngIf="
+                (task_type.touched || taskForm.submitted) && !task_type.valid
+              "
+              >* Required
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-md-12" style="padding: 0px 29px">
+          <mat-form-field>
+            <textarea
+              type="text"
+              rows="1"
+              matInput
+              #description="ngModel"
+              [(ngModel)]="taskObj.description"
+              maxlength="150"
+              placeholder="description"
+              name="description"
+              id="description"
+              required
+            ></textarea>
+          </mat-form-field>
+          <div class="error-block">
+            <small
+              class="help-block-custom"
+              *ngIf="
+                (description.touched || taskForm.submitted) &&
+                !description.valid
+              "
+              >* Required
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline color"
+          (click)="c('Close click')"
+        >
+          Close
+        </button>
+        <button type="submit" class="btn btn-primary color">Add Task</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #deletePersonalTaskModel let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Delete Personal To Do</h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red">Are you sure to delete this personal to do?</h6>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-primary-outline"
+        (click)="c('Close click')"
+      >
+        Close
+      </button>
+      <button type="submit" class="btn btn-primary" (click)="deleteTodoTask()">
+        Delete
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #deleteCompanyTaskModel let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Delete Company To Do</h6>
+    <button type="button" class="close" (click)="c('Close click')">
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 style="color: red">Are you sure to delete this company to do?</h6>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-primary-outline"
+        (click)="c('Close click')"
+      >
+        Close
+      </button>
+      <button type="submit" class="btn btn-primary" (click)="deleteTodoTask()">
+        Delete
+      </button>
+    </div>
+  </div>
+</ng-template>
+<!-- openDeleteTaskModal -->

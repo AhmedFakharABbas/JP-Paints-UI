@@ -1,0 +1,332 @@
+<div id="content" #content>
+  <div class="row flex-row-reverse m-0">
+    <button type="button" class="btn btn-primary color mr-4" value="Download PDF" (click)="captureScreen()"
+      placement="left" ngbTooltip="Export PDF">
+      <i class="fas fa-file-excel mr-1"></i> Export PDF
+    </button>
+  </div>
+</div>
+<div class="container bg-grad pt-4" id="contentToConvert">
+  <div class="row">
+    <img src="../../../../assets/img/jp-pdf-cover.png" alt="cover-photo" width="100%" height="auto">
+  </div>
+  <div class="row m-0" *ngIf="project_information != undefined">
+    <div class="col-4  ">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Name:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.customer_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Address:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.address_1}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Estimate#</span>
+        <span class="form-value b-b-1 col bold">{{project_information.project_number}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Home Phone:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.home_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-value b-b-1 bold col">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Project Type:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.project_type_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Work Phone:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.work_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Subdivision:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.sub_division_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Sales Rep.:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.estimator_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Mobile Phone:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.mobile_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Intersection:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.major_intersection}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Sales Phone:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.work_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">FAX:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.work_phone}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Referred By:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.referral_source_name}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Est Date:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.estimate_date}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Email:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.email}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+
+
+
+    <div class="col-4">
+      <div class="row m-0">
+        <span class="form-field col- bolder">Est Time:</span>
+        <span class="form-value b-b-1 col bold">{{project_information.estimate_time}}</span>
+        <span class="form-field col- w-30">&nbsp;</span>
+      </div>
+    </div>
+
+  </div>
+  <h4 class="section-heading">ESTIMATE</h4>
+
+  <div class="col-12 border-black">
+    <div class="row">
+      <h4 class="bg-heading-transparent">Job Specifications:
+      <p class="break-all-word"><u>{{project_information.project_description}}</u></p></h4>
+    </div>
+  </div>
+
+  <div class="col-12 border-black mt-2">
+    <div class="row">
+      <h4 class="bg-heading "></h4>
+    </div>
+    <div class="row b-b-1">
+      <div class="col-10 border-right-1 border-bottom-1">
+        <div class="row justify-content-around">
+          Description
+        </div>
+      </div>
+      <div class="col-2 border-bottom-1">
+        <div class="row justify-content-around">
+          Price
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="project_descriptions != undefined && project_descriptions.length >0">
+      <div class="row b-b-1" *ngFor="let task of project_descriptions">
+       <div class="col-10 border-right-1 border-bottom-1">
+          <div class="row justify-content-around  ml-1" [title]="task.other_project_descriptions">
+            <div class="col px-0">
+              <p class="break-all-word">{{task.other_project_descriptions}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-2 border-bottom-1">
+          <div class="row justify-content-around  ml-1">
+            <div class="col px-0" style="display: inline-block;">
+              ${{task.other_price}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container>
+      <div class="row b-b-1" *ngFor="let task of 5 | times">
+        <div class="col-2  border-bottom-1">
+          <div class="row justify-content-around">
+            &nbsp;
+          </div>
+        </div>
+        <div class="col-8 border-right-1 border-bottom-1">
+          <div class="row justify-content-around">
+            &nbsp;
+          </div>
+        </div>
+        <div class="col-2 border-bottom-1">
+          <div class="row justify-content-around">
+            &nbsp;
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+  <div class="col-12 border-black minus-margin mt-2" *ngIf="project_information!=undefined">
+
+    <div class="row ">
+      <div class="col-8">
+        <div class="align-items-center row justify-content-around">
+          <div class="col-4 bolder">
+            <h6 class="bolder m-0">Special Instructions:</h6>
+          </div>
+          <div class="col-8 pl-0 mt-2">
+           <p class="break-all-word">{{project_information.special_notes}}</p> 
+          </div>
+        </div>
+      </div>
+      <div class="col-4  b-b-1 b-l-1">
+        <div class="row">
+          <span class="form-field col-6 px-1 bolder text-right">Price include materials:</span>
+          <label class="check col"> Yes
+            <input type="checkbox" name="is_name" [checked]="project_information.is_paint_material_included == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col"> No
+            <input type="checkbox" name="is_name" [checked]="project_information.is_paint_material_included == 0">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col"> Partial
+            <input type="checkbox" name="is_name">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8 b mb-1">
+        <div class="align-items-center row justify-content-around mb-1 align-items-center">
+          <div class="col-12 pl-0 b-b-1 mb-1"></div>
+        </div>
+      </div>
+      <div class="col-4  b-b-1 b-l-1">
+        <div class="row">
+          <span class="form-field col-6 px-2 text-right bolder">Payment by check:</span>
+          <label class="check col"> Yes
+            <input type="checkbox" name="is_name" [checked]="project_information.is_payment_by_check == 1">
+            <span class="checkmark"></span>
+          </label>
+          <label class="check col"> No
+            <input type="checkbox" name="is_name" [checked]="project_information.is_payment_by_check == 0">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-8 b-b-1">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0 b-b-1 mb-1"></div>
+        </div>
+      </div>
+      <div class="col-4 b-b-1 b-l-1 ">
+        <div class="row">
+          <span class="form-field col-6 text-right px-2 bolder">TOTAL:</span>
+          <span class="form-value"> ${{project_information.final_price}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-8 b-b-1 ">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0  mb-1">&nbsp;</div>
+        </div>
+      </div>
+      <div class="col-4 b-b-1 b-l-1 ">
+        <div class="row mt-1">
+          <span class="form-field col-6 text-right px-2 bolder">DEPOSIT:</span>
+          <span class="form-value">
+            ${{project_information.deposit_amount}}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-8 b mb-1">
+        <div class="align-items-center row justify-content-around">
+
+          <div class="col-12 pl-0  mb-1">
+            <div class="row m-0">
+              <div class="col-1">
+                <img src="../../../../assets/img/cards.png" alt="cards" class="w-100">
+              </div>
+              Note: A convinience charge will be added when using a credit card:
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 b-l-1 ">
+        <div class="row">
+          <span class="form-field col-6 text-right px-2 bolder">BALANCE DUE:</span>
+          <span class="form-value">${{project_information.balance_due}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 border-black mt-2 bg-white">
+    <div class="row">
+      <h4 class="bg-heading ">Dependability, Quality, Value, Experience Make the Difference. Thank You for Letting Us
+        Serve You</h4>
+    </div>
+    <div class="row">
+      <div class="col-3 min-height-sig b-red-r-1">
+        <span class="form-field px-2 col-prim">Job Approved By:</span><span class="form-value"></span>
+      </div>
+      <div class="col-6 min-height-sig b-red-r-1">
+        <span class="form-field col-6 px-2 col-prim">Signature:</span><span class="form-value"></span>
+      </div>
+      <div class="col-3 min-height-sig">
+        <span class="form-field col-3 px-2 col-prim">Due to Start:</span><span class="form-value"></span>
+      </div>
+
+    </div>
+  </div>
+  <div class="row justify-content-around mt-3 mb-2">
+    <h6 class="red-heading ">We Appriciate Your Buisness. Please Make Check Payable To JP</h6>
+  </div>
+</div>
